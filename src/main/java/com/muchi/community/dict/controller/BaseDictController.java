@@ -37,14 +37,14 @@ public class BaseDictController {
     @RequestMapping("/getAll")
     @ResponseBody
     public LayuiVo getAll(Page page, @RequestParam("limit")int limit, @RequestParam(value = "page",defaultValue = "1")int currentPage){
-        List<BaseDict> list = dictService.getAllDict(page);
         page.setSize(limit);
         page.setCurrent(currentPage);
+        List<BaseDict> list = dictService.getAllDict(page);
         LayuiVo layUiVo=new LayuiVo();
         layUiVo.setCode(0);
         layUiVo.setMsg("成功");
-        layUiVo.setData(list);
         layUiVo.setCount(page.getTotal());
+        layUiVo.setData(list);
         return layUiVo;
     }
 

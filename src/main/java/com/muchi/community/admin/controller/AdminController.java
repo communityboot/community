@@ -1,6 +1,5 @@
 package com.muchi.community.admin.controller;
 
-
 import com.muchi.community.admin.service.IAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,8 +32,8 @@ public class AdminController {
     }
 
 
-    @RequestMapping("/toFragement")
-    public String toFragement(){
+    @RequestMapping("/toFragment")
+    public String toFragment(){
         return "fragment";
     }
 

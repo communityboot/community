@@ -15,6 +15,18 @@
 <div th:replace="/commons/bar::sidebar"></div>
 <div class="layui-body">
     <!-- 内容主体区域 -->
+    <div class="layui-form-item">
+        <label class="layui-form-label">字典名称</label>
+        <div class="layui-input-inline">
+            <input type="text" name="username" lay-verify="required" placeholder="请输入字典名称" autocomplete="off" class="layui-input">
+        </div>
+        <div class="layui-input-inline " style="width: 90px">
+            <button class="layui-btn" id="searchEmailCompany" data-type="reload">
+                <i class="layui-icon" style="font-size: 20px; "></i> 搜索
+            </button>
+        </div>
+    </div>
+
     <table class="layui-hide" id="dict" lay-filter="dict"></table>
     <script type="text/html" id="toolbarDemo">
         <div class="layui-btn-container">
@@ -60,8 +72,8 @@
             ,cols: [[
                 {type: 'checkbox', fixed: 'left'}
                 ,{field:'id', title:'ID', width:80, fixed: 'left', sort: true}
-                ,{field:'dictName', title:'字典名称', width:120,}
-                ,{field:'dictLabel', title:'字典代号', width:150,}
+                ,{field:'dictName', title:'字典名称', width:120}
+                ,{field:'dictLabel', title:'字典代号', width:150}
                 ,{field:'enabled', title:'是否启用', width:100}
                 ,{field:'remark', title:'备注',width:100}
                 ,{field:'createTime', title:'创建时间', width:200}
