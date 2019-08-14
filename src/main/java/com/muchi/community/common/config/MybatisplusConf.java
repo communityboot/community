@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * @Author： yuzq
- * @Description:
+ * @Description: 分页插件配置
  * @Date: 2019/7/30   11:46
  */
 @Configuration

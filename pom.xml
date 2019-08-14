@@ -21,6 +21,7 @@
         <MybatisGen.version>3.1.1</MybatisGen.version>
         <MySqlDriver.version>5.1.37</MySqlDriver.version>
         <Druid.Version>1.1.10</Druid.Version>
+        <DruidBoot.Version>1.1.14</DruidBoot.Version>
         <FreeMaker>2.3.23</FreeMaker>
         <Jquery.version>3.4.1</Jquery.version>
         <layui.version>2.5.4</layui.version>
@@ -52,6 +53,11 @@
             <groupId>com.alibaba</groupId>
             <artifactId>druid-spring-boot-starter</artifactId>
             <version>${Druid.Version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <version>${DruidBoot.Version}</version>
         </dependency>
         <!--mybatis plus插件-->
         <dependency>
