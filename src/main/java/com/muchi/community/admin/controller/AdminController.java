@@ -1,9 +1,11 @@
 package com.muchi.community.admin.controller;
 
 import com.muchi.community.admin.service.IAdminService;
+import com.muchi.community.common.log.Log;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import org.springframework.stereotype.Controller;
 
 /**
@@ -18,6 +20,8 @@ import org.springframework.stereotype.Controller;
 @RequestMapping("/admin")
 public class AdminController {
 
+    private Logger logger=LoggerFactory.getLogger(AdminController.class);
+
     @Autowired
     private IAdminService service;
 
@@ -26,6 +30,7 @@ public class AdminController {
         return "index";
     }
 
+    @Log(title = "进入主页操作",action = "Haha")
     @RequestMapping("/mainPage")
     public String toIndex(){
         return "homePage";
