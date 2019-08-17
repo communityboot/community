@@ -37,9 +37,10 @@ public class AdminController {
     }
 
 
-    @RequestMapping("/toFragment")
-    public String toFragment(){
-        return "fragment";
+    @RequestMapping("/testString")
+    public String toFragment(String name,String password){
+        System.out.println(name+">>>>>>>>>>>>>>>>>"+password);
+        return "homePage";
     }
 
 }
