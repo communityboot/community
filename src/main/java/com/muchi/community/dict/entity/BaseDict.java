@@ -3,6 +3,7 @@ package com.muchi.community.dict.entity;
 import java.time.LocalDateTime;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -11,6 +12,7 @@ import java.util.Date;
  * @author yuzq
  * @since 2019-08-13
  */
+@TableName("base_dict")
 public class BaseDict implements Serializable {
 
     private static final long serialVersionUID = 1L;

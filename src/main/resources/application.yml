@@ -22,10 +22,15 @@ spring:
       filters: stat
       connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
       use-global-data-source-stat: true
-
-# thymeleaf缓存禁用
-thymeleaf:
+  devtools:
+    restart:
+      enabled: true
+  freemarker:
     cache: false
+
+
+
+
 
 # 配置tomcat端口
 server:
@@ -36,4 +41,8 @@ logging:
   level:
     com.muchi.community.dict.mapper : debug
 
+
+
+
+debug: true
 

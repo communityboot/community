@@ -42,13 +42,14 @@
     </script>
 </div>
     <div id="edit" hidden="hidden" >
-       <form action="/updateDict" method="post">
-           ID<input type="text" name="id"  id="dictId" >
-           字典名称<input type="text" name="dictName" id="dictName">
-           字典代号<input type="text" name="dictLabel" id="dictLabel">
-           备注<input type="text" name="remark">
-           <input type="submit" name="提交">
-       </form>
+        <form id="editForm" method="post">
+            ID<input type="text" name="id"  id="dictId" >
+            字典名称<input type="text" name="dictName" id="dictName">
+            字典代号<input type="text" name="dictLabel" id="dictLabel">
+            是否启用<input type="text" name="enabled" id="enabled">
+            备注<input type="text" name="remark" id="remark">
+            <input id="dictSubmit" type="button" onclick="updateDic()" value="修改" name="dictSubmit">
+        </form>
     </div>
 
 <div th:replace="/commons/bar::footbar"></div>
@@ -131,19 +132,17 @@
             } else if(obj.event === 'edit'){
                 $.ajax({
                     type:"post",
-                    url:"/dict/getAll",
+                    url:"/dict/getDictInfo",
                     dataType:'json',
                     data:"id="+data.id,
                     success:function (data) {
                         //console.log(data);
-                        if(data.result==="成功"){
+                        if(data.result==="000"){
                             $("#dictId").val(data.dict.id);
                             $("#dictName").val(data.dict.dictName);
                             $("#dictLabel").val(data.dict.dictLabel);
-                            layer.close(index);
                         }else{
                             layer.msg("信息有误，请检查!");
-                            layer.close(index);
                         }
                     }
                 });
@@ -167,13 +166,69 @@
                             layer.close(index);
                         }else{
                             layer.msg("信息有误，请检查!");
-                            layer.close(index);
                         }
                     }
                 });
             }
         });
     });
+
+    function updateDic() {
+        var id = $('#dictId').val();
+        var dictName = $('#dictName').val();
+        var dictLabel = $('#dictLabel').val();
+        var enabled = $('#enabled').val();
+        var remark = $('#remark').val();
+        $.ajax({
+            type:"post",
+            url:"/dict/updateDict",
+            contentType: "application/json; charset=utf-8",
+            dataType:'json',
+            data: JSON.stringify({'id': id, 'dictName': dictName,dictLabel: dictLabel,'enabled': enabled,'remark': remark}),
+            // data: JSON.stringify($('#editForm').serialize()),
+            success:function (data) {
+                console.log(data);
+                if(data.result==="000"){
+                    layer.msg("更新成功")
+                }else{
+                    layer.msg("信息有误，请检查!");
+                }
+            }
+        });
+    }
+   /* function updateDic() {
+        $.ajax({
+            type:"post",
+            url:"/dict/updateDict",
+            contentType: "application/json; charset=utf-8",
+            dataType:'json',
+            data: {'id':dictId,'dictName': dictName,'dictLabel': dictLabel,'enabled': enabled,'remark': remark},
+           // data: JSON.stringify($('#editForm').serialize()),
+            success:function (data) {
+                console.log(data);
+                if(data.result==="000"){
+                    layer.msg("更新成功")
+                }else{
+                    layer.msg("信息有误，请检查!");
+                }
+            }
+        });
+    }*/
+/*    $("#dictSubmit").click(function () {
+        $.ajax({
+            type:"post",
+            url:"/dict/updateDict",
+            dataType:'json',
+            data: {'id':dictId,'dictName': dictName,'dictLabel': dictLabel,'enabled': enabled,'remark': remark},
+            success:function (data) {
+                if(data.result==="000"){
+                    layer.msg("更新成功")
+                }else{
+                    layer.msg("信息有误，请检查!");
+                }
+            }
+        });
+    });*/
 </script>
 </body>
 </html>
