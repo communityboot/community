@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.muchi.community.shiro.dao.RolePermissionDao">
+
+    <select id="getRolePermissionByUsername" parameterType="string" resultType="com.muchi.community.shiro.entity.RolePermission">
+        SELECT
+            t3.*
+        FROM
+            `t_user_role` t1,
+            `t_user` t2,
+            `t_role_permission` t3
+        WHERE
+            t1.user_id = t2.id
+          AND t3.role_id = t1.role_id
+          AND t2.user_name = #{username}
+
+    </select>
+
+</mapper>

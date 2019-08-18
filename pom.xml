@@ -26,6 +26,7 @@
         <Jquery.version>3.4.1</Jquery.version>
         <layui.version>2.5.4</layui.version>
         <shiro.version>1.4.0</shiro.version>
+        <json.version>20160810</json.version>
     </properties>
 
     <dependencies>
@@ -110,6 +111,13 @@
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-spring</artifactId>
             <version>${shiro.version}</version>
+        </dependency>
+
+        <!--json-->
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>${json.version}</version>
         </dependency>
 
     </dependencies>
