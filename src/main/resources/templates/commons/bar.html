@@ -7,12 +7,12 @@
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header" th:fragment="topbar">
-        <div class="layui-logo">muchi</div>
+        <div class="layui-logo"><i class="layui-icon layui-icon-tree"></i>&nbsp;muchi</div>
         <!-- 头部区域（可配合layui已有的水平导航） -->
         <ul class="layui-nav layui-layout-left">
-            <li class="layui-nav-item"><a href="">控制台</a></li>
-            <li class="layui-nav-item"><a href="">商品管理</a></li>
-            <li class="layui-nav-item"><a href="">用户</a></li>
+            <li class="layui-nav-item"><a href=""><i class="layui-icon layui-icon-console"></i>&nbsp;控制台</a></li>
+            <li class="layui-nav-item"><a href=""><i class="layui-icon layui-icon-console"></i>&nbsp;订单管理</a></li>
+            <li class="layui-nav-item"><a href=""><i class="layui-icon layui-icon-console"></i>&nbsp;用户</a></li>
             <li class="layui-nav-item">
                 <a href="javascript:;">其它系统</a>
                 <dl class="layui-nav-child">
@@ -26,7 +26,7 @@
             <li class="layui-nav-item">
                 <a href="javascript:;">
                     <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
-                    哈哈
+                    admin
                 </a>
                 <dl class="layui-nav-child">
                     <dd><a href="">基本资料</a></dd>
@@ -42,36 +42,38 @@
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree"  lay-filter="test">
                 <li class="layui-nav-item layui-nav-itemed">
-                    <a class="" href="javascript:;">系统管理</a>
+                    <a class="" href="javascript:;"><i class="layui-icon layui-icon-home"></i>&nbsp;主页</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="/dict/toDictPage">用户管理</a></dd>
-                        <dd><a href="javascript:;">字典管理</a></dd>
-                        <dd><a href="javascript:;">通知公告</a></dd>
-                        <dd><a href="">超链接</a></dd>
+                        <dd><a href=""><i class="layui-icon layui-icon-about"></i>&nbsp;关于牧之</a></dd>
+                        <dd><a href="javascript:;"><i class="layui-icon layui-icon-dialogue"></i>&nbsp;加入牧之</a></dd>
+                        <dd><a href="javascript:;"><i class="layui-icon layui-icon-survey"></i>&nbsp;投诉建议</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="" href="javascript:;"><i class="layui-icon layui-icon-set-sm"></i>&nbsp;系统管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href=""><i class="layui-icon layui-icon-group"></i>&nbsp;用户管理</a></dd>
+                        <dd><a href=""><i class="layui-icon layui-icon-cart"></i>&nbsp;商家管理</a></dd>
+                        <dd><a href="/dict/toDictPage"><i class="layui-icon layui-icon-read"></i>&nbsp;字典管理</a></dd>
+                        <dd><a href="javascript:;"><i class="layui-icon layui-icon-group"></i>&nbsp;通知公告</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item">
-                    <a href="javascript:;">解决方案</a>
+                    <a href="javascript:;"><i class="layui-icon layui-icon-util"></i>&nbsp;系统监控</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">列表一</a></dd>
-                        <dd><a href="javascript:;">列表二</a></dd>
-                        <dd><a href="">超链接</a></dd>
+                        <dd><a href="javascript:;"><i class="layui-icon layui-icon-console"></i>&nbsp;数据库监控</a></dd>
+                        <dd><a href="javascript:;"><i class="layui-icon layui-icon-chart-screen"></i>&nbsp;日志监控</a></dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item"><a href="">云市场</a></li>
-                <li class="layui-nav-item"><a href="">发布商品</a></li>
             </ul>
         </div>
     </div>
 
-    <div class="layui-body">
-        <!-- 内容主体区域 -->
-        <div style="padding: 15px;">内容主体区域</div>
-    </div>
 
-    <div class="layui-footer" th:fragment="footbar">
+
+    <div class="layui-footer" th:fragment="footbar" style="opacity: 0.5">
         <!-- 底部固定区域 -->
-        © layui.com - 底部固定区域
+        <p style="color: black">© muchi.com - 牧之社区版权所有</p>
     </div>
 </div>
 </body>

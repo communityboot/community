@@ -30,7 +30,7 @@ public class AdminController {
         return "index";
     }
 
-    @Log(title = "进入主页操作",action = "Haha")
+    @Log(title = "进入主页操作",action = "")
     @RequestMapping("/mainPage")
     public String toIndex(){
         return "homePage";

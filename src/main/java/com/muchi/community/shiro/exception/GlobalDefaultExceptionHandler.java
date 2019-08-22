@@ -37,7 +37,7 @@ public class GlobalDefaultExceptionHandler {
     @ExceptionHandler(UnauthorizedException.class)
     @ResponseBody
     public JsonResult defaultExceptionHandler(HttpServletRequest req, Exception e){
-        System.out.println("进来了");
+        //System.out.println("进来了");
         JsonResult object = new JsonResult();
         object.setMsg("对不起，您无权访问");
         object.setStatus("200");
