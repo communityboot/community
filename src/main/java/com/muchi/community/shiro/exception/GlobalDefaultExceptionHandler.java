@@ -39,7 +39,7 @@ public class GlobalDefaultExceptionHandler {
     public JsonResult defaultExceptionHandler(HttpServletRequest req, Exception e){
         //System.out.println("进来了");
         JsonResult object = new JsonResult();
-        object.setMsg("对不起，您无权访问");
+        object.setMsg("对不起，您没有该权限");
         object.setStatus("200");
         object.setSuccess(false);
         return object;

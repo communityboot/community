@@ -6,6 +6,8 @@ import com.muchi.community.common.LayuiVo;
 import com.muchi.community.dict.entity.BaseDict;
 import com.muchi.community.dict.service.IBaseDictService;
 import org.apache.ibatis.annotations.Param;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,5 +87,19 @@ public class BaseDictController {
         }
         return map;
     }
+
+    //需要有 delete 权限
+    @RequiresPermissions({"delete"})
+    @PostMapping("/delDictById")
+    @ResponseBody
+    public Map<String,String> delDictById(@RequestBody String id){
+        System.out.println("id = " + id);
+        System.out.println("进来了");
+        Map<String,String> map=new HashMap<>();
+        //假删除提醒
+        map.put("result","删除成功");
+        return map;
+    }
+
 
 }
