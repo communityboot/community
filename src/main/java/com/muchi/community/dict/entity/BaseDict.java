@@ -1,5 +1,6 @@
 package com.muchi.community.dict.entity;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -44,7 +45,7 @@ public class BaseDict implements Serializable {
     /**
      * 创建时间
      */
-    private Date createTime;
+    private Timestamp createTime;
 
     /**
      * 更新时间
@@ -83,11 +84,11 @@ public class BaseDict implements Serializable {
         this.remark = remark;
     }
 
-    public Date getCreateTime() {
+    public Timestamp getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(Timestamp createTime) {
         this.createTime = createTime;
     }
 

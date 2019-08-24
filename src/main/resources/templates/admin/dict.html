@@ -15,28 +15,34 @@
 <div th:replace="/commons/bar::sidebar"></div>
 <div class="layui-body">
     <!-- 内容主体区域 -->
-    <div>
-        <div class="layui-form-item">
-            <br/>
-            <label class="layui-form-label">字典名称</label>
-            <div class="layui-input-inline">
-                <input style="height: 32px; width: 110px"  type="text" name="dictName" lay-verify="required" placeholder="字典名称" autocomplete="off" class="layui-input">
+    <div >
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-md12">
+                <div class="layui-card">
+                    <blockquote class="layui-elem-quote">字典管理</blockquote>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">字典名称</label>
+                        <div class="layui-input-inline">
+                            <input style="height: 32px; width: 110px"  type="text" name="dictName" lay-verify="required" placeholder="输入字典名称" autocomplete="off" class="layui-input">
+                        </div>
+                        <label class="layui-form-label">字典代号</label>
+                        <div class="layui-input-inline">
+                            <input style="height: 32px; width: 110px"   type="text" name="dictLabel" lay-verify="required" placeholder="输入字典代号" autocomplete="off" class="layui-input">
+                        </div>
+                        <button class="layui-btn layui-btn-sm layui-bg-blue " ><i class="layui-icon layui-icon-search"></i>&nbsp;搜索</button>
+                    </div>
+                </div>
+                <hr class="layui-bg-orange">
             </div>
-            <label class="layui-form-label">字典代号</label>
-            <div class="layui-input-inline">
-                <input style="height: 32px; width: 110px"   type="text" name="dictLabel" lay-verify="required" placeholder="字典代号" autocomplete="off" class="layui-input">
-            </div>
-            <button class="layui-btn layui-btn-sm layui-bg-blue " ><i class="layui-icon layui-icon-search"></i>&nbsp;搜索</button>
         </div>
-
     </div>
 
     <table class="layui-hide" id="dict" lay-filter="dict"></table>
     <script type="text/html" id="toolbarDemo">
         <div class="layui-btn-container">
-            <button class="layui-btn layui-btn-sm layui-bg-green" lay-event="getCheckData"><i class="layui-icon layui-icon-add-1"></i>&nbsp;新增</button>
-            <button class="layui-btn layui-btn-sm layui-bg-red" lay-event="getCheckLength"><i class="layui-icon layui-icon-delete"></i>&nbsp;删除</button>
-            <button class="layui-btn layui-btn-sm layui-bg-orange" lay-event="isAll"><i class="layui-icon layui-icon-edit"></i>&nbsp;修改</button>
+            <button class="layui-btn layui-btn-sm layui-bg-green" lay-event="addDict"><i class="layui-icon layui-icon-add-1"></i>&nbsp;新增</button>
+            <button class="layui-btn layui-btn-sm layui-bg-red" lay-event="delDict"><i class="layui-icon layui-icon-delete"></i>&nbsp;删除</button>
+            <button class="layui-btn layui-btn-sm layui-bg-orange" lay-event="modifyDict"><i class="layui-icon layui-icon-edit"></i>&nbsp;修改</button>
         </div>
     </script>
     <script type="text/html" id="barDemo">
@@ -45,15 +51,44 @@
         <a class="layui-btn layui-bg-green layui-btn-xs" lay-event="manageDict">管理键值</a>
     </script>
 </div>
-    <div id="edit" hidden="hidden" >
-        <form id="editForm" method="post">
-            ID<input type="text" name="id"  id="dictId" >
-            字典名称<input type="text" name="dictName" id="dictName">
-            字典代号<input type="text" name="dictLabel" id="dictLabel">
-            是否启用<input type="text" name="enabled" id="enabled">
-            备注<input type="text" name="remark" id="remark">
-            <input id="dictSubmit" type="button" onclick="updateDic()" value="修改" name="dictSubmit">
-        </form>
+  <div id="edit" hidden="hidden" >
+      <form id="editForm" lay-filter="menuForm" class="layui-form model-form">
+          <div class="layui-form-item">
+              <label class="layui-form-label">字典ID<span style="color: red;">*</span></label>
+              <div class="layui-input-block">
+                  <input id="dictId" name="id" placeholder="请输入名称" type="text" class="layui-input" disabled="disabled"/>
+              </div>
+          </div>
+          <div class="layui-form-item">
+              <label class="layui-form-label">字典名称<span style="color: red;">*</span></label>
+              <div class="layui-input-block">
+                  <input id="dictName" name="dictName" placeholder="请输入字典名称" type="text" class="layui-input" lay-verify="required" required/>
+              </div>
+          </div>
+          <div class="layui-form-item">
+              <label class="layui-form-label">字典代号<span style="color: red;">*</span></label>
+              <div class="layui-input-block">
+                  <input id="dictLabel" name="dictLabel" placeholder="请输入字典代号" type="text" class="layui-input" autocomplete="off" lay-verify="required" required/>
+              </div>
+          </div>
+          <div class="layui-form-item">
+              <label class="layui-form-label">是否启用<span style="color: red;">*</span></label>
+              <div class="layui-input-block">
+                  <input  type="radio" name="enabled" value="1" title="是" checked/>
+                  <input id="enabled" type="radio" name="enabled" value="0" title="不是"/>
+              </div>
+          </div>
+          <div class="layui-form-item">
+              <label class="layui-form-label">备注</label>
+              <div class="layui-input-block">
+                  <input id="remark" name="remark" placeholder="请输入备注" type="text" class="layui-input"/>
+              </div>
+          </div>
+          <div class="layui-form-item" align="center">
+              <button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog">取消</button>
+              <button class="layui-btn"  onclick="updateDic()">保存</button>
+          </div>
+      </form>
     </div>
 
 <div th:replace="/commons/bar::footbar"></div>
@@ -98,21 +133,32 @@
         table.on('toolbar(dict)', function(obj){
             var checkStatus = table.checkStatus(obj.config.id);
             switch(obj.event){
-                case 'getCheckData':
+                case 'addDict':
                     var data = checkStatus.data;
-                    layer.alert(JSON.stringify(data));
+                    layer.open({
+                        title:"字典信息修改",
+                        type: 1,
+                        skin: 'layui-layer-rim', //加上边框
+                        area: ['700px', '480px'], //宽高
+                        content: $("#edit")
+                    });
                     break;
-                case 'getCheckLength':
+                case 'delDict':
                     var data = checkStatus.data;
-                    layer.msg('选中了：'+ data.length + ' 个');
+                    console.log(JSON.stringify(data));
+                    console.log(JSON.stringify(data.dictLabel));
+                    //layer.alert();
+                    // var data = checkStatus.data;
+                    // layer.alert(JSON.stringify(data.dictLabel));
+                   // var data = obj.data;
+                    //console.log("data的值是"+data);
+                    //layer.msg('选中了：'+ data.length + ' 个');
                     break;
-                case 'isAll':
+                case 'modifyDict':
                     layer.msg(checkStatus.isAll ? '全选': '未全选');
                     break;
-            };
+            }
         });
-
-
 
         //监听行工具事件
         table.on('tool(dict)', function(obj){
@@ -138,18 +184,19 @@
                     });
                     //layer.close(index);
                 });
-            } else if(obj.event === 'edit'){
+            }else if(obj.event === 'edit'){
                 $.ajax({
                     type:"post",
                     url:"/dict/getDictInfo",
                     dataType:'json',
                     data:"id="+data.id,
                     success:function (data) {
-                        //console.log(data);
                         if(data.result==="000"){
                             $("#dictId").val(data.dict.id);
                             $("#dictName").val(data.dict.dictName);
                             $("#dictLabel").val(data.dict.dictLabel);
+                            $("#enabled").val(data.dict.enabled);
+                            $("#remark").val(data.dict.remark);
                         }else{
                             layer.msg("信息有误，请检查!");
                         }
@@ -159,7 +206,7 @@
                     title:"字典信息修改",
                     type: 1,
                     skin: 'layui-layer-rim', //加上边框
-                    area: ['820px', '440px'], //宽高
+                    area: ['700px', '480px'], //宽高
                     content: $("#edit"),
                 });
             }else if(obj.event === 'manageDict'){
