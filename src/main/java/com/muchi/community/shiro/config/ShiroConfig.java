@@ -46,7 +46,7 @@ public class ShiroConfig {
 
 
 		filterChainDefinitionMap.put("/webjars/**", "anon");
-		filterChainDefinitionMap.put("/static/**", "anon");
+		filterChainDefinitionMap.put("/statics/**", "anon");
 		filterChainDefinitionMap.put("/templates/index*", "anon");
 		filterChainDefinitionMap.put("/templates/login*", "anon");
 		filterChainDefinitionMap.put("/user/login", "anon");
