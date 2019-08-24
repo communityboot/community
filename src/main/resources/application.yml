@@ -42,8 +42,5 @@ logging:
   level:
     com.muchi.community.dict.mapper : debug
 
-
-
-
 debug: true
 

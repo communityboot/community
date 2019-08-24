@@ -16,6 +16,12 @@ public class PageController {
         return "login";
     }
 
+
+    @RequestMapping("/logout")
+    public String logout(){
+        return "logout";
+    }
+
     @RequestMapping("/main")
     public String main(){
         return "main";
