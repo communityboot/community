@@ -45,10 +45,10 @@ public class ShiroConfig {
 		//filterChainDefinitionMap.put("/**", "anon");
 
 
-		filterChainDefinitionMap.put("/webjar/**", "anon");
+		filterChainDefinitionMap.put("/webjars/**", "anon");
 		filterChainDefinitionMap.put("/static/**", "anon");
-		filterChainDefinitionMap.put("/templates/index.html", "anon");
-		filterChainDefinitionMap.put("/templates/login.html", "anon");
+		filterChainDefinitionMap.put("/templates/index*", "anon");
+		filterChainDefinitionMap.put("/templates/login*", "anon");
 		filterChainDefinitionMap.put("/user/login", "anon");
 
 		// 配置退出过滤器,其中的具体的退出代码Shiro已经替我们实现了
