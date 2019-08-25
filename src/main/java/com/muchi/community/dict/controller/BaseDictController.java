@@ -3,6 +3,7 @@ package com.muchi.community.dict.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.muchi.community.common.LayuiVo;
+import com.muchi.community.common.utils.UUIDUtil;
 import com.muchi.community.dict.entity.BaseDict;
 import com.muchi.community.dict.service.IBaseDictService;
 import org.apache.ibatis.annotations.Param;
@@ -22,7 +23,7 @@ import java.util.Map;
 
 /**
  * <p>
- *  前端控制器
+ * 前端控制器
  * </p>
  *
  * @author yuzq
@@ -32,23 +33,23 @@ import java.util.Map;
 @RequestMapping("/dict")
 public class BaseDictController {
 
-    private static Logger logger= LoggerFactory.getLogger(BaseDictController.class);
+    private static Logger logger = LoggerFactory.getLogger(BaseDictController.class);
 
     @Autowired
-   private IBaseDictService dictService;
+    private IBaseDictService dictService;
 
     @RequestMapping("/toDictPage")
-    public String toDictPage(){
+    public String toDictPage() {
         return "admin/dict";
     }
 
     @RequestMapping("/getAll")
     @ResponseBody
-    public LayuiVo getAll(Page page, @RequestParam("limit")int limit, @RequestParam(value = "page",defaultValue = "1")int currentPage){
+    public LayuiVo getAll(Page page, @RequestParam("limit") int limit, @RequestParam(value = "page", defaultValue = "1") int currentPage) {
         page.setSize(limit);
         page.setCurrent(currentPage);
         List<BaseDict> list = dictService.getAllDict(page);
-        LayuiVo layUiVo=new LayuiVo();
+        LayuiVo layUiVo = new LayuiVo();
         layUiVo.setCode(0);
         layUiVo.setMsg("成功");
         layUiVo.setCount(page.getTotal());
@@ -58,46 +59,53 @@ public class BaseDictController {
 
     @RequestMapping("/getDictInfo")
     @ResponseBody
-    public Map<String,Object> updateDict(@Param("id")Integer id){
-        BaseDict dictInfo=new BaseDict();
-        Map<String,Object> map=new HashMap<>();
-        if(id!=null){
-            dictInfo=dictService.getById(id);
-            map.put("result","000");
-            map.put("dict",dictInfo);
+    public Map<String, Object> updateDict(@Param("id") String id) {
+        BaseDict dictInfo = new BaseDict();
+        Map<String, Object> map = new HashMap<>();
+        if (id != null) {
+            dictInfo = dictService.getById(id);
+            map.put("result", "000");
+            map.put("dict", dictInfo);
+            return map;
         }
+        map.put("result","参数错误！");
         return map;
     }
 
     @PostMapping("/updateDict")
     @ResponseBody
-    public Map<String,String> updateDict(@RequestBody BaseDict dict){
-        Map<String,String> map=new HashMap<>();
-        if(dict !=null){
+    public Map<String, String> updateDict(@RequestBody BaseDict dict) {
+        Map<String, String> map = new HashMap<>();
+        if (dict != null) {
+            if(dict.getId().equals("")){
+                dict.setId(UUIDUtil.genUUID());
+            }
             try {
                 boolean b = dictService.saveOrUpdate(dict);
-                if(b){
-                    map.put("result","000");
-                }else {
-                    map.put("result","111");
+                if (b) {
+                    map.put("result", "000");
+                } else {
+                    map.put("result", "111");
                 }
-            }catch (Exception e){
-                logger.info("更新字典失败,字典id为："+dict.getId());
+            } catch (Exception e) {
+                logger.info("更新字典失败,字典id为：" + dict.getId());
             }
         }
         return map;
     }
 
-    //需要有 delete 权限
+    /**
+     * 需要有 delete 权限
+     */
     @RequiresPermissions({"delete"})
     @PostMapping("/delDictById")
     @ResponseBody
-    public Map<String,String> delDictById(@RequestBody String id){
+    public Map<String, String> delDictById(@RequestBody String id) {
         System.out.println("id = " + id);
         System.out.println("进来了");
-        Map<String,String> map=new HashMap<>();
+        Map<String, String> map = new HashMap<>();
         //假删除提醒
-        map.put("result","删除成功");
+        map.put("result", "删除成功");
         return map;
     }
 
