@@ -36,7 +36,7 @@ public class UserController{
      * @return
      */
 	@PostMapping("/login")
-	public Map<String, Object> login(User user, BindingResult bindingResult, HttpSession session) {
+	public Map<String, Object> login(User user, BindingResult bindingResult, HttpSession session,Boolean rememberMe) {
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		// 1、JSR303
@@ -48,10 +48,11 @@ public class UserController{
 
 		// 2、Shiro
 		Subject subject = SecurityUtils.getSubject();
-		UsernamePasswordToken token = new UsernamePasswordToken(user.getUserName(), user.getPassword());
+		UsernamePasswordToken token = new UsernamePasswordToken(user.getUserName(), user.getPassword(),rememberMe);
 		try {
 			subject.login(token);
 			map.put("success", true);
+
 			return map;
 		} catch (Exception e) {
 			e.printStackTrace();
