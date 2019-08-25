@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>注册页面</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/statics/css/regist.css}">
+    <script type="text/javascript" th:src="@{/webjars/jquery/3.4.1/jquery.js}" ></script>
+</head>
+<body>
+    <div class="wrapper">
+        <article>
+            <h1><em>"图片"</em><span>muchi技术有限公司</span></h1>
+            <div class="main">
+                <form>
+                    <div class="tel">
+                        <input type="tel"  placeholder="手机号"><em>由11个字符组成！</em>
+                    </div>
+                    <div class="userName">
+                        <input type="text" id="userName"  placeholder="用户名"><em>由5-8个字符组成！</em>
+                    </div>
+                    <div class="password">
+                        <input type="password" id="password1" name="pwd" placeholder="密码"><em>使用字母、数字、符号两种及以上的组合，8-12个字符</em>
+                    </div>
+                    <div class="againpwd">
+                        <input type="password" id="password2" name="pwd" placeholder="再次输入密码"><em>两次密码不一致</em>
+                    </div>
+                    <button type="button" id="regBtn">注册</button>
+                </form>
+            </div>
+        </article>
+        <footer>
+            <ul>
+                <li><a href="#">联系我们</a></li>
+                <li><a href="#">关于我们</a></li>
+                <li><a href="#">人才招聘</a></li>
+                <li><a href="#">友情链接</a></li>
+                <li><a href="#">公司地址</a></li>
+                <li><a href="#">关注我们</a></li>
+            </ul>
+            <p>本网站版权归muchi技术有限公司所有，未经许可，不得转载。</p>
+        </footer>
+    </div>
+
+
+    <script type="text/javascript">
+        $("#regBtn").click(function() {
+            //TODO 先判断输入的是否合法
+            var pwd1 = $("#password1").val();
+            var pwd2 = $("#password2").val();
+
+            if(pwd1 != pwd2){
+                alert("两次输入的密码不相同");
+                return false;
+            }
+
+
+                $.post("http://localhost:8088/user/regist", {
+                    userName: $("#userName").val(),
+                    password: pwd1,
+                }, function(result) {
+                    if(result.success) {
+
+                        alert("注册成功！");
+                        window.location.href = "http://localhost:8088/login";
+                        //必须加上，否则跳转不了
+                        return false;
+                    } else {
+                        alert(result.msg);
+                    }
+                });
+
+
+        });
+
+
+    </script>
+
+
+</body>
+</html>
