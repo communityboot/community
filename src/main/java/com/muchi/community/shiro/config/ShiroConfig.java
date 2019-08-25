@@ -47,9 +47,9 @@ public class ShiroConfig {
 
 		filterChainDefinitionMap.put("/webjars/**", "anon");
 		filterChainDefinitionMap.put("/statics/**", "anon");
-		filterChainDefinitionMap.put("/templates/index*", "anon");
-		filterChainDefinitionMap.put("/templates/login*", "anon");
 		filterChainDefinitionMap.put("/user/login", "anon");
+		filterChainDefinitionMap.put("/user/regist", "anon");
+		filterChainDefinitionMap.put("/regist", "anon");
 
 		// 配置退出过滤器,其中的具体的退出代码Shiro已经替我们实现了
 		filterChainDefinitionMap.put("/logout", "logout");

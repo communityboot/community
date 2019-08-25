@@ -17,4 +17,9 @@ public interface UserDao extends BaseMapper<User> {
 	 * @return
 	 */
 	 User getUserByUserName(String userName);
+
+
+
+
+
 }

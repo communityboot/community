@@ -1,12 +1,17 @@
 package com.muchi.community.shiro.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
+
 /**
  * shiro 权限类
  */
+@TableName("t_permission")
 public class Permission {
 
-	private Integer id; // 编号
+	private String id; // 编号
 
+	@TableField("permission_name")
 	private String permissionName; // 菜单名称
 
 	private String remarks; // 备注
@@ -19,11 +24,11 @@ public class Permission {
 		this.remarks = remarks;
 	}
 
-	public Integer getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

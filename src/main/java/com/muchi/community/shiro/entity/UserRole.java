@@ -1,12 +1,15 @@
 package com.muchi.community.shiro.entity;
 
 
+import com.baomidou.mybatisplus.annotation.TableName;
+
 /**
  * shiro 权限 用户角色
  */
+@TableName("t_user_role")
 public class UserRole {
 
-	private Integer id; // 编号
+	private String id; // 编号
 
 	private User user; // 用户
 
@@ -22,11 +25,11 @@ public class UserRole {
 		this.remarks = remarks;
 	}
 
-	public Integer getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

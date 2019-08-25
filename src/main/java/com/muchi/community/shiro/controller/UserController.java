@@ -1,15 +1,17 @@
 package com.muchi.community.shiro.controller;
 
+import com.muchi.community.common.utils.JsonResult;
 import com.muchi.community.shiro.entity.User;
+import com.muchi.community.shiro.service.UserService;
+import org.apache.logging.log4j.message.ReusableMessage;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
@@ -20,8 +22,19 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/user")
-public class UserController {
+public class UserController{
 
+	@Autowired
+	private UserService userService;
+
+
+    /**
+     * 用户登录
+     * @param user
+     * @param bindingResult
+     * @param session
+     * @return
+     */
 	@PostMapping("/login")
 	public Map<String, Object> login(User user, BindingResult bindingResult, HttpSession session) {
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -47,6 +60,33 @@ public class UserController {
 			return map;
 		}
 	}
+
+    /**
+     * 用户注册
+     * @param user
+     * @param bindingResult
+     * @return
+     */
+    @PostMapping("/regist")
+    public JsonResult regist(User user, BindingResult bindingResult) {
+        //创建返回对象
+		JsonResult result = new JsonResult();
+
+        // 1、JSR303验证是否有效
+        if (bindingResult.hasErrors()) {
+			result.setSuccess(false);
+			result.setMsg(bindingResult.getFieldError().getDefaultMessage());
+			result.setStatus("500");
+            return result;
+        }
+
+        //调用service接口执行注册
+		result = userService.registUser(user);
+
+		return  result;
+    }
+
+
 
 
 

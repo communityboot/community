@@ -1,17 +1,24 @@
 package com.muchi.community.shiro.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * shiro 权限 user 类
  */
+@TableName("t_user")
 public class User {
 
-	private Integer id;
+	private String id;
 
+	@NotEmpty(message = "用户名不能为空")
+	@TableField("user_name")
 	private String userName;  //用户名
 
+	@NotEmpty(message = "密码不能为空")
 	private String password;  //密码
-	
+
 	private String remarks; // 备注
 	
 	public String getRemarks() {
@@ -22,11 +29,11 @@ public class User {
 		this.remarks = remarks;
 	}
 
-	public Integer getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

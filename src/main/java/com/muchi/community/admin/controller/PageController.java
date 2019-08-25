@@ -16,6 +16,11 @@ public class PageController {
         return "login";
     }
 
+    @RequestMapping("/regist")
+    public String regist(){
+        return "regist";
+    }
+
 
     @RequestMapping("/logout")
     public String logout(){

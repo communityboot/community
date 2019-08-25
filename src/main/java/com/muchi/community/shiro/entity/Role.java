@@ -1,21 +1,26 @@
 package com.muchi.community.shiro.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
+
 /**
  * shiro 角色类
  */
+@TableName("t_role")
 public class Role {
 
-	private Integer id; // 编号
+	private String id; // 编号
 
+	@TableField("role_name")
 	private String roleName; // 角色名称
 
 	private String remarks; // 备注
-	
-	public Integer getId() {
+
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
