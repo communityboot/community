@@ -1,5 +1,7 @@
 package com.muchi.community.common.log;
 
+import com.muchi.community.shiro.entity.User;
+import org.apache.shiro.SecurityUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -56,7 +58,12 @@ public class LogAspect {
                 sb.append("第").append(a).append("个参数为").append(o.toString());
                 a++;
             }
+
+            /*****加入操作用户*****/
+            String username = (String)SecurityUtils.getSubject().getPrincipal();
+
             System.out.println(sb.toString());
+            logger.info("操作用户为：{}",username);
             logger.info(title+","+"备注为"+action+","+"类名为"+className+",方法名为"+methodName+",共有"+args.length+"个参数"+",参数为"+sb.toString());
 
         }catch (Exception e1){
