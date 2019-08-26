@@ -19,6 +19,6 @@ public interface IBaseDictService extends IService<BaseDict> {
 
     List<BaseDict> getAllDict(Page page);
 
-    Map<String,Object> delDictBatch(List<String> [] ids);
+    int delDictBatch(String[] ids);
 
 }

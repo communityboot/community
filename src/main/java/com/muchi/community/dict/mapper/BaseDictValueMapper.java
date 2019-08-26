@@ -17,4 +17,6 @@ import org.springframework.stereotype.Component;
 @Component
 public interface BaseDictValueMapper extends BaseMapper<BaseDictValue> {
 
+    int deleteByDictIds(String[] ids);
+
 }

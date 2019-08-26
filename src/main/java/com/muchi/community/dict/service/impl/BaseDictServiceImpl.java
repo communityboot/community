@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -31,16 +32,9 @@ public class BaseDictServiceImpl extends ServiceImpl<BaseDictMapper, BaseDict> i
     }
 
     @Override
-    public Map<String, Object> delDictBatch(List<String>[] ids) {
-        return null;
+    public int delDictBatch(String[] ids) {
+        List<String> strings = Arrays.asList(ids);
+        return baseDictMapper.deleteBatchIds(strings);
     }
-
-/*    @Override
-    public Map<String, Object> delDictBatch(List<String> ids) {
-        int i = baseDictMapper.deleteBatchIds(ids);
-
-
-    }*/
-
 
 }

@@ -6,6 +6,7 @@ import com.muchi.community.common.LayuiVo;
 import com.muchi.community.common.utils.UUIDUtil;
 import com.muchi.community.dict.entity.BaseDict;
 import com.muchi.community.dict.service.IBaseDictService;
+import com.muchi.community.dict.service.IBaseDictValueService;
 import org.apache.ibatis.annotations.Param;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import org.springframework.stereotype.Controller;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,6 +37,9 @@ public class BaseDictController {
 
     @Autowired
     private IBaseDictService dictService;
+
+    @Autowired
+    private IBaseDictValueService dictValueService;
 
     @RequestMapping("/toDictPage")
     public String toDictPage() {
@@ -107,9 +112,24 @@ public class BaseDictController {
         return map;
     }
 
-/*    public  Map<String,Object> delDictBatch(@RequestParam(value = "ids[]") String[] ids){
-
-    }*/
+    @PostMapping("/delBatchDict")
+    @ResponseBody
+    public  Map<String,Object> delDictBatch(@RequestParam(value = "ids[]") String[] ids){
+        List<String> dictIds = Arrays.asList(ids);
+        //根据ID删除字典
+        int dictNum = dictService.delDictBatch(ids);
+        //根据ID删除字典选项
+        int dictVaNum = dictValueService.deleteByDictIds(ids);
+        Map<String,Object> map=new HashMap<>();
+        if(dictNum+dictVaNum == ids.length){
+            map.put("result","success");
+            map.put("msg","删除成功！");
+        }else {
+            map.put("result","fail");
+            map.put("msg","删除失败！");
+        }
+        return map;
+    }
 
 
 }

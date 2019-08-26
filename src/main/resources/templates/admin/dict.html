@@ -130,7 +130,7 @@
         });
 
         $("#closeDialog").click(function () {
-           $("edit").hide();
+            layer.closeAll();
         });
 
         //头工具栏事件
@@ -153,10 +153,65 @@
                    for(var i = 0 ;i<data.length;i++){
                        arr.push(data[i].id);
                    }
+                    layer.confirm('确定删除吗？', {
+                        btn: ['取消','确定'] //按钮
+                    }, function(){
+                        layer.closeAll();
+                    }, function(){
+                        $.ajax({
+                            type:"post",
+                            url:"/dict/delBatchDict",
+                            dataType:'json',
+                            data:{"ids" : arr},
+                            success:function (data) {
+                                if(data.result==="删除成功"){
+                                    layer.msg("删除成功!");
+                                    obj.del();
+                                    layer.close(index);
+                                }else{
+                                    //layer.msg("删除失败!");
+                                    layer.msg(data.msg);
+                                    layer.close(index);
+                                }
+                            }
+                        });
+                    });
 
                     break;
                 case 'modifyDict':
-                    layer.msg(checkStatus.isAll ? '全选': '未全选');
+                    var  data = checkStatus.data;
+                   // console.log(data);
+                  if(data.length === 1){
+                      $.ajax({
+                          type:"post",
+                          url:"/dict/getDictInfo",
+                          dataType:'json',
+                          data:"id="+data[0].id,
+                          success:function (data) {
+                              if(data.result==="000"){
+                                  $("#dictId").val(data.dict.id);
+                                  $("#dictName").val(data.dict.dictName);
+                                  $("#dictLabel").val(data.dict.dictLabel);
+                                  $("#enabled").val(data.dict.enabled);
+                                  $("#remark").val(data.dict.remark);
+                              }else{
+                                  layer.msg("信息有误，请检查!");
+                              }
+                          }
+                      });
+                      layer.open({
+                          title:"字典信息修改",
+                          type: 1,
+                          skin: 'layui-layer-rim', //加上边框
+                          area: ['700px', '480px'], //宽高
+                          content: $("#edit"),
+                      });
+                  }else if(data.length === 0){
+                      layer.msg("所选数量为0，请选择需要操作的数据");
+
+                  }else {
+                      layer.msg("所选数量超过1，只能对单条数据进行编辑！")
+                  }
                     break;
             }
         });

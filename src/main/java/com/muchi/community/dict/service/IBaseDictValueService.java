@@ -13,4 +13,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IBaseDictValueService extends IService<BaseDictValue> {
 
+    int deleteByDictIds(String[] ids);
+
 }
