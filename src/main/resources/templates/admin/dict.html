@@ -90,7 +90,6 @@
           </div>
       </form>
     </div>
-
 <div th:replace="/commons/bar::footbar"></div>
 </div>
 <script type="text/javascript" th:src="@{/webjars/layui/2.5.4/layui.js}" ></script>
@@ -130,6 +129,11 @@
         });
 
         $("#closeDialog").click(function () {
+            $("#dictId").val("");
+            $("#dictName").val("");
+            $("#dictLabel").val("");
+            $("#enabled").val("");
+            $("#remark").val("");
             layer.closeAll();
         });
 

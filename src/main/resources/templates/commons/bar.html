@@ -25,7 +25,7 @@
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">
                 <a href="javascript:;">
-                    <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+                    <img th:src="@{/static/xwz.jpeg}" class="layui-nav-img">
                     admin
                 </a>
                 <dl class="layui-nav-child">
@@ -61,7 +61,7 @@
                 <li class="layui-nav-item">
                     <a href="javascript:;"><i class="layui-icon layui-icon-util"></i>&nbsp;系统监控</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;"><i class="layui-icon layui-icon-console"></i>&nbsp;数据库监控</a></dd>
+                        <dd><a href="/druidMonitor"><i class="layui-icon layui-icon-console"></i>&nbsp;数据库监控</a></dd>
                         <dd><a href="javascript:;"><i class="layui-icon layui-icon-chart-screen"></i>&nbsp;日志监控</a></dd>
                     </dl>
                 </li>
@@ -71,7 +71,7 @@
 
 
 
-    <div class="layui-footer" th:fragment="footbar" style="opacity: 0.5">
+    <div class="layui-footer" th:fragment="footbar" >
         <!-- 底部固定区域 -->
         <p style="color: black">© muchi.com - 牧之社区版权所有</p>
     </div>

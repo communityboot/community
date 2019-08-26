@@ -33,6 +33,9 @@ public class PageController {
     }
 
 
-
+    @RequestMapping("/druidMonitor")
+    public String druidMonitor(){
+        return "/admin/druid";
+    }
 
 }
