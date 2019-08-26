@@ -3,23 +3,23 @@
 <head>
 	<meta charset="UTF-8">
 	<title>登陆页面</title>
-	<link rel="stylesheet" type="text/css" th:href="@{/statics/css/login.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/static/login/css/login.css}">
 
 	<script type="text/javascript" th:src="@{/webjars/jquery/3.4.1/jquery.js}" ></script>
 
 	<script type="text/javascript">
         $(function(){
             $(".name input").focus(function(){
-                $(this).prev("i").css({"background-image":"th:url(@{/statics/img/user2.png})"});
+                $(this).prev("i").css({"background-image":"th:url(@{/static/login/img/user2.png})"});
             });
             $(".name input").blur(function(){
-                $(this).prev("i").css({"background-image":"th:url(@{/statics/img/user1.png})"});
+                $(this).prev("i").css({"background-image":"th:url(@{/static/login/img/user1.png})"});
             });
             $(".password input").focus(function(){
-                $(this).prev("i").css({"background-image":"th:url(@{/statics/img/password2.png})"});
+                $(this).prev("i").css({"background-image":"th:url(@{/static/login/img/password2.png})"});
             });
             $(".password input").blur(function(){
-                $(this).prev("i").css({"background-image":"th:url(@{/statics/img/password1.png})"});
+                $(this).prev("i").css({"background-image":"th:url(@{/static/login/img/password1.png})"});
             });
         });
 	</script>
@@ -32,7 +32,7 @@
 			<section>
 				<aside>
 					<em>
-						<img th:src="@{/statics/img/user.png}">
+						<img th:src="@{/static/login/img/user.png}">
 					</em>
 					<form action="" method="post">
 						<p class="name"><i></i><input type="text" id="userName" name="userName" class="userName" placeholder="请输入用户名"></p>
