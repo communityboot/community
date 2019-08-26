@@ -8,11 +8,9 @@ import com.muchi.community.dict.entity.BaseDict;
 import com.muchi.community.dict.service.IBaseDictService;
 import org.apache.ibatis.annotations.Param;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.stereotype.Controller;
@@ -108,6 +106,10 @@ public class BaseDictController {
         map.put("result", "删除成功");
         return map;
     }
+
+/*    public  Map<String,Object> delDictBatch(@RequestParam(value = "ids[]") String[] ids){
+
+    }*/
 
 
 }

@@ -85,7 +85,7 @@
               </div>
           </div>
           <div class="layui-form-item" align="center">
-              <button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog">取消</button>
+              <button class="layui-btn layui-btn-primary" type="button" id="closeDialog">取消</button>
               <button class="layui-btn"  onclick="updateDic()">保存</button>
           </div>
       </form>
@@ -129,6 +129,10 @@
 
         });
 
+        $("#closeDialog").click(function () {
+           $("edit").hide();
+        });
+
         //头工具栏事件
         table.on('toolbar(dict)', function(obj){
             var checkStatus = table.checkStatus(obj.config.id);
@@ -145,14 +149,11 @@
                     break;
                 case 'delDict':
                     var data = checkStatus.data;
-                    console.log(JSON.stringify(data));
-                    console.log(JSON.stringify(data.dictLabel));
-                    //layer.alert();
-                    // var data = checkStatus.data;
-                    // layer.alert(JSON.stringify(data.dictLabel));
-                   // var data = obj.data;
-                    //console.log("data的值是"+data);
-                    //layer.msg('选中了：'+ data.length + ' 个');
+                    var arr=[];
+                   for(var i = 0 ;i<data.length;i++){
+                       arr.push(data[i].id);
+                   }
+
                     break;
                 case 'modifyDict':
                     layer.msg(checkStatus.isAll ? '全选': '未全选');
@@ -163,7 +164,6 @@
         //监听行工具事件
         table.on('tool(dict)', function(obj){
             var data = obj.data;
-            //console.log(obj)
             if(obj.event === 'del'){
                 layer.confirm('真的删除行么', function(index){
                     $.ajax({

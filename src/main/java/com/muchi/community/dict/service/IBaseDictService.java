@@ -5,6 +5,7 @@ import com.muchi.community.dict.entity.BaseDict;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -17,5 +18,7 @@ import java.util.List;
 public interface IBaseDictService extends IService<BaseDict> {
 
     List<BaseDict> getAllDict(Page page);
+
+    Map<String,Object> delDictBatch(List<String> [] ids);
 
 }

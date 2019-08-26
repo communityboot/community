@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -28,4 +29,18 @@ public class BaseDictServiceImpl extends ServiceImpl<BaseDictMapper, BaseDict> i
     public List<BaseDict> getAllDict(Page page) {
         return baseDictMapper.getAllDict(page);
     }
+
+    @Override
+    public Map<String, Object> delDictBatch(List<String>[] ids) {
+        return null;
+    }
+
+/*    @Override
+    public Map<String, Object> delDictBatch(List<String> ids) {
+        int i = baseDictMapper.deleteBatchIds(ids);
+
+
+    }*/
+
+
 }
