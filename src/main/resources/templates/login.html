@@ -66,10 +66,10 @@
         $.post("http://localhost:8088/user/login", {
             userName: $("#userName").val(),
             password: $("#password").val(),
-            rememberMe: $("#rememberMe").val(),
+            rememberMe: $("#rememberMe").prop("checked"),
         }, function(result) {
             if(result.success) {
-                //window.location.href = "http://localhost:8088/main";
+                //window.location.href = "http://localhost:8088/main";rememberMe
                 window.location.href = "http://localhost:8088/admin/mainPage";
                 //必须加上，否则跳转不了
                 //return false;
