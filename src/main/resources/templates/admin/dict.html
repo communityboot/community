@@ -74,8 +74,8 @@
           <div class="layui-form-item">
               <label class="layui-form-label">是否启用<span style="color: red;">*</span></label>
               <div class="layui-input-block">
-                  <input  type="radio" name="enabled" value="1" title="是" checked/>
-                  <input id="enabled" type="radio" name="enabled" value="0" title="不是"/>
+                  <input id="check1" type="radio" name="enabled" value="1" title="启用" />
+                  <input id="check2" type="radio" name="enabled" value="0" title="不启用"  />
               </div>
           </div>
           <div class="layui-form-item">
@@ -86,7 +86,7 @@
           </div>
           <div class="layui-form-item" align="center">
               <button class="layui-btn layui-btn-primary" type="button" id="closeDialog">取消</button>
-              <button class="layui-btn"  onclick="updateDic()">保存</button>
+              <button class="layui-btn" id="updateDict">保存</button>
           </div>
       </form>
     </div>
@@ -139,6 +139,7 @@
 
         //头工具栏事件
         table.on('toolbar(dict)', function(obj){
+            var $ = layui.jquery;
             var checkStatus = table.checkStatus(obj.config.id);
             switch(obj.event){
                 case 'addDict':
@@ -184,8 +185,8 @@
                     break;
                 case 'modifyDict':
                     var  data = checkStatus.data;
-                   // console.log(data);
                   if(data.length === 1){
+                      var $ = layui.jquery,form =layui.form;
                       $.ajax({
                           type:"post",
                           url:"/dict/getDictInfo",
@@ -196,19 +197,21 @@
                                   $("#dictId").val(data.dict.id);
                                   $("#dictName").val(data.dict.dictName);
                                   $("#dictLabel").val(data.dict.dictLabel);
-                                  $("#enabled").val(data.dict.enabled);
+                                  $("input[name=enabled][value=1]").attr("checked",data.dict.enabled === 1 ? true :false);
+                                  $("input[name=enabled][value=0]").attr("checked",data.dict.enabled === 0 ? true :false)
                                   $("#remark").val(data.dict.remark);
+                                  form.render();
                               }else{
                                   layer.msg("信息有误，请检查!");
                               }
                           }
-                      });
+                      })
                       layer.open({
                           title:"字典信息修改",
                           type: 1,
                           skin: 'layui-layer-rim', //加上边框
                           area: ['700px', '480px'], //宽高
-                          content: $("#edit"),
+                          content: $("#edit")
                       });
                   }else if(data.length === 0){
                       layer.msg("所选数量为0，请选择需要操作的数据");
@@ -238,29 +241,34 @@
                             }else{
                                 //layer.msg("删除失败!");
                                 layer.msg(data.msg);
-                                layer.close(index);
+                                obj.del();
                             }
                         }
                     });
                     //layer.close(index);
                 });
             }else if(obj.event === 'edit'){
-                $.ajax({
-                    type:"post",
-                    url:"/dict/getDictInfo",
-                    dataType:'json',
-                    data:"id="+data.id,
-                    success:function (data) {
-                        if(data.result==="000"){
-                            $("#dictId").val(data.dict.id);
-                            $("#dictName").val(data.dict.dictName);
-                            $("#dictLabel").val(data.dict.dictLabel);
-                            $("#enabled").val(data.dict.enabled);
-                            $("#remark").val(data.dict.remark);
-                        }else{
-                            layer.msg("信息有误，请检查!");
+                layui.use('form',function () {
+                    var $ = layui.jquery,form =layui.form;
+                    $.ajax({
+                        type:"post",
+                        url:"/dict/getDictInfo",
+                        dataType:'json',
+                        data:"id="+data.id,
+                        success:function (data) {
+                            if(data.result==="000"){
+                                $("#dictId").val(data.dict.id);
+                                $("#dictName").val(data.dict.dictName);
+                                $("#dictLabel").val(data.dict.dictLabel);
+                                $("input[name=enabled][value=1]").attr("checked",data.dict.enabled === 1 ? true :false);
+                                $("input[name=enabled][value=0]").attr("checked",data.dict.enabled === 0 ? true :false)
+                                $("#remark").val(data.dict.remark);
+                                form.render();
+                            }else{
+                                layer.msg("信息有误，请检查!");
+                            }
                         }
-                    }
+                    })
                 });
                 layer.open({
                     title:"字典信息修改",
@@ -277,7 +285,7 @@
                     dataType:'json',
                     data:"id="+data.id,
                     success:function (data) {
-                        console.log(data);
+                        //console.log(data);
                         if(data.result==="haha"){
                             layer.close(index);
                         }else{
@@ -289,11 +297,17 @@
         });
     });
 
-    function updateDic() {
+
+    $("#updateDict").click(function () {
         var id = $('#dictId').val();
         var dictName = $('#dictName').val();
         var dictLabel = $('#dictLabel').val();
-        var enabled = $('#enabled').val();
+        var enableds = document.getElementsByName("enabled");
+        for(var i = 0;i<enableds.length;i++){
+            if(enableds[i].checked){
+                var  enabled = enableds[i].value;
+            }
+        }
         var remark = $('#remark').val();
         $.ajax({
             type:"post",
@@ -311,7 +325,8 @@
                 }
             }
         });
-    }
+    });
+
 </script>
 </body>
 </html>

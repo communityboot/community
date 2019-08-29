@@ -1,6 +1,5 @@
 package com.muchi.community.common.log;
 
-import com.muchi.community.shiro.entity.User;
 import org.apache.shiro.SecurityUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;

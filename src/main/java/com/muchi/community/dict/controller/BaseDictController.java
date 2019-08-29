@@ -12,6 +12,7 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.stereotype.Controller;
@@ -62,15 +63,17 @@ public class BaseDictController {
 
     @RequestMapping("/getDictInfo")
     @ResponseBody
-    public Map<String, Object> updateDict(@Param("id") String id) {
+    public Map<String, Object> updateDict(@Param("id") String id, Model model) {
         BaseDict dictInfo = new BaseDict();
         Map<String, Object> map = new HashMap<>();
         if (id != null) {
             dictInfo = dictService.getById(id);
             map.put("result", "000");
             map.put("dict", dictInfo);
+            model.addAttribute("dict",dictInfo);
             return map;
         }
+
         map.put("result","参数错误！");
         return map;
     }
