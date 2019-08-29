@@ -86,7 +86,11 @@
           </div>
           <div class="layui-form-item" align="center">
               <button class="layui-btn layui-btn-primary" type="button" id="closeDialog">取消</button>
-              <button class="layui-btn" id="updateDict">保存</button>
+              <button class="layui-btn" lay-submit lay-filter="submitBtn">立即提交</button>
+
+              <!--
+                            <button class="layui-btn" id="updateDict">保存</button>
+              -->
           </div>
       </form>
     </div>
@@ -296,8 +300,6 @@
             }
         });
     });
-
-
     $("#updateDict").click(function () {
         var id = $('#dictId').val();
         var dictName = $('#dictName').val();
@@ -315,7 +317,6 @@
             contentType: "application/json; charset=utf-8",
             dataType:'json',
             data: JSON.stringify({'id': id, 'dictName': dictName,dictLabel: dictLabel,'enabled': enabled,'remark': remark}),
-            // data: JSON.stringify($('#editForm').serialize()),
             success:function (data) {
                 console.log(data);
                 if(data.result==="000"){
@@ -328,5 +329,31 @@
     });
 
 </script>
+<script>
+    layui.use('form', function(){
+        var form = layui.form;
+        form.on('submit(submitBtn)',function (data) {
+            $.ajax({
+                type:"post",
+                url:"/dict/updateDict",
+                contentType: "application/json; charset=utf-8",
+                dataType:'json',
+                data: JSON.stringify(data.field),
+                //data: JSON.stringify({'id': id, 'dictName': dictName,dictLabel: dictLabel,'enabled': enabled,'remark': remark}),
+                success:function (data) {
+                    console.log(data);
+                    if(data.result==="000"){
+                        layer.closeAll();
+                        layer.msg("更新成功")
+                    }else{
+                        layer.msg("信息有误，请检查!");
+                    }
+                }
+            });
+            return false;
+        });
+    });
+</script>
+
 </body>
 </html>
