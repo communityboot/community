@@ -1,5 +1,6 @@
 package com.muchi.community.shiro.service.impl;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.muchi.community.common.utils.JsonResult;
 import com.muchi.community.shiro.dao.UserDao;
@@ -8,6 +9,7 @@ import com.muchi.community.shiro.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -59,5 +61,18 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
         result.setSuccess(true);
         result.setMsg("注册成功");
         return result;
+    }
+
+    /**
+     * 分页查询用户
+     * @param page
+     * @param user
+     * @return
+     */
+    @Override
+    public List<User> userQuery(Page page, User user) {
+
+        List<User> users = userDao.userQuery(page, user);
+        return users;
     }
 }

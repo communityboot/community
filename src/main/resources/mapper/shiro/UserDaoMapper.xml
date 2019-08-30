@@ -7,4 +7,10 @@
         select * from t_user where user_name=#{userName}
     </select>
 
+
+
+    <select id="userQuery" parameterType="string" resultType="com.muchi.community.shiro.entity.User">
+        select * from t_user
+    </select>
+
 </mapper>
