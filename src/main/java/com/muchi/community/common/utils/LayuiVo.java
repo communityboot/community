@@ -1,4 +1,4 @@
-package com.muchi.community.common;
+package com.muchi.community.common.utils;
 
 /**
  * @Author： yuzq

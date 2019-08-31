@@ -48,7 +48,7 @@
     <script type="text/html" id="barDemo">
         <a id="editBtn" class="layui-btn layui-btn-xs" lay-event="edit" >编辑</a>
         <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
-        <a class="layui-btn layui-bg-green layui-btn-xs" lay-event="manageDict">管理键值</a>
+        <a class="layui-btn layui-bg-green layui-btn-xs" lay-event="manageDict" href="/dv/dictPage">管理键值</a>
     </script>
 </div>
   <div id="edit" hidden="hidden" >
@@ -286,8 +286,8 @@
                     dataType:'json',
                     data:"dictId="+data.id,
                     success:function (data) {
-                        if(data.result==="haha"){
-                            layer.close(index);
+                        if(data.result==="success"){
+                            window.location.href="localhost:8088/dv/dictValue";
                         }else{
                             layer.msg("信息有误，请检查!");
                         }
@@ -296,34 +296,6 @@
             }
         });
     });
-   /* $("#updateDict").click(function () {
-        var id = $('#dictId').val();
-        var dictName = $('#dictName').val();
-        var dictLabel = $('#dictLabel').val();
-        var enableds = document.getElementsByName("enabled");
-        for(var i = 0;i<enableds.length;i++){
-            if(enableds[i].checked){
-                var  enabled = enableds[i].value;
-            }
-        }
-        var remark = $('#remark').val();
-        $.ajax({
-            type:"post",
-            url:"/dict/updateDict",
-            contentType: "application/json; charset=utf-8",
-            dataType:'json',
-            data: JSON.stringify({'id': id, 'dictName': dictName,dictLabel: dictLabel,'enabled': enabled,'remark': remark}),
-            success:function (data) {
-                console.log(data);
-                if(data.result==="000"){
-                    layer.msg("更新成功")
-                }else{
-                    layer.msg("信息有误，请检查!");
-                }
-            }
-        });
-    });
-*/
 </script>
 <script>
     layui.use('form', function(){

@@ -1,7 +1,7 @@
 package com.muchi.community.shiro.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.muchi.community.common.LayuiVo;
+import com.muchi.community.common.utils.LayuiVo;
 import com.muchi.community.common.utils.JsonResult;
 import com.muchi.community.shiro.entity.User;
 import com.muchi.community.shiro.service.UserService;

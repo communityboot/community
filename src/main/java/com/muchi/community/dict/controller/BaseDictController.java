@@ -2,7 +2,7 @@ package com.muchi.community.dict.controller;
 
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.muchi.community.common.LayuiVo;
+import com.muchi.community.common.utils.LayuiVo;
 import com.muchi.community.common.constant.JsonConstant;
 import com.muchi.community.common.utils.UUIDUtil;
 import com.muchi.community.dict.entity.BaseDict;
@@ -65,7 +65,7 @@ public class BaseDictController {
     @RequestMapping("/getDictInfo")
     @ResponseBody
     public Map<String, Object> updateDict(@Param("id") String id, Model model) {
-        BaseDict dictInfo = new BaseDict();
+        BaseDict dictInfo;
         Map<String, Object> map = new HashMap<>();
         if (id != null) {
             dictInfo = dictService.getById(id);
