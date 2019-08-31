@@ -74,11 +74,10 @@
           <div class="layui-form-item">
               <label class="layui-form-label">是否启用<span style="color: red;">*</span></label>
               <div class="layui-input-block">
-                  <input id="check1" type="radio" name="enabled" value="1" title="启用" />
-                  <input id="check2" type="radio" name="enabled" value="0" title="不启用"  />
+                  <input id="check1" name="enabled" title="启用" type="radio" value="1"/>
+                  <input id="check2" type="radio" name="enabled" value="0" title="不启用"/>
               </div>
-          </div>
-          <div class="layui-form-item">
+
               <label class="layui-form-label">备注</label>
               <div class="layui-input-block">
                   <input id="remark" name="remark" placeholder="请输入备注" type="text" class="layui-input"/>
@@ -88,9 +87,6 @@
               <button class="layui-btn layui-btn-primary" type="button" id="closeDialog">取消</button>
               <button class="layui-btn" lay-submit lay-filter="submitBtn">立即提交</button>
 
-              <!--
-                            <button class="layui-btn" id="updateDict">保存</button>
-              -->
           </div>
       </form>
     </div>
@@ -201,15 +197,15 @@
                                   $("#dictId").val(data.dict.id);
                                   $("#dictName").val(data.dict.dictName);
                                   $("#dictLabel").val(data.dict.dictLabel);
-                                  $("input[name=enabled][value=1]").attr("checked",data.dict.enabled === 1 ? true :false);
-                                  $("input[name=enabled][value=0]").attr("checked",data.dict.enabled === 0 ? true :false)
+                                  $("input[name=enabled][value= '1']").attr("checked",data.dict.enabled === 1 ? true :false);
+                                  $("input[name=enabled][value= '0']").attr("checked",data.dict.enabled === 0 ? true :false)
                                   $("#remark").val(data.dict.remark);
                                   form.render();
                               }else{
                                   layer.msg("信息有误，请检查!");
                               }
                           }
-                      })
+                      });
                       layer.open({
                           title:"字典信息修改",
                           type: 1,
@@ -223,6 +219,8 @@
                   }else {
                       layer.msg("所选数量超过1，只能对单条数据进行编辑！")
                   }
+                    break;
+                default:
                     break;
             }
         });
@@ -264,8 +262,8 @@
                                 $("#dictId").val(data.dict.id);
                                 $("#dictName").val(data.dict.dictName);
                                 $("#dictLabel").val(data.dict.dictLabel);
-                                $("input[name=enabled][value=1]").attr("checked",data.dict.enabled === 1 ? true :false);
-                                $("input[name=enabled][value=0]").attr("checked",data.dict.enabled === 0 ? true :false)
+                                $("input[name=enabled][value= '1']").attr("checked",data.dict.enabled === 1 ? true :false);
+                                $("input[name=enabled][value= '0']").attr("checked",data.dict.enabled === 0 ? true :false)
                                 $("#remark").val(data.dict.remark);
                                 form.render();
                             }else{
@@ -284,12 +282,10 @@
             }else if(obj.event === 'manageDict'){
                 $.ajax({
                     type:"post",
-                    url:"/dict/testString",
-                    //url:"/dict/getDictVal",
+                    url:"/dv/toDictValue",
                     dataType:'json',
-                    data:"id="+data.id,
+                    data:"dictId="+data.id,
                     success:function (data) {
-                        //console.log(data);
                         if(data.result==="haha"){
                             layer.close(index);
                         }else{
@@ -300,7 +296,7 @@
             }
         });
     });
-    $("#updateDict").click(function () {
+   /* $("#updateDict").click(function () {
         var id = $('#dictId').val();
         var dictName = $('#dictName').val();
         var dictLabel = $('#dictLabel').val();
@@ -327,7 +323,7 @@
             }
         });
     });
-
+*/
 </script>
 <script>
     layui.use('form', function(){
@@ -339,7 +335,6 @@
                 contentType: "application/json; charset=utf-8",
                 dataType:'json',
                 data: JSON.stringify(data.field),
-                //data: JSON.stringify({'id': id, 'dictName': dictName,dictLabel: dictLabel,'enabled': enabled,'remark': remark}),
                 success:function (data) {
                     console.log(data);
                     if(data.result==="000"){

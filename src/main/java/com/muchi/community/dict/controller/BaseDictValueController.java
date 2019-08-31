@@ -1,9 +1,12 @@
 package com.muchi.community.dict.controller;
 
 
-import org.springframework.web.bind.annotation.RequestMapping;
+import com.muchi.community.dict.entity.BaseDictValue;
+import com.muchi.community.dict.service.IBaseDictValueService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RestController;
+import java.util.List;
 
 /**
  * <p>
@@ -14,7 +17,21 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2019-08-26
  */
 @RestController
-@RequestMapping("/dict/base-dict-value")
+@RequestMapping("/dv")
 public class BaseDictValueController {
+
+    @Autowired
+    private IBaseDictValueService dictValueService;
+
+    @GetMapping("/toDictValue")
+    public String toDictValue(){
+        return "/admin/dictValue";
+    }
+
+    @PostMapping("/getDictVal")
+    @ResponseBody
+    public List<BaseDictValue> getDictValue(@RequestParam("dictId") String dictID){
+        return dictValueService.getDictVallue(dictID);
+    }
 
 }

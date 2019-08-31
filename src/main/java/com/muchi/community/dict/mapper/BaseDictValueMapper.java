@@ -3,7 +3,11 @@ package com.muchi.community.dict.mapper;
 import com.muchi.community.dict.entity.BaseDictValue;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 /**
  * <p>
@@ -19,4 +23,6 @@ public interface BaseDictValueMapper extends BaseMapper<BaseDictValue> {
 
     int deleteByDictIds(String[] ids);
 
+    @Select("select * from base_dict_value where dict_id = #{dictId}")
+    List<BaseDictValue> getDictVallues(@Param("dictId") String dictId);
 }

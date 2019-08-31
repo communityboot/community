@@ -3,6 +3,7 @@ package com.muchi.community.dict.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.muchi.community.common.LayuiVo;
+import com.muchi.community.common.constant.JsonConstant;
 import com.muchi.community.common.utils.UUIDUtil;
 import com.muchi.community.dict.entity.BaseDict;
 import com.muchi.community.dict.service.IBaseDictService;
@@ -125,7 +126,7 @@ public class BaseDictController {
         int dictVaNum = dictValueService.deleteByDictIds(ids);
         Map<String,Object> map=new HashMap<>();
         if(dictNum+dictVaNum == ids.length){
-            map.put("result","success");
+            map.put("result", JsonConstant.SUCCESS);
             map.put("msg","删除成功！");
         }else {
             map.put("result","fail");

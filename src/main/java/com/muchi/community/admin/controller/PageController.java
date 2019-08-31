@@ -38,4 +38,10 @@ public class PageController {
         return "/admin/druid";
     }
 
+
+    @RequestMapping("/MainDemo")
+    public String mainDemo(){
+        return "mainDemo";
+    }
+
 }

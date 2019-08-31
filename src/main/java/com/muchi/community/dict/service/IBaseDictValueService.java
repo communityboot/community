@@ -3,6 +3,8 @@ package com.muchi.community.dict.service;
 import com.muchi.community.dict.entity.BaseDictValue;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务类
@@ -14,5 +16,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface IBaseDictValueService extends IService<BaseDictValue> {
 
     int deleteByDictIds(String[] ids);
+
+    List<BaseDictValue> getDictVallue(String dictId);
 
 }

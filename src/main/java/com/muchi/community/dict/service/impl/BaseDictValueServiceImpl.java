@@ -6,6 +6,9 @@ import com.muchi.community.dict.service.IBaseDictValueService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 /**
  * <p>
@@ -23,5 +26,14 @@ public class BaseDictValueServiceImpl extends ServiceImpl<BaseDictValueMapper, B
     @Override
     public int deleteByDictIds(String[] ids) {
         return  mapper.deleteByDictIds(ids);
+    }
+
+    /**
+     * 根据字典id去字典值表查找字典值列表
+     * @param  dictId 字典id
+     * @return List<BaseDictValue>
+     */
+    public List<BaseDictValue> getDictVallue(String dictId){
+        return mapper.getDictVallues(dictId);
     }
 }
