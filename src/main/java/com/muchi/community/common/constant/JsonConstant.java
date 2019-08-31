@@ -13,6 +13,10 @@ public class JsonConstant {
 
     public static final String FAIL = "fail";
 
+    public static final String MSG = "msg";
+
+    public static final String RESULT = "result";
+
     public static final String DELSUCCESS = "删除成功！";
 
     public static final String DELFAIL = "删除失败！";
