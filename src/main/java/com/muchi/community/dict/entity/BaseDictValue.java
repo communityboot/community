@@ -1,9 +1,11 @@
 package com.muchi.community.dict.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.time.LocalDateTime;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <p>
@@ -26,32 +28,38 @@ public class BaseDictValue implements Serializable {
     /**
      * 字典id
      */
+    @TableField("dict_id")
     private String dictId;
 
     /**
      * 字典key
      */
+    @TableField("dict_key")
     private String dictKey;
 
     /**
      * 字典value
      */
+    @TableField("dict_val")
     private String dictVal;
 
     /**
      * 字典排序
      */
+    @TableField("sort")
     private String sort;
 
     /**
      * 创建时间
      */
-    private LocalDateTime createTime;
+    @TableField("create_time")
+    private Date createTime;
 
     /**
      * 更新时间
      */
-    private LocalDateTime updateTime;
+    @TableField("update_time")
+    private Date updateTime;
 
     public String getId() {
         return id;
@@ -93,19 +101,19 @@ public class BaseDictValue implements Serializable {
         this.sort = sort;
     }
 
-    public LocalDateTime getCreateTime() {
+    public Date getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(LocalDateTime createTime) {
+    public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 
-    public LocalDateTime getUpdateTime() {
+    public Date getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(LocalDateTime updateTime) {
+    public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
 

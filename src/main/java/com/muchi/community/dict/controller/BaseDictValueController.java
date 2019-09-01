@@ -2,12 +2,15 @@ package com.muchi.community.dict.controller;
 
 
 import com.muchi.community.common.constant.JsonConstant;
+import com.muchi.community.common.utils.LayuiVo;
 import com.muchi.community.dict.entity.BaseDictValue;
 import com.muchi.community.dict.service.IBaseDictValueService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +30,13 @@ public class BaseDictValueController {
     @Autowired
     private IBaseDictValueService dictValueService;
 
+    @RequestMapping("/toDvPage/{id}")
+    public String toDvPage(@PathVariable("id") String id, Model model, HttpServletRequest request){
+        String id1 = request.getParameter("id");
+        model.addAttribute("dictValId",id1);
+        return "admin/dictValue";
+    }
+
     @RequestMapping("/toDictValue")
     public Map<String,String> toDictValue(){
         Map<String,String> map=new HashMap<>();
@@ -35,8 +45,11 @@ public class BaseDictValueController {
     }
 
     @RequestMapping("/dictPage")
-    public String toDictValPage(){
-        return "admin/dictValue";
+    public Map<String,String> toDictValPage(@RequestParam("dictId")String dictId, Model model){
+        Map<String ,String> map=new HashMap<>();
+        map.put(JsonConstant.RESULT, JsonConstant.SUCCESS);
+        model.addAttribute("dictId",dictId);
+        return map;
     }
 
     @PostMapping("/getDictVal")
