@@ -99,7 +99,7 @@
                 </div>
             </div>
             <div class="layui-form-item" align="center">
-                <button class="layui-btn layui-btn-primary" type="button" id="closeDialog">取消</button>
+                <button class="layui-btn " id="closeDialog">取消</button>
                 <button class="layui-btn" lay-submit lay-filter="submitBtn">立即提交</button>
 
             </div>
@@ -123,37 +123,30 @@
             , toolbar: '#toolbarDemo'
             , title: '字典表'
             , page: true
+            ,even: true
+            ,cellMinWidth: 30 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
             , cols: [[
                 {type: 'checkbox', fixed: 'left'}
                 , {field: 'id', title: 'ID', width: 80, fixed: 'left', sort: true}
-                , {field: 'dictName', title: '字典名称'}
-                , {field: 'dictLabel', title: '字典代号'}
-                , {
-                    field: 'enabled', title: '是否启用', templet: function (d) {
-                        if (d.enabled === 1) {
-                            return "启用";
-                        } else {
-                            return "未启用";
-                        }
-                    }
-                }
-                , {field: 'remark', title: '备注'}
-                , {field: 'createTime', title: '创建时间'}
-                , {field: 'updateTime', title: '更新时间'}
-                , {fixed: 'right', title: '操作', toolbar: '#barDemo'}
+                , {field: 'dictName', width: 140, title: '字典名称'}
+                , {field: 'dictLabel', title: '字典代号', width: 140}
+                , {field: 'enabled', title: '是否启用', width: 80, templet: function (d) {if (d.enabled === 1) {return "启用";} else {return "未启用";}}}
+                , {field: 'remark', width: 220, title: '备注'}
+                , {field: 'createTime', width: 200, title: '创建时间'}
+                , {field: 'updateTime',  width: 200,title: '更新时间'}
+                , {fixed: 'right',  width: 180,title: '操作', toolbar: '#barDemo'}
             ]]
-
         });
-
         $("#closeDialog").click(function () {
-            $("#dictId").val("");
+           $("#dictId").val("");
             $("#dictName").val("");
             $("#dictLabel").val("");
             $("#enabled").val("");
             $("#remark").val("");
+        /*    $("#editForm").reset();*/
             layer.closeAll();
+            return false;
         });
-
         //头工具栏事件
         table.on('toolbar(dict)', function (obj) {
             var $ = layui.jquery;
@@ -198,7 +191,6 @@
                             }
                         });
                     });
-
                     break;
                 case 'modifyDict':
                     var data = checkStatus.data;
@@ -258,13 +250,11 @@
                                 obj.del();
                                 layer.close(index);
                             } else {
-                                //layer.msg("删除失败!");
                                 layer.msg(data.msg);
                                 obj.del();
                             }
                         }
                     });
-                    //layer.close(index);
                 });
             } else if (obj.event === 'edit') {
                 layui.use('form', function () {
@@ -327,6 +317,5 @@
         });
     });
 </script>
-
 </body>
 </html>
