@@ -127,7 +127,7 @@
             ,cellMinWidth: 30 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
             , cols: [[
                 {type: 'checkbox', fixed: 'left'}
-                , {field: 'id', title: 'ID', width: 80, fixed: 'left', sort: true}
+                , {field: 'id', title: 'ID', width: 80}
                 , {field: 'dictName', width: 140, title: '字典名称'}
                 , {field: 'dictLabel', title: '字典代号', width: 140}
                 , {field: 'enabled', title: '是否启用', width: 80, templet: function (d) {if (d.enabled === 1) {return "启用";} else {return "未启用";}}}
@@ -136,16 +136,6 @@
                 , {field: 'updateTime',  width: 200,title: '更新时间'}
                 , {fixed: 'right',  width: 180,title: '操作', toolbar: '#barDemo'}
             ]]
-        });
-        $("#closeDialog").click(function () {
-           $("#dictId").val("");
-            $("#dictName").val("");
-            $("#dictLabel").val("");
-            $("#enabled").val("");
-            $("#remark").val("");
-        /*    $("#editForm").reset();*/
-            layer.closeAll();
-            return false;
         });
         //头工具栏事件
         table.on('toolbar(dict)', function (obj) {
@@ -315,6 +305,16 @@
             });
             return false;
         });
+    });
+    $("#closeDialog").click(function () {
+        $("#dictId").val("");
+        $("#dictName").val("");
+        $("#dictLabel").val("");
+        $("#enabled").val("");
+        $("#remark").val("");
+        /*    $("#editForm").reset();*/
+        layer.closeAll();
+        return false;
     });
 </script>
 </body>
