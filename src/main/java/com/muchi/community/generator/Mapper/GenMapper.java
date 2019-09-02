@@ -32,8 +32,8 @@ public interface GenMapper extends BaseMapper<FieledComment> {
 
 
     @Select("SELECT\n" +
-            "\tcolumn_name columnName,\n" +
-            "\tcolumn_comment columnComment\n" +
+            "\tcolumn_name field,\n" +
+            "\tcolumn_comment title\n" +
             "FROM\n" +
             "\tinformation_schema.COLUMNS \n" +
             "WHERE\n" +
