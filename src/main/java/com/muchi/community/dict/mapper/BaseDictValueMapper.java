@@ -1,5 +1,6 @@
 package com.muchi.community.dict.mapper;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.muchi.community.dict.entity.BaseDictValue;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
@@ -24,5 +25,5 @@ public interface BaseDictValueMapper extends BaseMapper<BaseDictValue> {
     int deleteByDictIds(String[] ids);
 
     @Select("select * from base_dict_value where dict_id = #{dictId}")
-    List<BaseDictValue> getDictVallues(@Param("dictId") String dictId);
+    List<BaseDictValue> getDictValues(Page page, @Param("dictId") String dictId);
 }

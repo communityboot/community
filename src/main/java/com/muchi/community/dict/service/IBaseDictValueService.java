@@ -1,5 +1,6 @@
 package com.muchi.community.dict.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.muchi.community.dict.entity.BaseDictValue;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -17,6 +18,6 @@ public interface IBaseDictValueService extends IService<BaseDictValue> {
 
     int deleteByDictIds(String[] ids);
 
-    List<BaseDictValue> getDictVallue(String dictId);
+    List<BaseDictValue> getDictVallue(Page page,String dictId);
 
 }

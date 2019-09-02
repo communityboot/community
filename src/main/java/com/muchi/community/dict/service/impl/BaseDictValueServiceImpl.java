@@ -1,5 +1,6 @@
 package com.muchi.community.dict.service.impl;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.muchi.community.dict.entity.BaseDictValue;
 import com.muchi.community.dict.mapper.BaseDictValueMapper;
 import com.muchi.community.dict.service.IBaseDictValueService;
@@ -33,7 +34,7 @@ public class BaseDictValueServiceImpl extends ServiceImpl<BaseDictValueMapper, B
      * @param  dictId 字典id
      * @return List<BaseDictValue>
      */
-    public List<BaseDictValue> getDictVallue(String dictId){
-        return mapper.getDictVallues(dictId);
+    public List<BaseDictValue> getDictVallue(Page page,String dictId){
+        return mapper.getDictValues(page,dictId);
     }
 }

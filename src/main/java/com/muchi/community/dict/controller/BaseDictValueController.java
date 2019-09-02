@@ -1,10 +1,12 @@
 package com.muchi.community.dict.controller;
 
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.muchi.community.common.constant.JsonConstant;
 import com.muchi.community.common.utils.LayuiVo;
 import com.muchi.community.dict.entity.BaseDictValue;
 import com.muchi.community.dict.service.IBaseDictValueService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,8 +34,7 @@ public class BaseDictValueController {
 
     @RequestMapping("/toDvPage/{id}")
     public String toDvPage(@PathVariable("id") String id, Model model, HttpServletRequest request){
-        String id1 = request.getParameter("id");
-        model.addAttribute("dictValId",id1);
+        model.addAttribute("dictId",id);
         return "admin/dictValue";
     }
 
@@ -52,10 +53,14 @@ public class BaseDictValueController {
         return map;
     }
 
-    @PostMapping("/getDictVal")
+    @PostMapping("/getDictVal/{dId}")
     @ResponseBody
-    public List<BaseDictValue> getDictValue(@RequestParam("dictId") String dictID){
-        return dictValueService.getDictVallue(dictID);
+    public LayuiVo getDictValue(Page page, @RequestParam("limit") int limit, @RequestParam(value = "page", defaultValue = "1") int currentPage,@PathVariable("dId") String dictID){
+        page.setSize(limit);
+        page.setCurrent(currentPage);
+        List<BaseDictValue> dictVallue = dictValueService.getDictVallue(page, dictID);
+       return LayuiVo.failByData(page.getTotal(),dictVallue);
+
     }
 
 }
