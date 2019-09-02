@@ -54,12 +54,7 @@ public class BaseDictController {
         page.setSize(limit);
         page.setCurrent(currentPage);
         List<BaseDict> list = dictService.getAllDict(page);
-        LayuiVo layUiVo = new LayuiVo();
-        layUiVo.setCode(0);
-        layUiVo.setMsg("成功");
-        layUiVo.setCount(page.getTotal());
-        layUiVo.setData(list);
-        return layUiVo;
+        return LayuiVo.successLayui(page.getTotal(),list);
     }
 
     @RequestMapping("/getDictInfo")

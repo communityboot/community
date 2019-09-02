@@ -33,7 +33,7 @@ public class BaseDictValueController {
     private IBaseDictValueService dictValueService;
 
     @RequestMapping("/toDvPage/{id}")
-    public String toDvPage(@PathVariable("id") String id, Model model, HttpServletRequest request){
+    public String toDvPage(@PathVariable("id") String id, Model model){
         model.addAttribute("dictId",id);
         return "admin/dictValue";
     }
@@ -53,13 +53,13 @@ public class BaseDictValueController {
         return map;
     }
 
-    @PostMapping("/getDictVal/{dId}")
+    @RequestMapping("/getDictVal/{dId}")
     @ResponseBody
     public LayuiVo getDictValue(Page page, @RequestParam("limit") int limit, @RequestParam(value = "page", defaultValue = "1") int currentPage,@PathVariable("dId") String dictID){
         page.setSize(limit);
         page.setCurrent(currentPage);
-        List<BaseDictValue> dictVallue = dictValueService.getDictVallue(page, dictID);
-       return LayuiVo.failByData(page.getTotal(),dictVallue);
+        List<BaseDictValue> dictValue = dictValueService.getDictValue(page, dictID);
+        return LayuiVo.successLayui(page.getTotal(),dictValue);
 
     }
 

@@ -72,6 +72,11 @@ public class LayuiVo {
         return new LayuiVo(200,"请求成功！",total,data);
     }
 
+
+    public static LayuiVo successLayui(Long total,Object data){
+        return new LayuiVo(0,"请求成功！",total,data);
+    }
+
     /**
      *
      * @return 请求成功提示信息

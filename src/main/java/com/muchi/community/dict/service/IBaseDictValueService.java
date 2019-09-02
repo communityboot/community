@@ -18,6 +18,6 @@ public interface IBaseDictValueService extends IService<BaseDictValue> {
 
     int deleteByDictIds(String[] ids);
 
-    List<BaseDictValue> getDictVallue(Page page,String dictId);
+    List<BaseDictValue> getDictValue(Page page,String dictId);
 
 }

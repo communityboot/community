@@ -34,7 +34,7 @@ public class BaseDictValueServiceImpl extends ServiceImpl<BaseDictValueMapper, B
      * @param  dictId 字典id
      * @return List<BaseDictValue>
      */
-    public List<BaseDictValue> getDictVallue(Page page,String dictId){
+    public List<BaseDictValue> getDictValue(Page page,String dictId){
         return mapper.getDictValues(page,dictId);
     }
 }

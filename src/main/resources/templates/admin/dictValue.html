@@ -14,10 +14,7 @@
     <div th:replace="/commons/bar::sidebar"></div>
     <div class="layui-body">
         <!-- 内容主体区域 -->
-        <h1>下面</h1>
-        <button id="dictBtn" name="btn">按钮</button>
-        <input th:id="dictValId" th:value="${dictId}"/>
-        <h1>上面</h1>
+        <input  th:id="dictValId" th:value="${dictId}" hidden="hidden"/>
         <table class="layui-hide" id="dictValue" lay-filter="dictValue"></table>
 
         <script type="text/html" id="dictValueTb">
@@ -54,9 +51,9 @@
                         {type: 'checkbox', fixed: 'left'}
                         , {field: 'id', title: 'ID'}
                         , {field: 'dictId', title: 'dictId'}
-                        , {field: 'dictLabel', title: '字典标签'}
-                        , {field: 'dictValue', title: '字典键值', edit: 'text'}
-                        , {field: 'order', title: '排序'}
+                        , {field: 'dictKey', title: '字典标签'}
+                        , {field: 'dictVal', title: '字典键值', edit: 'text'}
+                        , {field: 'sort', title: '排序'}
                         , {field: 'createTime', title: '创建时间'}
                         , {field: 'updateTime', title: '更新时间'}
                     ]]
@@ -108,20 +105,5 @@
     </div>
     <div th:replace="/commons/bar::footbar"></div>
 </div>
-<script>
-
-    let elementById = document.getElementById("dictBtn");
-    elementById.click(function () {
-        alert("哈哈哈哈");
-
-    })
-/*    layui.use('form', function () {
-        var $ = layui.jquery;
-        $("#dictBtn").click(function () {
-            alert("哈哈哈哈");
-        });
-    }*/
-
-</script>
 </body>
 </html>
