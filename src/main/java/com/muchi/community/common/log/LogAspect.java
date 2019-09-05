@@ -57,14 +57,8 @@ public class LogAspect {
                 sb.append("第").append(a).append("个参数为").append(o.toString());
                 a++;
             }
-
-            /*****加入操作用户*****/
             String username = (String)SecurityUtils.getSubject().getPrincipal();
-
-            System.out.println(sb.toString());
-            logger.info("操作用户为：{}",username);
-            logger.info(title+","+"备注为"+action+","+"类名为"+className+",方法名为"+methodName+",共有"+args.length+"个参数"+",参数为"+sb.toString());
-
+            logger.info("本次操作用户名为:{},{},备注为:{},类名为:{},方法名为:{},共有{}个参数,参数为{}",username,title,action,className,methodName,args.length,sb.toString());
         }catch (Exception e1){
             logger.info("==========前置通知异常=========");
             logger.info("异常信息为:"+e1.getMessage());
