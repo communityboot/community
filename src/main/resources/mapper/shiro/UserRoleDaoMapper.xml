@@ -7,8 +7,8 @@
         SELECT
             t1.*
         FROM
-            `t_user_role` t1,
-            `t_user` t2
+            `sys_user_role` t1,
+            `sys_user` t2
         WHERE
             t2.id = t1.user_id
           AND t2.user_name = #{username}

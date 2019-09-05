@@ -2,17 +2,18 @@ package com.muchi.community.shiro.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.validation.constraints.NotEmpty;
 
 /**
  * shiro 权限 user 类
  */
-@TableName("t_user")
+@TableName("sys_user")
 public class User {
 
 	private String id;
 
-	@NotEmpty(message = "用户名不能为空")
+	@NotEmpty(message = "用户名不为空")
 	@TableField("user_name")
 	private String userName;  //用户名
 

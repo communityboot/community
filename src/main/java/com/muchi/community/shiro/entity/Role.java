@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 /**
  * shiro 角色类
  */
-@TableName("t_role")
+@TableName("sys_role")
 public class Role {
 
 	private String id; // 编号

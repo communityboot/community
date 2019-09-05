@@ -4,7 +4,7 @@
 <mapper namespace="com.muchi.community.shiro.dao.RoleDao">
 
 <select id="getRolesByUserName" parameterType="string" resultType="com.muchi.community.shiro.entity.Role">
-    SELECT * FROM t_user u,t_user_role ur,t_role r where u.id=ur.user_id and ur.role_id=r.id and u.user_name=#{userName}
+    SELECT * FROM sys_user u,sys_user_role ur,sys_role r where u.id=ur.user_id and ur.role_id=r.id and u.user_name=#{userName}
 </select>
 
 </mapper>

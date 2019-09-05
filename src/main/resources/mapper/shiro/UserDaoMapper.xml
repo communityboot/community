@@ -4,13 +4,13 @@
 <mapper namespace="com.muchi.community.shiro.dao.UserDao">
 
     <select id="getUserByUserName" parameterType="string" resultType="com.muchi.community.shiro.entity.User">
-        select * from t_user where user_name=#{userName}
+        select * from sys_user where user_name=#{userName}
     </select>
 
 
 
     <select id="userQuery" parameterType="string" resultType="com.muchi.community.shiro.entity.User">
-        select * from t_user
+        select * from sys_user
     </select>
 
 </mapper>

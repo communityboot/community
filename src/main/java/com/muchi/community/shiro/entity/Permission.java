@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 /**
  * shiro 权限类
  */
-@TableName("t_permission")
+@TableName("sys_permission")
 public class Permission {
 
 	private String id; // 编号

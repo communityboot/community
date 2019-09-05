@@ -15,7 +15,7 @@ import java.io.Serializable;
  * @author yuzq
  * @since 2019-08-13
  */
-@TableName("admin")
+@TableName("base_admin")
 public class Admin implements Serializable {
 
     private static final long serialVersionUID = 1L;

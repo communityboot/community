@@ -59,26 +59,24 @@
 		</footer>
 	</div>
 </div>
-</body>
-
 <script type="text/javascript">
-    $("#loginBtn").click(function() {
-        $.post("http://localhost:8088/user/login", {
-            userName: $("#userName").val(),
-            password: $("#password").val(),
-            rememberMe: $("#rememberMe").prop("checked"),
-        }, function(result) {
-            if(result.success) {
-                //window.location.href = "http://localhost:8088/main";rememberMe
-                window.location.href = "http://localhost:8088/admin/mainPage";
-                //必须加上，否则跳转不了
-                //return false;
-            } else {
-                alert(result.errorInfo);
-            }
-        });
+	$("#loginBtn").click(function() {
+		$.post("http://localhost:8088/user/login", {
+			userName: $("#userName").val(),
+			password: $("#password").val(),
+			rememberMe: $("#rememberMe").prop("checked"),
+		}, function(result) {
+			if(result.success) {
+				//window.location.href = "http://localhost:8088/main";rememberMe
+				window.location.href = "http://localhost:8088/admin/mainPage";
+				//必须加上，否则跳转不了
+				//return false;
+			} else {
+				alert(result.errorInfo);
+			}
+		});
 
-    });
+	});
 </script>
-
+</body>
 </html>
