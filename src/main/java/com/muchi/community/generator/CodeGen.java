@@ -55,7 +55,7 @@ public class CodeGen {
 
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://localhost:3306/community?useUnicode=true&characterEncoding=utf-8");
+        dsc.setUrl("jdbc:mysql://localhost:3306/community_feature1?useUnicode=true&characterEncoding=utf-8");
         // dsc.setSchemaName("public");
         dsc.setDriverName("com.mysql.jdbc.Driver");
         dsc.setUsername("root");
@@ -123,13 +123,13 @@ public class CodeGen {
         strategy.setColumnNaming(NamingStrategy.underline_to_camel);
         //strategy.setSuperEntityClass("com.baomidou.ant.common.BaseEntity");
         //strategy.setEntityLombokModel(true);
-        strategy.setRestControllerStyle(true);
+        //strategy.setRestControllerStyle(true);
         // 公共父类
        // strategy.setSuperControllerClass("com.baomidou.ant.common.BaseController");
         // 写于父类中的公共字段
         //strategy.setSuperEntityColumns("id");
         strategy.setInclude(scanner("表名，多个英文逗号分割").split(","));
-        strategy.setControllerMappingHyphenStyle(true);
+        //strategy.setControllerMappingHyphenStyle(true);
         strategy.setTablePrefix(pc.getModuleName() + "_");
         mpg.setStrategy(strategy);
         mpg.setTemplateEngine(new FreemarkerTemplateEngine());
