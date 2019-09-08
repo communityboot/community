@@ -4,6 +4,7 @@ package com.muchi.community.dict.controller;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.muchi.community.common.constant.JsonConstant;
 import com.muchi.community.common.utils.LayuiVo;
+import com.muchi.community.common.utils.UUIDUtil;
 import com.muchi.community.dict.entity.BaseDictValue;
 import com.muchi.community.dict.service.IBaseDictValueService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -61,4 +63,28 @@ public class BaseDictValueController {
 
     }
 
+    @PostMapping("/updateDict")
+    @ResponseBody
+    public LayuiVo updateDictValue(@RequestBody BaseDictValue baseDictValue){
+        if (baseDictValue != null) {
+            if(baseDictValue.getId() == null){
+                baseDictValue.setId(UUIDUtil.genUUID());
+            }
+            boolean b = dictValueService.saveOrUpdate(baseDictValue);
+            if(b){
+               return LayuiVo.successCustomMsg(JsonConstant.SUCCESS);
+            }
+        }
+        return LayuiVo.failCustomMsg(JsonConstant.UPDATEFAIL);
+    }
+
+    @PostMapping("/delDictValBatch")
+    @ResponseBody
+    public  LayuiVo delDictValBatch(@RequestParam(value = "ids[]") String[] ids) {
+        List<String> dictIds = Arrays.asList(ids);
+        if(dictValueService.removeByIds(dictIds)){
+            return LayuiVo.successCustomMsg(JsonConstant.SUCCESS);
+            }
+        return LayuiVo.failCustomMsg(JsonConstant.DELFAIL);
+    }
 }

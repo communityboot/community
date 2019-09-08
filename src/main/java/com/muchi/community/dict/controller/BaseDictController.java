@@ -103,11 +103,9 @@ public class BaseDictController {
     @PostMapping("/delDictById")
     @ResponseBody
     public Map<String, String> delDictById(@RequestBody String id) {
-        System.out.println("id = " + id);
-        System.out.println("进来了");
         Map<String, String> map = new HashMap<>();
         //假删除提醒
-        map.put("result", "删除成功");
+        map.put(JsonConstant.RESULT, JsonConstant.SUCCESS);
         return map;
     }
 
@@ -121,11 +119,11 @@ public class BaseDictController {
         int dictVaNum = dictValueService.deleteByDictIds(ids);
         Map<String,Object> map=new HashMap<>();
         if(dictNum+dictVaNum == ids.length){
-            map.put("result", JsonConstant.SUCCESS);
-            map.put("msg","删除成功！");
+            map.put(JsonConstant.RESULT, JsonConstant.SUCCESS);
+            map.put(JsonConstant.MSG,JsonConstant.DELSUCCESS);
         }else {
-            map.put("result","fail");
-            map.put("msg","删除失败！");
+            map.put(JsonConstant.RESULT,JsonConstant.FAIL);
+            map.put(JsonConstant.MSG,JsonConstant.DELFAIL);
         }
         return map;
     }

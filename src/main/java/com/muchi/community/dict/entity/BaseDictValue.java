@@ -3,6 +3,7 @@ package com.muchi.community.dict.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.io.Serializable;
 import java.util.Date;
@@ -53,13 +54,13 @@ public class BaseDictValue implements Serializable {
      * 创建时间
      */
     @TableField("create_time")
-    private Date createTime;
+    private Timestamp createTime;
 
     /**
      * 更新时间
      */
     @TableField("update_time")
-    private Date updateTime;
+    private Timestamp updateTime;
 
     public String getId() {
         return id;
@@ -101,19 +102,19 @@ public class BaseDictValue implements Serializable {
         this.sort = sort;
     }
 
-    public Date getCreateTime() {
+    public Timestamp getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(Timestamp createTime) {
         this.createTime = createTime;
     }
 
-    public Date getUpdateTime() {
+    public Timestamp getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(Date updateTime) {
+    public void setUpdateTime(Timestamp updateTime) {
         this.updateTime = updateTime;
     }
 

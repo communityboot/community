@@ -17,12 +17,20 @@ public class JsonConstant {
 
     public static final String RESULT = "result";
 
+    public static final String ADDSUCCESS = "添加成功！";
+
+    public static final String ADDFAIL = "添加失败！";
+
     public static final String DELSUCCESS = "删除成功！";
 
     public static final String DELFAIL = "删除失败！";
 
-    public static final String ADDSUCCESS = "添加成功！";
+    public static final String MODIFYSUCCESS = "修改成功！";
 
-    public static final String ADDFAIL = "添加失败！";
+    public static final String MODIFYFAIL = "修改失败！";
+
+    public static final String UPDATESUCCESS = "更新成功！";
+
+    public static final String UPDATEFAIL = "更新失败！";
 
 }

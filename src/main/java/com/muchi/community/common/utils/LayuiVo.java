@@ -85,11 +85,19 @@ public class LayuiVo {
         return new LayuiVo(200,"请求成功！");
     }
 
+    public static LayuiVo successCustomMsg(String msg){
+        return new LayuiVo(200,msg);
+    }
+
     /**
      * @return 请求失败提示信息
      */
     public static LayuiVo failByMsg(){
         return new LayuiVo(200,"请求失败！");
+    }
+
+    public static LayuiVo failCustomMsg(String msg){
+        return new LayuiVo(200,msg);
     }
 
     /**
