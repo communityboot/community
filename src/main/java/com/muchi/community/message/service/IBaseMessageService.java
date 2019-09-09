@@ -1,7 +1,11 @@
 package com.muchi.community.message.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.muchi.community.dict.entity.BaseDict;
 import com.muchi.community.message.entity.BaseMessage;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +17,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IBaseMessageService extends IService<BaseMessage> {
 
+    List<BaseMessage> getAllDict(Page page);
 }

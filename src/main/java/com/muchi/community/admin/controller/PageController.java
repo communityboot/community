@@ -33,15 +33,22 @@ public class PageController {
     }
 
 
+    /**
+     *
+     * @return druid管理界面
+     */
     @RequestMapping("/druidMonitor")
     public String druidMonitor(){
         return "/admin/druid";
     }
-
 
     @RequestMapping("/MainDemo")
     public String mainDemo(){
         return "mainDemo";
     }
 
+    @RequestMapping("/message")
+    public String messagePage(){
+        return "message/message";
+    }
 }
