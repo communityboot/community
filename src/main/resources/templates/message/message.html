@@ -97,12 +97,36 @@
 </div>
 <script type="text/javascript" th:src="@{/webjars/layui/2.5.4/layui.js}"></script>
 <script>
+
     //JavaScript代码区域
     layui.use('element', function () {
         var element = layui.element;
     });
+
+
 </script>
+
+
 <script th:inline="none">
+
+    var Message_TypeMap = new Map();
+    // 以 消息类型为例
+    // 走字典接口查询相对应的键值
+    $.ajax({
+        type: "post",
+        url: "/dv/getDictByCode?dicCode=Message_Type",
+        success: function (data) {
+            if (data.code === 200) {
+                for(var i = 0 ; i < data.data.length;i++){
+                    Message_TypeMap.set(data.data[i].dictKey,data.data[i].dictVal);
+                }
+                alert("更新成功");
+            } else {
+                alert("信息有误，请检查!");
+            }
+        }
+    });
+
     layui.use('table', function () {
         var table = layui.table;
         var $ = layui.$;
@@ -114,7 +138,10 @@
             , cols: [[
                 {type: 'checkbox', fixed: 'left'}
                 , {field: 'id', title: 'ID'}
-                , {field: 'msgType', title: '消息类型'}
+                , {field: 'msgType', title: '消息类型',templet: function(d) {
+                        var temp = d.msgType;
+                        return Message_TypeMap.get(''+temp+'');
+                    }}
                 , {field: 'msgStatus', title: '消息状态'}
                 , {field: 'msgCreator', title: '消息创建者'}
                 , {field: 'msgSender', title: '消息发送者'}
@@ -131,6 +158,8 @@
             ]]
             , page: true
         });
+
+
         //头工具栏事件
         table.on('toolbar(dictValue)', function (obj) {
             var $ = layui.jquery;

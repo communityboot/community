@@ -26,4 +26,11 @@ public interface BaseDictValueMapper extends BaseMapper<BaseDictValue> {
 
     @Select("select * from base_dict_value where dict_id = #{dictId}")
     List<BaseDictValue> getDictValues(Page page, @Param("dictId") String dictId);
+
+
+    @Select("SELECT  dv.dict_key, dv.dict_val, d.dictLabel FROM base_dict_value dv LEFT JOIN base_dict d on dv.dict_id = d.id WHERE d.dictLabel = #{dictCode}")
+    List<BaseDictValue> getDictByCode(@Param("dictCode") String dictCode);
+
+
+
 }

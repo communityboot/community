@@ -20,4 +20,13 @@ public interface IBaseDictValueService extends IService<BaseDictValue> {
 
     List<BaseDictValue> getDictValue(Page page,String dictId);
 
+
+    /**
+     * 通过字典代号获取字典下面的键值
+     * @param dicCode
+     * @return
+     */
+    List<BaseDictValue> getDictByCode(String dicCode);
+
+
 }

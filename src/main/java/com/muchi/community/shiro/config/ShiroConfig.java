@@ -1,5 +1,6 @@
 package com.muchi.community.shiro.config;
 
+import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 import com.muchi.community.shiro.shiroRealm.MyRealm;
 import org.apache.shiro.codec.Base64;
 import org.apache.shiro.mgt.SecurityManager;
@@ -13,7 +14,6 @@ import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreato
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
-
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -128,6 +128,17 @@ public class ShiroConfig {
 		return cookie;
 	}
 
+
+	/**
+	 * 页面上使用shiro标签
+	 * @return
+	 */
+	@Bean
+	public ShiroDialect shiroDialect(){
+		return new ShiroDialect();
+	}
+
+
 	/**
 	 * cookie管理对象
 	 * @return
@@ -139,6 +150,9 @@ public class ShiroConfig {
 		cookieRememberMeManager.setCipherKey(Base64.decode("4AvVhmFLUs0KTA3Kprsdag=="));
 		return cookieRememberMeManager;
 	}
+
+
+
 
 
 

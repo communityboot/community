@@ -3,11 +3,11 @@ package com.muchi.community.message.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 
-import java.time.LocalDateTime;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <p>
@@ -79,13 +79,13 @@ public class BaseMessage implements Serializable {
      * 生效时间
      */
     @TableField("msgEffectTime")
-    private LocalDateTime msgEffectTime;
+    private Date msgEffectTime;
 
     /**
      * 失效时间
      */
     @TableField("msgExpireTime")
-    private LocalDateTime msgExpireTime;
+    private Date msgExpireTime;
 
     /**
      * 登录ip
@@ -97,13 +97,13 @@ public class BaseMessage implements Serializable {
      * 创建时间
      */
     @TableField("createDate")
-    private LocalDateTime createDate;
+    private Date createDate;
 
     /**
      * 更新时间
      */
     @TableField("lastModified")
-    private LocalDateTime lastModified;
+    private Date lastModified;
 
     /**
      * 备注
@@ -182,20 +182,24 @@ public class BaseMessage implements Serializable {
         this.msgSummary = msgSummary;
     }
 
-    public LocalDateTime getMsgEffectTime() {
+    public Date getMsgEffectTime() {
         return msgEffectTime;
     }
 
-    public void setMsgEffectTime(LocalDateTime msgEffectTime) {
-        this.msgEffectTime = msgEffectTime;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public LocalDateTime getMsgExpireTime() {
-        return msgExpireTime;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
-    public void setMsgExpireTime(LocalDateTime msgExpireTime) {
-        this.msgExpireTime = msgExpireTime;
+    public Date getLastModified() {
+        return lastModified;
+    }
+
+    public void setLastModified(Date lastModified) {
+        this.lastModified = lastModified;
     }
 
     public String getLoginIp() {
@@ -206,20 +210,16 @@ public class BaseMessage implements Serializable {
         this.loginIp = loginIp;
     }
 
-    public LocalDateTime getCreateDate() {
-        return createDate;
+    public void setMsgEffectTime(Date msgEffectTime) {
+        this.msgEffectTime = msgEffectTime;
     }
 
-    public void setCreateDate(LocalDateTime createDate) {
-        this.createDate = createDate;
+    public Date getMsgExpireTime() {
+        return msgExpireTime;
     }
 
-    public LocalDateTime getLastModified() {
-        return lastModified;
-    }
-
-    public void setLastModified(LocalDateTime lastModified) {
-        this.lastModified = lastModified;
+    public void setMsgExpireTime(Date msgExpireTime) {
+        this.msgExpireTime = msgExpireTime;
     }
 
     public String getMemo() {

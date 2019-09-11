@@ -37,4 +37,14 @@ public class BaseDictValueServiceImpl extends ServiceImpl<BaseDictValueMapper, B
     public List<BaseDictValue> getDictValue(Page page,String dictId){
         return mapper.getDictValues(page,dictId);
     }
+
+    /**
+     * 通过字典代号获取字典下面的键值
+     * @param dicCode
+     * @return
+     */
+    @Override
+    public List<BaseDictValue> getDictByCode(String dicCode) {
+        return mapper.getDictByCode(dicCode);
+    }
 }

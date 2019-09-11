@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * <p>
@@ -26,6 +27,7 @@ public class BaseMessageController {
     private IBaseMessageService messageService;
 
     @RequestMapping("/getAllMessage")
+    @ResponseBody
     public LayuiVo getAllMessage(Page page, @RequestParam("limit") int limit, @RequestParam(value = "page", defaultValue = "1") int currentPage) {
         page.setCurrent(currentPage);
         page.setSize(limit);
