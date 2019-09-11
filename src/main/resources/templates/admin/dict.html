@@ -169,13 +169,12 @@
                             dataType: 'json',
                             data: {"ids": arr},
                             success: function (data) {
-                                if (data.result === "删除成功") {
+                                if (data.result === "success") {
                                     layer.msg("删除成功!");
-                                    obj.del();
-                                    layer.close(index);
+                                    window.parent.location.reload();//修改成功后刷新父界面
+                                    layer.closeAll();
                                 } else {
                                     layer.msg(data.msg);
-                                    layer.close(index);
                                 }
                             }
                         });
@@ -236,8 +235,8 @@
                         success: function (data) {
                             if (data.result === "删除成功") {
                                 layer.msg("删除成功!");
-                                obj.del();
-                                layer.close(index);
+                                window.parent.location.reload();//修改成功后刷新父界面
+                                layer.closeAll();
                             } else {
                                 layer.msg(data.msg);
                                 obj.del();

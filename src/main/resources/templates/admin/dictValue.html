@@ -37,6 +37,20 @@
                                                    lay-verify="required" placeholder="输入字典代号" autocomplete="off"
                                                    class="layui-input">
                                         </div>
+                                        <select name="area1" class="fsSelect" dict="city" addNull="1">
+                                            <option code="1" name="22" >hhh</option>
+                                            <option>1</option>
+                                            <option>1</option>
+                                            <option>1</option>
+                                        </select>
+
+                                        <select name="city" lay-verify="required"  lay-verType="tips" class="fsSelect" dict="city" addNull="1">
+                                        <option value="1">1</option>
+                                        <option value="2">1</option>
+                                        <option value="3">1</option>
+                                        <option value="3"></option>
+                                        <option value="3"></option>
+                                        </select>
                                         <button class="layui-btn layui-btn-sm layui-bg-blue "><i
                                                 class="layui-icon layui-icon-search"></i>&nbsp;搜索
                                         </button>
@@ -120,7 +134,7 @@
                 , {field: 'dictId', title: 'dictId'}
                 , {field: 'dictKey', title: '字典标签'}
                 , {field: 'dictVal', title: '字典键值'}
-                , {field: 'sort', title: '排序'}
+                , {field: 'sort', title: '排序', dict:"city"}
                 , {field: 'createTime', title: '创建时间'}
                 , {field: 'updateTime', title: '更新时间'}
             ]]

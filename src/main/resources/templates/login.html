@@ -34,10 +34,10 @@
 					<em>
 						<img th:src="@{/static/login/img/user.png}">
 					</em>
-					<form action="" method="post">
+					<form method="post">
 						<p class="name"><i></i><input type="text" id="userName" name="userName" class="userName" placeholder="请输入用户名"></p>
 						<p class="password"><i></i><input type="password" id="password" name="password" class="pwd" placeholder="请输入密码"></p>
-						<button id="loginBtn">登录</button>
+						<button id="loginBtn" onclick="login();return false" >登录</button>
 						<p class="remember"><input type="checkbox" id="rememberMe" name="remember">记住密码</p>
 						<p class="regist"><span>没有账号?</span><a href="http://localhost:8088/regist">立即注册</a></p>
 						<div class="clear"></div>
@@ -59,8 +59,9 @@
 		</footer>
 	</div>
 </div>
-<script type="text/javascript">
-	$("#loginBtn").click(function() {
+
+<script>
+	function login(){
 		var userName= $("#userName").val();
 		var password= $("#password").val();
 		var rememberMe = $("#rememberMe").prop("checked");
@@ -70,14 +71,14 @@
 			dataType: 'json',
 			data: {"userName": userName,"password":password,"rememberMe":rememberMe},
 			success:function (data) {
-				if(data.success){
+				if(data.success===true){
 					window.location.href = "http://localhost:8088/admin/mainPage";
 				}else {
 					alert(data.errorInfo);
 				}
 			}
 		});
-	});
+	}
 </script>
 </body>
 </html>
