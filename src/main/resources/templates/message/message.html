@@ -66,6 +66,19 @@
     </div>
     <div th:replace="/commons/bar::footbar"></div>
 </div>
+<div th:id="dictTag">
+    <script type="text/html" id="msgType">
+        <div>
+            {{# var fu = function(){
+            var msgType = d.msgType;
+            if(msgType == 1){return "幼儿园";}
+            return getDictTag('Message_Type')[msgType]
+            }
+            }}
+            {{fu()}}
+        </div>
+    </script>
+</div>
 <script type="text/javascript" th:src="@{/webjars/layui/2.5.4/layui.js}"></script>
 <script>
 
@@ -80,43 +93,30 @@
 
 <script th:inline="none">
     function getDictTag(dictType) {
-        let MessageTypeMap = new Map();
+        let dictMap={
+
+        };
         // 以 消息类型为例
         // 走字典接口查询相对应的键值
         $.ajax({
             type: "post",
             url: "/dv/getDictByCode?dicCode="+dictType,
+            //cache:false,
+            async:false,
             success: function (data) {
                 if (data.code === 200) {
-                    console.log(data);
-                    for(let i = 0 ; i < data.data.length;i++){
-                        MessageTypeMap.set(""+data.data[i].dictKey+"",""+data.data[i].dictVal+"");
+                    var a=data.data.length;
+                    for(var i = 0 ; i < a;i++){
+                        let di=data.data[i].dictKey;
+                        dictMap[""+di+""]=data.data[i].dictVal;
                     }
                 } else {
                     alert("信息有误，请检查!");
                 }
             }
         });
-        console.log(MessageTypeMap.get("1"))
-        return MessageTypeMap;
-    }
-/*    var Message_TypeMap = new Map();
-    // 以 消息类型为例
-    // 走字典接口查询相对应的键值
-    $.ajax({
-        type: "post",
-        url: "/dv/getDictByCode?dicCode=Message_Type",
-        success: function (data) {
-            if (data.code === 200) {
-                for(var i = 0 ; i < data.data.length;i++){
-                    Message_TypeMap.set(data.data[i].dictKey,data.data[i].dictVal);
-                }
-            } else {
-                alert("信息有误，请检查!");
-            }
-        }
-    });*/
-
+        return dictMap;
+    };
     layui.use('table', function () {
         var table = layui.table;
         var $ = layui.$;
@@ -125,14 +125,16 @@
             , url: '/m/getAllMessage'
             , toolbar: '#toolbarDemo'
             , title: '字典详情表'
+            , page: true
+            ,even:true
             , cols: [[
                 {type: 'checkbox', fixed: 'left'}
                 , {field: 'id', title: 'ID'}
-                , {field: 'msgType', title: '消息类型',templet: function(d) {
+                , {field: 'msgType', title: '类型',templet: function(d) {
                         var temp = d.msgType;
-                       // return getDictTag('Message_TypeMap').get(''+temp+'');
+                        return getDictTag('Message_Type')[temp];
                     }}
-                , {field: 'msgStatus', title: '状态'}
+                , {field: 'msgStatus', title: '状态',}
                 , {field: 'msgCreator', title: '创建者'}
                 , {field: 'msgSender', title: '发送者'}
                 , {field: 'msgReceiver', title: '接收者'}
@@ -146,7 +148,7 @@
                 , {field: 'lastModified', title: '更新时间'}
                 , {field: 'memo', title: '备注'}
             ]]
-            , page: true
+
         });
 
 
@@ -265,17 +267,6 @@
         layer.closeAll();
         return false;
     });
-</script>
-<script>
-    let click = $("#searchBtn").click(function () {
-        console.log(getDictTag('Message_Type'));
-    });
-</script>
-<script>
-    function searchBtn() {
-        console.log(getDictTag('Message_Type'));
-        console.log("size"+getDictTag('Message_Type').size);
-    }
 </script>
 </body>
 </html>
