@@ -63,21 +63,24 @@
 
 <script type="text/javascript">
     $("#loginBtn").click(function() {
-        $.post("http://localhost:8088/user/login", {
-            userName: $("#userName").val(),
-            password: $("#password").val(),
-            rememberMe: $("#rememberMe").val(),
-        }, function(result) {
-            if(result.success) {
-                //window.location.href = "http://localhost:8088/main";
-                window.location.href = "http://localhost:8088/dict/toDictPage";
-                //必须加上，否则跳转不了
-                //return false;
-            } else {
-                alert(result.errorInfo);
+        var userName= $("#userName").val();
+        var password= $("#password").val();
+        var rememberMe = $("#rememberMe").prop("checked");
+        $.ajax({
+            type: "post",
+            url: "/user/login",
+            dataType: 'json',
+            data: {"userName": userName,"password":password,"rememberMe":rememberMe},
+            success:function (data) {
+                console.log("index"+data);
+                alert("index");
+                if(data.success){
+                    window.location.href = "http://localhost:8088/admin/mainPage";
+                }else {
+                    alert(data.errorInfo);
+                }
             }
         });
-
     });
 </script>
 

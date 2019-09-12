@@ -36,7 +36,7 @@
                                                    lay-verify="required" placeholder="输入字典代号" autocomplete="off"
                                                    class="layui-input">
                                         </div>
-                                        <button class="layui-btn layui-btn-sm layui-bg-blue "><i
+                                        <button onclick="searchBtn();return false" class="layui-btn layui-btn-sm layui-bg-blue "><i
                                                 class="layui-icon layui-icon-search"></i>&nbsp;搜索
                                         </button>
                                     </div>
@@ -64,35 +64,6 @@
             </div>
         </script>
     </div>
-    <div id="edit" hidden="hidden">
-        <form id="editForm" lay-filter="menuForm" class="layui-form model-form">
-            <div class="layui-form-item">
-                <label class="layui-form-label">字典显示的名字<span style="color: red;">*</span></label>
-                <div class="layui-input-block">
-                    <input id="dictKey" name="dictKey" placeholder="请输入字典显示的名" type="text" class="layui-input"/>
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">字典的值<span style="color: red;">*</span></label>
-                <div class="layui-input-block">
-                    <input id="dictVal" name="dictVal" placeholder="请输入字典的值" type="text" class="layui-input"
-                           lay-verify="required" required/>
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">字典排序<span style="color: red;">*</span></label>
-                <div class="layui-input-block">
-                    <input id="sort" name="sort" placeholder="请输入字典排序" type="text" class="layui-input"
-                           autocomplete="off" lay-verify="required" required/>
-                </div>
-            </div>
-            <div class="layui-form-item" align="center">
-                <button class="layui-btn " id="closeDialog">取消</button>
-                <button class="layui-btn" lay-submit lay-filter="submitBtn">立即提交</button>
-
-            </div>
-        </form>
-    </div>
     <div th:replace="/commons/bar::footbar"></div>
 </div>
 <script type="text/javascript" th:src="@{/webjars/layui/2.5.4/layui.js}"></script>
@@ -108,8 +79,28 @@
 
 
 <script th:inline="none">
-
-    var Message_TypeMap = new Map();
+    function getDictTag(dictType) {
+        let MessageTypeMap = new Map();
+        // 以 消息类型为例
+        // 走字典接口查询相对应的键值
+        $.ajax({
+            type: "post",
+            url: "/dv/getDictByCode?dicCode="+dictType,
+            success: function (data) {
+                if (data.code === 200) {
+                    console.log(data);
+                    for(let i = 0 ; i < data.data.length;i++){
+                        MessageTypeMap.set(""+data.data[i].dictKey+"",""+data.data[i].dictVal+"");
+                    }
+                } else {
+                    alert("信息有误，请检查!");
+                }
+            }
+        });
+        console.log(MessageTypeMap.get("1"))
+        return MessageTypeMap;
+    }
+/*    var Message_TypeMap = new Map();
     // 以 消息类型为例
     // 走字典接口查询相对应的键值
     $.ajax({
@@ -120,12 +111,11 @@
                 for(var i = 0 ; i < data.data.length;i++){
                     Message_TypeMap.set(data.data[i].dictKey,data.data[i].dictVal);
                 }
-                alert("更新成功");
             } else {
                 alert("信息有误，请检查!");
             }
         }
-    });
+    });*/
 
     layui.use('table', function () {
         var table = layui.table;
@@ -140,15 +130,15 @@
                 , {field: 'id', title: 'ID'}
                 , {field: 'msgType', title: '消息类型',templet: function(d) {
                         var temp = d.msgType;
-                        return Message_TypeMap.get(''+temp+'');
+                       // return getDictTag('Message_TypeMap').get(''+temp+'');
                     }}
-                , {field: 'msgStatus', title: '消息状态'}
-                , {field: 'msgCreator', title: '消息创建者'}
-                , {field: 'msgSender', title: '消息发送者'}
-                , {field: 'msgReceiver', title: 'msgReceiver'}
-                , {field: 'msgTitle', title: '消息标题'}
-                , {field: 'msgContent', title: '消息内容'}
-                , {field: 'msgSummary', title: '消息概要'}
+                , {field: 'msgStatus', title: '状态'}
+                , {field: 'msgCreator', title: '创建者'}
+                , {field: 'msgSender', title: '发送者'}
+                , {field: 'msgReceiver', title: '接收者'}
+                , {field: 'msgTitle', title: '标题'}
+                , {field: 'msgContent', title: '内容'}
+                , {field: 'msgSummary', title: '概要'}
                 , {field: 'msgEffectTime', title: '生效时间'}
                 , {field: 'msgExpireTime', title: '失效时间'}
                 , {field: 'loginIp', title: '登录ip'}
@@ -275,6 +265,17 @@
         layer.closeAll();
         return false;
     });
+</script>
+<script>
+    let click = $("#searchBtn").click(function () {
+        console.log(getDictTag('Message_Type'));
+    });
+</script>
+<script>
+    function searchBtn() {
+        console.log(getDictTag('Message_Type'));
+        console.log("size"+getDictTag('Message_Type').size);
+    }
 </script>
 </body>
 </html>
