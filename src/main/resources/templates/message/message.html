@@ -36,7 +36,7 @@
                                                    lay-verify="required" placeholder="输入字典代号" autocomplete="off"
                                                    class="layui-input">
                                         </div>
-                                        <button onclick="searchBtn();return false" class="layui-btn layui-btn-sm layui-bg-blue "><i
+                                        <button onclick="searchBtn()" class="layui-btn layui-btn-sm layui-bg-blue "><i
                                                 class="layui-icon layui-icon-search"></i>&nbsp;搜索
                                         </button>
                                     </div>
@@ -66,31 +66,12 @@
     </div>
     <div th:replace="/commons/bar::footbar"></div>
 </div>
-<div th:id="dictTag">
-    <script type="text/html" id="msgType">
-        <div>
-            {{# var fu = function(){
-            var msgType = d.msgType;
-            if(msgType == 1){return "幼儿园";}
-            return getDictTag('Message_Type')[msgType]
-            }
-            }}
-            {{fu()}}
-        </div>
-    </script>
-</div>
 <script type="text/javascript" th:src="@{/webjars/layui/2.5.4/layui.js}"></script>
 <script>
-
-    //JavaScript代码区域
     layui.use('element', function () {
         var element = layui.element;
     });
-
-
 </script>
-
-
 <script th:inline="none">
     function getDictTag(dictType) {
         let dictMap={
@@ -130,11 +111,8 @@
             , cols: [[
                 {type: 'checkbox', fixed: 'left'}
                 , {field: 'id', title: 'ID'}
-                , {field: 'msgType', title: '类型',templet: function(d) {
-                        var temp = d.msgType;
-                        return getDictTag('Message_Type')[temp];
-                    }}
-                , {field: 'msgStatus', title: '状态',}
+                , {field: 'msgType', title: '类型',templet: function(d) {return getDictTag('Message_Type')[d.msgType];}}
+                , {field: 'msgStatus', title: '状态',templet: function(d) {return getDictTag('Message_Status')[d.msgStatus];}}
                 , {field: 'msgCreator', title: '创建者'}
                 , {field: 'msgSender', title: '发送者'}
                 , {field: 'msgReceiver', title: '接收者'}
@@ -158,14 +136,7 @@
             var checkStatus = table.checkStatus(obj.config.id);
             switch (obj.event) {
                 case 'addDict':
-                    var data = checkStatus.data;
-                    layer.open({
-                        title: "字典信息修改",
-                        type: 1,
-                        skin: 'layui-layer-rim', //加上边框
-                        area: ['700px', '480px'], //宽高
-                        content: $("#edit")
-                    });
+                    window.location.href = "http://localhost:8088/m/msgAdd";
                     break;
                 case 'delDict':
                     var data = checkStatus.data;

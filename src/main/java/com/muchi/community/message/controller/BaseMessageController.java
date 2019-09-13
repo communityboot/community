@@ -34,4 +34,9 @@ public class BaseMessageController {
         return LayuiVo.successLayui(page.getTotal(),messageService.getAllDict(page));
     }
 
+    @RequestMapping("/msgAdd")
+    public String msgAdd(){
+        return "message/msgAdd";
+    }
+
 }
