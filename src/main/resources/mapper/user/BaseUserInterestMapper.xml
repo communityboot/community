@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.muchi.community.user.mapper.BaseUserInterestMapper">
+
+    <select id="getUserIdsByInterest" resultType="java.util.HashMap">
+         SELECT
+            COLUMN_NAME,COLUMN_Comment
+            FROM
+            information_schema.COLUMNS
+            WHERE
+            table_name = 'base_user_interest'
+            AND table_schema = ( SELECT DATABASE ( ) )
+    </select>
+</mapper>

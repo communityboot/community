@@ -41,6 +41,7 @@ server:
 logging:
   level:
     com.muchi.community.dict.mapper : debug
+    com.muchi.community.user.mapper : debug
 
 debug: true
 
