@@ -11,6 +11,8 @@ public class JsonConstant {
 
     public static final Integer SUCCESSCODE = 200;
 
+    public static final Integer FAIL_CODE = 403;
+
     public static final String ERROR = "error";
 
     public static final String FAIL = "fail";
@@ -34,5 +36,9 @@ public class JsonConstant {
     public static final String UPDATESUCCESS = "更新成功！";
 
     public static final String UPDATEFAIL = "更新失败！";
+
+    public static final String ILLEGAL_ARGUMENT = "参数错误！";
+
+
 
 }

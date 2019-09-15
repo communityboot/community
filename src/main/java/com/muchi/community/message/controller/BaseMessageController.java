@@ -2,14 +2,19 @@ package com.muchi.community.message.controller;
 
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.muchi.community.common.utils.IpUtils;
 import com.muchi.community.common.utils.LayuiVo;
+import com.muchi.community.common.utils.MsgResult;
+import com.muchi.community.common.utils.UUIDUtil;
+import com.muchi.community.message.entity.BaseMessage;
 import com.muchi.community.message.service.IBaseMessageService;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <p>
@@ -34,9 +39,27 @@ public class BaseMessageController {
         return LayuiVo.successLayui(page.getTotal(),messageService.getAllDict(page));
     }
 
-    @RequestMapping("/msgAdd")
+    @RequestMapping("/msgAddPage")
     public String msgAdd(){
-        return "message/msgAdd";
+        return "message/msgAddPage";
+    }
+
+    @RequestMapping("/addMsg")
+    @ResponseBody
+    public MsgResult addMsg(@RequestBody BaseMessage baseMessage, HttpServletRequest request){
+        if(baseMessage!=null){
+            //获取当前操作人姓名
+            String username = (String) SecurityUtils.getSubject().getPrincipal();
+            //公告需要审核
+            baseMessage.setMsgCreator(username);
+            baseMessage.setLoginIp(IpUtils.getIpAddr(request));
+            baseMessage.setMsgStatus(1);
+            messageService.save(baseMessage);
+            return MsgResult.success();
+        }else{
+            return MsgResult.fail();
+
+        }
     }
 
 }

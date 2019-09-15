@@ -37,4 +37,8 @@ public class MsgResult {
     public static MsgResult success(){
         return new MsgResult(JsonConstant.SUCCESSCODE,JsonConstant.SUCCESS);
     }
+
+    public static MsgResult fail(){
+        return new MsgResult(JsonConstant.FAIL_CODE,JsonConstant.FAIL);
+    }
 }

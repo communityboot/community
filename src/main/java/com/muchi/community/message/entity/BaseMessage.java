@@ -138,7 +138,7 @@ public class BaseMessage implements Serializable {
         return msgCreator;
     }
 
-    public void setMsgCreater(String msgCreator) {
+    public void setMsgCreator(String msgCreator) {
         this.msgCreator = msgCreator;
     }
 
