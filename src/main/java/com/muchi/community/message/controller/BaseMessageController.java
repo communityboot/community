@@ -13,7 +13,6 @@ import com.muchi.community.message.service.IBaseMessageService;
 import com.muchi.community.shiro.entity.User;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.stereotype.Controller;
@@ -75,6 +74,7 @@ public class BaseMessageController {
 
     @Log(title = "查询未读公告")
     @RequestMapping("/getUnReadMessageNum")
+    @ResponseBody
     public MzResult getUnReadMessageNum(){
         List<Integer> messageIds = messageService.getMessageIds();
         User user = (User)SecurityUtils.getSubject().getPrincipal();
