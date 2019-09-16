@@ -63,8 +63,13 @@ public class MyRealm extends AuthorizingRealm {
 		String userName = token.getPrincipal().toString();
 		User user = userDao.getUserByUserName(userName);
 		if (user != null) {
+
+			User userLogin = new User();
+			userLogin.setUserName(userName);
+			userLogin.setId(user.getId());
+
 			// Object principal, Object credentials, String realmName
-			AuthenticationInfo authcInfo = new SimpleAuthenticationInfo(user.getUserName(), user.getPassword(), getName());
+			AuthenticationInfo authcInfo = new SimpleAuthenticationInfo(userLogin, user.getPassword(), getName());
 			return authcInfo;
 		} else {
 			return null;
