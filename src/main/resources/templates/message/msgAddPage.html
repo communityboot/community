@@ -64,7 +64,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">生效时间</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="msgEffectTime" class="layui-input" id="msgEffectTime" placeholder="yyyy-MM-dd HH:mm:ss">
+                    <input type="text" name="msgEffectTime" class="layui-input" id="msgEffectTime"  placeholder="yyyy-MM-dd HH:mm:ss">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -124,15 +124,18 @@
             console.dir(vals);
             console.dir(texts);
         });*/
-        form.on('select(msgReceiver)',function(data){
+    /*    form.on('select(msgReceiver)',function(data){
             console.dir(data);
-        })
+        })*/
     });
     layui.use('form', function () {
         var form = layui.form;
         $=layui.jquery;
         form.on('submit(submitBtn)', function (data) {
-            $.ajax({
+             console.log(data);
+             console.log("field"+JSON.stringify(data.field));
+             console.log("data"+JSON.stringify(data));
+           $.ajax({
                 type: "post",
                 url: "/m/addMsg",
                 cache:false,
@@ -141,7 +144,6 @@
                 dataType: 'json',
                 data: JSON.stringify(data.field),
                 success: function (data) {
-                    console.log(data);
                     if (data.code === 200) {
                         layer.msg("添加成功！")
                     } else {

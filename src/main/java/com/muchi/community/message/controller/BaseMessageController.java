@@ -54,11 +54,12 @@ public class BaseMessageController {
             baseMessage.setMsgCreator(username);
             baseMessage.setLoginIp(IpUtils.getIpAddr(request));
             baseMessage.setMsgStatus(1);
+            baseMessage.setMsgSender(username);
+            baseMessage.setMsgReciver(username);
             messageService.save(baseMessage);
             return MsgResult.success();
         }else{
             return MsgResult.fail();
-
         }
     }
 
