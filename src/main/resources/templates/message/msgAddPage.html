@@ -53,35 +53,45 @@
                 <div class="layui-input-block">
                     <select multiple="multiple" lay-filter="msgReceiver">
                         <option value=""></option>
-                        <option value="0">写作</option>
-                        <option value="1">阅读</option>
-                        <option value="2">游戏</option>
-                        <option value="3">音乐</option>
-                        <option value="4">旅行</option>
+                        <option value="0">所有人</option>
+                        <option value="1">喜欢唱歌的人</option>
+                        <option value="2">男人</option>
+                        <option value="3">女人</option>
+                        <option value="4">程序员</option>
                     </select>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">生效时间</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="msgEffectTime" class="layui-input" id="msgEffectTime"  placeholder="yyyy-MM-dd HH:mm:ss">
+                    <input type="text" name="msgEffectTime" class="layui-input" id="msgEffectTime"  placeholder="yyyy-MM-dd HH:mm:ss" autocomplete="off" >
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">失效时间</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="msgExpireTime" class="layui-input" id="msgExpireTime" placeholder="yyyy-MM-dd HH:mm:ss">
+                    <input type="text" name="msgExpireTime" class="layui-input" id="msgExpireTime" placeholder="yyyy-MM-dd HH:mm:ss" autocomplete="off" >
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">备注</label>
                 <div class="layui-input-block">
-                    <input type="text" name="memo" lay-verify="required" lay-reqtext="公告标题是必填项，岂能为空？" placeholder="请输入备注" autocomplete="off" class="layui-input">
+                    <input type="text" name="memo" placeholder="请输入备注" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item" align="center">
                 <button class="layui-btn " id="closeDialog">取消</button>
                 <button class="layui-btn" lay-submit lay-filter="submitBtn">立即提交</button>
+            </div>
+            <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+                <legend>开启复选框</legend>
+            </fieldset>
+
+            <div id="test7" class="demo-tree"></div>
+            <div class="layui-btn-container">
+                <button type="button" class="layui-btn layui-btn-sm" lay-demo="getChecked">获取选中节点数据</button>
+                <button type="button" class="layui-btn layui-btn-sm" lay-demo="setChecked">勾选指定节点</button>
+                <button type="button" class="layui-btn layui-btn-sm" lay-demo="reload">重载实例</button>
             </div>
         </form>
     </div>
@@ -89,6 +99,97 @@
 </div>
 
 <script type="text/javascript" th:src="@{/webjars/layui/2.5.4/layui.js}"></script>
+<script>
+    layui.use(['tree', 'util'], function(){
+        var tree = layui.tree
+            ,util=layui.util
+            ,data2 = [{
+            title: '早餐'
+            ,id: 1
+            ,children: [{
+                title: '油条'
+                ,id: 5
+            },{
+                title: '包子'
+                ,id: 6
+            },{
+                title: '豆浆'
+                ,id: 7
+            }]
+        },{
+            title: '午餐'
+            ,id: 2
+            ,checked: true
+            ,children: [{
+                title: '藜蒿炒腊肉'
+                ,id: 8
+            },{
+                title: '西湖醋鱼'
+                ,id: 9
+            },{
+                title: '小白菜'
+                ,id: 10
+            },{
+                title: '海带排骨汤'
+                ,id: 11
+            }]
+        },{
+            title: '晚餐'
+            ,id: 3
+            ,children: [{
+                title: '红烧肉'
+                ,id: 12
+                ,fixed: true
+            },{
+                title: '番茄炒蛋'
+                ,id: 13
+            }]
+        },{
+            title: '夜宵'
+            ,id: 4
+            ,children: [{
+                title: '小龙虾'
+                ,id: 14
+                ,checked: true
+            },{
+                title: '香辣蟹'
+                ,id: 15
+                ,disabled: true
+            },{
+                title: '烤鱿鱼'
+                ,id: 16
+            }]
+        }];
+        //开启复选框
+        tree.render({
+            elem: '#test7'
+            ,data: data2
+            ,showCheckbox: true
+            ,id: 'demoId1'
+        });
+        //按钮事件
+        util.event('lay-demo', {
+            getChecked: function(othis){
+                var checkedData = tree.getChecked('demoId1'); //获取选中节点的数据
+
+                layer.alert(JSON.stringify(checkedData), {shade:0});
+                console.log(checkedData);
+            }
+            ,setChecked: function(){
+                tree.setChecked('demoId1', [12, 16]); //勾选指定节点
+            }
+            ,reload: function(){
+                //重载实例
+                tree.reload('demoId1', {
+
+                });
+
+            }
+        });
+        });
+
+
+</script>
 <script>
     //JavaScript代码区域
     layui.use(['element','form','laydate'], function () {
@@ -107,7 +208,6 @@
         });
     });
     layui.config({
-        // base: './message/',
         base: '../static/message/',
     });
     layui.use(['multiSelect'],function() {
