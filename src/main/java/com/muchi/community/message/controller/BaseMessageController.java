@@ -2,19 +2,27 @@ package com.muchi.community.message.controller;
 
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.muchi.community.common.log.Log;
 import com.muchi.community.common.utils.IpUtils;
 import com.muchi.community.common.utils.LayuiVo;
 import com.muchi.community.common.utils.MsgResult;
-import com.muchi.community.common.utils.UUIDUtil;
+import com.muchi.community.common.utils.MzResult;
 import com.muchi.community.message.entity.BaseMessage;
+import com.muchi.community.message.service.IBaseMessageRecordService;
 import com.muchi.community.message.service.IBaseMessageService;
+import com.muchi.community.shiro.entity.User;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.stereotype.Controller;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -30,6 +38,9 @@ public class BaseMessageController {
 
     @Autowired
     private IBaseMessageService messageService;
+
+    @Autowired
+    private IBaseMessageRecordService recordService;
 
     @RequestMapping("/getAllMessage")
     @ResponseBody
@@ -50,7 +61,6 @@ public class BaseMessageController {
         if(baseMessage!=null){
             //获取当前操作人姓名
             String username = (String) SecurityUtils.getSubject().getPrincipal();
-            //公告需要审核
             baseMessage.setMsgCreator(username);
             baseMessage.setLoginIp(IpUtils.getIpAddr(request));
             baseMessage.setMsgStatus(1);
@@ -61,6 +71,27 @@ public class BaseMessageController {
         }else{
             return MsgResult.fail();
         }
+    }
+
+    @Log(title = "查询未读公告")
+    @RequestMapping("/getUnReadMessageNum")
+    public MzResult getUnReadMessageNum(){
+        List<Integer> messageIds = messageService.getMessageIds();
+        User user = (User)SecurityUtils.getSubject().getPrincipal();
+        if(user !=null){
+            //对已读的记录进行去重
+            List<Integer> unreadIds = recordService.getUnreadIds(Integer.parseInt(user.getId()));
+            HashSet<Integer> h1=new HashSet<>(messageIds);
+            HashSet<Integer> h2=new HashSet<>(unreadIds);
+            h1.removeAll(h2);
+            messageIds.clear();
+            messageIds.addAll(h1);
+            Map<String ,Object> map=new HashMap<>();
+            map.put("unReadNum",h1.size());
+            map.put("unReadIds",h1);
+            return MzResult.success(map);
+        }
+        return MzResult.fail();
     }
 
 }

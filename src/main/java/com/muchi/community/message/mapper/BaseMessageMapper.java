@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.muchi.community.message.entity.BaseMessage;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -21,5 +22,8 @@ import java.util.List;
 public interface BaseMessageMapper extends BaseMapper<BaseMessage> {
 
     List<BaseMessage>  getAllMessage(Page page);
+
+    @Select("SELECT id FROM base_message")
+    List<Integer> getMessageIds();
 
 }

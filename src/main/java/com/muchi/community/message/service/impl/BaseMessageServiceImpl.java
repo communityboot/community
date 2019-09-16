@@ -25,8 +25,21 @@ public class BaseMessageServiceImpl extends ServiceImpl<BaseMessageMapper, BaseM
     @Autowired
     private BaseMessageMapper messageMapper;
 
+
+    /**
+     * @param page 分页参数
+     * @return 分页后的数据
+     */
     @Override
     public List<BaseMessage> getAllDict(Page page) {
         return messageMapper.getAllMessage(page);
+    }
+
+    /**
+     * @return 公告表所有的id
+     */
+    @Override
+    public List<Integer> getMessageIds() {
+        return messageMapper.getMessageIds();
     }
 }

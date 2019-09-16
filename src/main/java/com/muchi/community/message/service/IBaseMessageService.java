@@ -18,4 +18,6 @@ import java.util.List;
 public interface IBaseMessageService extends IService<BaseMessage> {
 
     List<BaseMessage> getAllDict(Page page);
+
+    List<Integer> getMessageIds();
 }
