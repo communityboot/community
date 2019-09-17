@@ -3,6 +3,8 @@ package com.muchi.community.shiro.controller;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.muchi.community.common.utils.LayuiVo;
 import com.muchi.community.common.utils.JsonResult;
+import com.muchi.community.common.utils.MzResult;
+import com.muchi.community.message.controller.BaseMessageController;
 import com.muchi.community.shiro.entity.User;
 import com.muchi.community.shiro.service.UserService;
 import org.apache.shiro.SecurityUtils;
@@ -30,6 +32,9 @@ public class UserController{
 	@Autowired
 	private UserService userService;
 
+	@Autowired
+	private BaseMessageController messageController;
+
 
     /**
      * 用户登录
@@ -53,10 +58,12 @@ public class UserController{
 		// 2、Shiro
 		Subject subject = SecurityUtils.getSubject();
 		UsernamePasswordToken token = new UsernamePasswordToken(user.getUserName(), user.getPassword(),rememberMe);
+
 		try {
 			subject.login(token);
 			map.put("success", true);
-
+//			MzResult unReadMessageNum = messageController.getUnReadMessageNum();
+//			map.put("unReadNum",unReadMessageNum.getData());
 			return map;
 		} catch (Exception e) {
 			e.printStackTrace();

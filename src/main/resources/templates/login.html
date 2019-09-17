@@ -72,6 +72,7 @@
 			data: {"userName": userName,"password":password,"rememberMe":rememberMe},
 			success:function (data) {
 				if(data.success===true){
+					console.log(data);
 					window.location.href = "http://localhost:8088/admin/mainPage";
 				}else {
 					alert(data.errorInfo);

@@ -72,26 +72,4 @@ public class BaseMessageController {
         }
     }
 
-    @Log(title = "查询未读公告")
-    @RequestMapping("/getUnReadMessageNum")
-    @ResponseBody
-    public MzResult getUnReadMessageNum(){
-        List<Integer> messageIds = messageService.getMessageIds();
-        User user = (User)SecurityUtils.getSubject().getPrincipal();
-        if(user !=null){
-            //对已读的记录进行去重
-            List<Integer> unreadIds = recordService.getUnreadIds(Integer.parseInt(user.getId()));
-            HashSet<Integer> h1=new HashSet<>(messageIds);
-            HashSet<Integer> h2=new HashSet<>(unreadIds);
-            h1.removeAll(h2);
-            messageIds.clear();
-            messageIds.addAll(h1);
-            Map<String ,Object> map=new HashMap<>();
-            map.put("unReadNum",h1.size());
-            map.put("unReadIds",h1);
-            return MzResult.success(map);
-        }
-        return MzResult.fail();
-    }
-
 }
