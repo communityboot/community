@@ -51,4 +51,14 @@ public class PageController {
     public String messagePage(){
         return "message/message";
     }
+
+    @RequestMapping("/frame")
+    public String Frame(){
+        return "commons/Frame";
+    }
+
+    @RequestMapping("/Mainframe")
+    public String Mainframe(){
+        return "portal/MainFrame";
+    }
 }

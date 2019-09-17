@@ -11,9 +11,6 @@
 </head>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
-<div th:replace="/commons/bar::topbar"></div>
-<div th:replace="/commons/bar::sidebar"></div>
-<div class="layui-body">
     <!-- 内容主体区域 -->
     <div >
         <div class="layui-row layui-col-space15">
@@ -87,14 +84,8 @@
           <div class="layui-form-item" align="center">
               <button class="layui-btn layui-btn-primary" type="button" id="closeDialog">取消</button>
               <button class="layui-btn" lay-submit lay-filter="submitBtn">立即提交</button>
-
-              <!--
-                            <button class="layui-btn" id="updateDict">保存</button>
-              -->
           </div>
       </form>
-    </div>
-<div th:replace="/commons/bar::footbar"></div>
 </div>
 <script type="text/javascript" th:src="@{/webjars/layui/2.5.4/layui.js}" ></script>
 <script>

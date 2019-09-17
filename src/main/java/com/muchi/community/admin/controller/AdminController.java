@@ -39,7 +39,7 @@ public class AdminController {
     public String toIndex(Model model){
         Integer unReadMessageNum = messageService.getUnReadMessageNum();
         model.addAttribute("UnReadNum",unReadMessageNum);
-        return "homePage";
+        return "commons/Frame";
     }
 
 

@@ -88,18 +88,18 @@
                 <button class="layui-btn " id="closeDialog">取消</button>
                 <button class="layui-btn" lay-submit lay-filter="submitBtn">立即提交</button>
             </div>
-            <div class="layui-btn-container">
+       <!--     <div class="layui-btn-container">
                 <button type="button" class="layui-btn layui-btn-sm" lay-demo="getChecked">获取选中节点数据</button>
                 <button type="button" class="layui-btn layui-btn-sm" lay-demo="setChecked">勾选指定节点</button>
                 <button type="button" class="layui-btn layui-btn-sm" lay-demo="reload">重载实例</button>
-            </div>
+            </div>-->
         </form>
     </div>
     <div th:replace="/commons/bar::footbar"></div>
 </div>
 
 <script type="text/javascript" th:src="@{/webjars/layui/2.5.4/layui.js}"></script>
-<script>
+<!--<script>
     layui.use(['tree', 'util'], function(){
         var tree = layui.tree
             ,util=layui.util
@@ -189,7 +189,7 @@
         });
 
 
-</script>
+</script>-->
 <script>
     //JavaScript代码区域
     layui.use(['element','form','laydate'], function () {

@@ -6,11 +6,9 @@ import com.muchi.community.common.log.Log;
 import com.muchi.community.common.utils.IpUtils;
 import com.muchi.community.common.utils.LayuiVo;
 import com.muchi.community.common.utils.MsgResult;
-import com.muchi.community.common.utils.MzResult;
 import com.muchi.community.message.entity.BaseMessage;
 import com.muchi.community.message.service.IBaseMessageRecordService;
 import com.muchi.community.message.service.IBaseMessageService;
-import com.muchi.community.shiro.entity.User;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,10 +16,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
 
 /**
  * <p>
@@ -59,6 +53,7 @@ public class BaseMessageController {
     public MsgResult addMsg(@RequestBody BaseMessage baseMessage, HttpServletRequest request){
         if(baseMessage!=null){
             //获取当前操作人姓名
+
             String username = (String) SecurityUtils.getSubject().getPrincipal();
             baseMessage.setMsgCreator(username);
             baseMessage.setLoginIp(IpUtils.getIpAddr(request));
