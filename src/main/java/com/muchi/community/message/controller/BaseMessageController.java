@@ -74,4 +74,9 @@ public class BaseMessageController {
         return messageService.getUnreadMsg();
     }
 
+    @RequestMapping("/toUnreadMessage")
+    public String toUnreadMessage(){
+        return "message/unReadMessage";
+    }
+
 }
