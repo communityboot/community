@@ -6,6 +6,7 @@ import com.muchi.community.common.log.Log;
 import com.muchi.community.common.utils.IpUtils;
 import com.muchi.community.common.utils.LayuiVo;
 import com.muchi.community.common.utils.MsgResult;
+import com.muchi.community.common.utils.MzResult;
 import com.muchi.community.message.entity.BaseMessage;
 import com.muchi.community.message.service.IBaseMessageRecordService;
 import com.muchi.community.message.service.IBaseMessageService;
@@ -65,6 +66,12 @@ public class BaseMessageController {
         }else{
             return MsgResult.fail();
         }
+    }
+
+    @RequestMapping("/getUnreadMsg")
+    @ResponseBody
+    public MzResult getUnreadMsg(){
+        return messageService.getUnreadMsg();
     }
 
 }

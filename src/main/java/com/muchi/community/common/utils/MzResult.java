@@ -57,4 +57,8 @@ public class MzResult {
     public static MzResult fail(){
         return new MzResult(JsonConstant.FAIL_CODE,JsonConstant.FAIL);
     }
+
+    public static MzResult failMsg(String msg){
+        return new MzResult(JsonConstant.FAIL_CODE,JsonConstant.FAIL,msg);
+    }
 }

@@ -53,22 +53,39 @@ public class BaseMessageServiceImpl extends ServiceImpl<BaseMessageMapper, BaseM
         return messageMapper.getMessageIds();
     }
 
+    /**
+     * @return 查询未读公告数量
+     */
     public Integer getUnReadMessageNum(){
+        if(this.getUnread()!=null){
+            return this.getUnread().size();
+        }
+        return 0;
+    }
+
+    /**
+     * @return 查询未读公告
+     */
+    public MzResult getUnreadMsg(){
+        if(this.getUnread()!=null){
+            List<BaseMessage> baseMessages = messageMapper.selectBatchIds(this.getUnread());
+            return MzResult.success(baseMessages);
+        }
+        return MzResult.failMsg("公告读取失败！");
+    }
+
+    private HashSet<Integer> getUnread(){
         List<Integer> messageIds = this.getMessageIds();
         User user = (User) SecurityUtils.getSubject().getPrincipal();
         if(user !=null){
-            //对已读的记录进行去重
             List<Integer> unreadIds = recordMapper.getUnreadIds(Integer.parseInt(user.getId()));
             HashSet<Integer> h1=new HashSet<>(messageIds);
             HashSet<Integer> h2=new HashSet<>(unreadIds);
             h1.removeAll(h2);
             messageIds.clear();
             messageIds.addAll(h1);
-            Map<String ,Object> map=new HashMap<>();
-//            map.put("unReadNum",h1.size());
-//            map.put("unReadIds",h1);
-            return h1.size();
+            return h1;
         }
-        return 0;
+        return null;
     }
 }
