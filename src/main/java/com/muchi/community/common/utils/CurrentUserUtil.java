@@ -1,6 +1,6 @@
 package com.muchi.community.common.utils;
 
-import com.muchi.community.base.entity.User;
+import com.muchi.community.user.entity.User;
 import org.apache.shiro.SecurityUtils;
 
 /**

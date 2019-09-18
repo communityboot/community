@@ -1,7 +1,7 @@
 package com.muchi.community.common.log;
 
-import com.muchi.community.base.entity.User;
 import com.muchi.community.common.utils.CurrentUserUtil;
+import com.muchi.community.user.entity.User;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.AfterReturning;

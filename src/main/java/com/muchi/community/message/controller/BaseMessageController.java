@@ -2,6 +2,7 @@ package com.muchi.community.message.controller;
 
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.muchi.community.common.log.Log;
 import com.muchi.community.common.utils.*;
 import com.muchi.community.message.entity.BaseMessage;
 import com.muchi.community.message.entity.BaseMessageRecord;
@@ -38,6 +39,7 @@ public class BaseMessageController {
 
     @RequestMapping("/getAllMessage")
     @ResponseBody
+    @Log(title = "请求公告所有数据")
     public LayuiVo getAllMessage(Page page, @RequestParam("limit") int limit, @RequestParam(value = "page", defaultValue = "1") int currentPage) {
         page.setCurrent(currentPage);
         page.setSize(limit);
@@ -45,17 +47,17 @@ public class BaseMessageController {
     }
 
     @RequestMapping("/msgAddPage")
+    @Log(title = "进入公告新增页面")
     public String msgAdd(){
         return "message/msgAddPage";
     }
 
     @RequestMapping("/addMsg")
     @ResponseBody
+    @Log(title = "新增公告")
     public MsgResult addMsg(@RequestBody BaseMessage baseMessage, HttpServletRequest request){
         if(baseMessage!=null){
-            //获取当前操作人姓名
-
-            String username = (String) SecurityUtils.getSubject().getPrincipal();
+            String username = CurrentUserUtil.getCurrentUser().getUserName();
             baseMessage.setMsgCreator(username);
             baseMessage.setLoginIp(IpUtils.getIpAddr(request));
             baseMessage.setMsgStatus(1);
@@ -68,6 +70,7 @@ public class BaseMessageController {
         }
     }
 
+    @Log(title = "进入未读消息")
     @RequestMapping("/toUnreadMessage")
     public String toUnreadMessage(Model model){
         List<BaseMessage> unreadMsg= messageService.getUnreadMsg();
@@ -76,6 +79,7 @@ public class BaseMessageController {
     }
 
     @RequestMapping("/getUnreadMsgDetail/{id}")
+    @Log(title = "进入公告详情")
     public String getUnreadMsgDetail(@PathVariable("id") Integer id,Model model){
         BaseMessage unreadMsgDetail = messageService.getUnreadMsgDetail(id);
         model.addAttribute("msgDetail",unreadMsgDetail);
