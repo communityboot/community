@@ -9,28 +9,23 @@
 <body>
     <!-- 内容主体区域 -->
     <div th:each="unread : ${unreadMsg}">
-        <tr>
-            <td th:text="${unread.getId()}"></td>
-            <td th:text="${unread.msgTitle}"></td>
-            <td th:text="${unread.msgContent}"></td>
-            <!--<td th:text="${unread.msgSumary}"></td>-->
-            <td th:text="${unread.loginIp}"></td>
-        </tr>
     <ul class="fly-list">
         <li>
             <a href="" class="fly-avatar">
-                <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg" alt="贤心">
+                <img th:src="@{/static/login/img/mzlogo.png}" alt="贤心">
             </a>
             <h2>
-                <a class="layui-badge" >分享</a>
-                <a href="">基于 layui 的极简社区页面模版</a>
+                <a class="layui-badge" th:text="${unread.msgType}">分享</a>
+                <a th:id="${unread.id}" onclick="changePage(this.id);return false" th:text="${unread.msgSummary}"></a>
             </h2>
             <div class="fly-list-info">
                 <a href="" link>
-                    <cite>贤心</cite>
+                    <cite th:text="${unread.msgCreator}"></cite>
                 </a>
-                <span>刚刚</span>
+                <span th:text="${unread.msgEffectTime}"></span>
+<!--
                 <span class="fly-list-kiss layui-hide-xs" title="悬赏飞吻"><i class="iconfont icon-kiss"></i> 60</span>
+-->
                 <!--<span class="layui-badge fly-badge-accept layui-hide-xs">已结</span>-->
                 <span class="fly-list-nums">
                 <i class="iconfont icon-pinglun1" title="回答"></i> 66
@@ -41,6 +36,12 @@
             </div>
         </li>
     </ul>
+        <hr class="layui-bg-blue">
     </div>
+<script type="text/javascript">
+    function changePage(href) {
+        window.location.href = "http://localhost:8088/m/getUnreadMsgDetail/"+href;
+    }
+</script>
 </body>
 </html>

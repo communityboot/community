@@ -7,8 +7,8 @@
     <title>公告详情</title>
 </head>
 <body>
-            <div class="fly-panel detail-box" th:each="msgDetail : ${msgDetail}">
-                <h1>Fly Template v3.0，基于 layui 的极简社区页面模版</h1>
+            <div class="fly-panel detail-box">
+                <h1 th:text=" ${msgDetail.msgTitle}"></h1>
                 <div class="fly-detail-info">
                     <!-- <span class="layui-badge">审核中</span> -->
                     <span class="layui-badge layui-bg-green fly-detail-column">动态</span>
@@ -37,34 +37,31 @@
                 </div>
                 <div class="detail-about">
                     <a class="fly-avatar" href="../user/home.html">
-                        <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"
-                             alt="贤心">
+                        <img th:src="@{/static/login/img/mzlogo.png}" alt="yuzq">
                     </a>
                     <div class="fly-detail-user">
                         <a href="../user/home.html" class="fly-link">
-                            <cite>贤心</cite>
+                            <cite th:text=" ${msgDetail.msgSender}"></cite>
                             <i class="iconfont icon-renzheng" title="认证信息：{{ rows.user.approve }}"></i>
                             <i class="layui-badge fly-badge-vip">VIP3</i>
                         </a>
-                        <span>2017-11-30</span>
+                        <span th:text="${msgDetail.msgEffectTime}"></span>
                     </div>
                     <div class="detail-hits" id="LAY_jieAdmin" data-id="123">
-                        <span style="padding-right: 10px; color: #FF7200">悬赏：60飞吻</span>
+                        <!--<span style="padding-right: 10px; color: #FF7200">悬赏：60飞吻</span>-->
                         <span class="layui-btn layui-btn-xs jie-admin" type="edit"><a
                                 href="add.html">编辑此贴</a></span>
                     </div>
                 </div>
                 <div class="detail-body photos">
-                    <p>
-                        该模版由 layui官方社区（<a href="http://fly.layui.com/" target="_blank">fly.layui.com</a>）倾情提供，只为表明我们对
-                        layui 执着的信念、以及对未来持续加强的承诺。该模版基于 layui 搭建而成，可作为极简通用型社区的页面支撑。
+                    <p th:text=" ${msgDetail.msgContent}">
                     </p>
-                    下载
+
                     <hr>
                     <p>
-                        官网：<a href="http://www.layui.com/template/fly/" target="_blank">http://www.layui.com/template/fly/</a><br>
-                        码云：<a href="https://gitee.com/sentsin/fly/" target="_blank">https://gitee.com/sentsin/fly/</a><br>
-                        GitHub：<a href="https://github.com/layui/fly" target="_blank">https://github.com/layui/fly</a>
+                        新浦院社区电话：<a href="http://www.layui.com/template/fly/" target="_blank">0791-8888888</a><br>
+                        牧之售后：<a href="https://gitee.com/sentsin/fly/" target="_blank">0791-66666666</a><br>
+                        请求帮助：<a href="https://github.com/layui/fly" target="_blank">0791-99999999</a>
                     </p>
 
                 </div>
@@ -85,7 +82,7 @@
                             </a>
                             <div class="fly-detail-user">
                                 <a href="" class="fly-link">
-                                    <cite>贤心</cite>
+                                    <cite th:text="${msgDetail.msgCreator}"></cite>
                                     <i class="iconfont icon-renzheng" title="认证信息：XXX"></i>
                                     <i class="layui-badge fly-badge-vip">VIP3</i>
                                 </a>

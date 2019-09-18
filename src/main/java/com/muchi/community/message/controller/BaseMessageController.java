@@ -2,12 +2,9 @@ package com.muchi.community.message.controller;
 
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.muchi.community.common.log.Log;
-import com.muchi.community.common.utils.IpUtils;
-import com.muchi.community.common.utils.LayuiVo;
-import com.muchi.community.common.utils.MsgResult;
-import com.muchi.community.common.utils.MzResult;
+import com.muchi.community.common.utils.*;
 import com.muchi.community.message.entity.BaseMessage;
+import com.muchi.community.message.entity.BaseMessageRecord;
 import com.muchi.community.message.service.IBaseMessageRecordService;
 import com.muchi.community.message.service.IBaseMessageService;
 import org.apache.shiro.SecurityUtils;
@@ -18,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -75,6 +73,19 @@ public class BaseMessageController {
         List<BaseMessage> unreadMsg= messageService.getUnreadMsg();
         model.addAttribute("unreadMsg",unreadMsg);
         return "message/unReadMessage";
+    }
+
+    @RequestMapping("/getUnreadMsgDetail/{id}")
+    public String getUnreadMsgDetail(@PathVariable("id") Integer id,Model model){
+        BaseMessage unreadMsgDetail = messageService.getUnreadMsgDetail(id);
+        model.addAttribute("msgDetail",unreadMsgDetail);
+        BaseMessageRecord messageRecord=new BaseMessageRecord();
+        messageRecord.setUserId(CurrentUserUtil.getCurrentUser().getId());
+        messageRecord.setIsRead(1);
+        messageRecord.setMsgId(id);
+        messageRecord.setReadTime(new Date());
+        recordService.saveOrUpdate(messageRecord);
+        return "message/messageDetail";
     }
 
 }

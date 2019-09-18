@@ -60,7 +60,7 @@ public class BaseMessageServiceImpl extends ServiceImpl<BaseMessageMapper, BaseM
     }
 
     /**
-     * @return 查询未读公告
+     * @return 查询未读公告列表
      */
     public List<BaseMessage> getUnreadMsg(){
         if(this.getUnread()!=null){
@@ -82,5 +82,16 @@ public class BaseMessageServiceImpl extends ServiceImpl<BaseMessageMapper, BaseM
             return h1;
         }
         return null;
+    }
+
+    /**
+     * @param id 公告id
+     * @return id为该公告的详情
+     */
+    public BaseMessage getUnreadMsgDetail(Integer id) {
+        if (id != null && id > 0) {
+            return messageMapper.selectById(id);
+        }
+        return new BaseMessage();
     }
 }

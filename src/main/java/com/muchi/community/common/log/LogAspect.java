@@ -1,7 +1,7 @@
 package com.muchi.community.common.log;
 
-import com.muchi.community.user.entity.User;
-import com.muchi.community.shiro.component.CurrentLoginUser;
+import com.muchi.community.base.entity.User;
+import com.muchi.community.common.utils.CurrentUserUtil;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -11,7 +11,6 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
@@ -26,9 +25,6 @@ import java.lang.reflect.Method;
 public class LogAspect {
 
     private static Logger logger= LoggerFactory.getLogger(LogAspect.class);
-
-    @Autowired
-    CurrentLoginUser loginUser;
 
     @Pointcut(value = "@annotation(com.muchi.community.common.log.Log)")
     public void logPointCut(){
@@ -63,7 +59,7 @@ public class LogAspect {
                 a++;
             }
 
-            User userLogin = loginUser.getCurrentUser();
+            User userLogin = CurrentUserUtil.getCurrentUser();
 
             logger.info("本次操作用户名为:{},{},备注为:{},类名为:{},方法名为:{},共有{}个参数,参数为{}",userLogin.getUserName(),title,action,className,methodName,args.length,sb.toString());
         }catch (Exception e1){

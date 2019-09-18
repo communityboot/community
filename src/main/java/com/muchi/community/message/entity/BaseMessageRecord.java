@@ -33,7 +33,7 @@ public class BaseMessageRecord implements Serializable {
      * 用户id
      */
     @TableField("userId")
-    private Integer userId;
+    private String userId;
 
     /**
      * 消息id
@@ -73,11 +73,11 @@ public class BaseMessageRecord implements Serializable {
         this.id = id;
     }
 
-    public Integer getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
