@@ -1,8 +1,8 @@
-package com.muchi.community.base.service.impl;
+package com.muchi.community.user.service.impl;
 
-import com.muchi.community.base.entity.User;
-import com.muchi.community.base.mapper.SysUserMapper;
-import com.muchi.community.base.service.SysIUserService;
+import com.muchi.community.user.entity.User;
+import com.muchi.community.user.mapper.SysUserMapper;
+import com.muchi.community.user.service.SysIUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 

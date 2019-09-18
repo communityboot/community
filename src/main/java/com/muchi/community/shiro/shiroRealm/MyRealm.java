@@ -1,6 +1,6 @@
 package com.muchi.community.shiro.shiroRealm;
 
-import com.muchi.community.base.entity.User;
+import com.muchi.community.user.entity.User;
 import com.muchi.community.shiro.dao.PermissionDao;
 import com.muchi.community.shiro.dao.RoleDao;
 import com.muchi.community.shiro.dao.UserDao;

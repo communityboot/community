@@ -1,6 +1,6 @@
-package com.muchi.community.base.mapper;
+package com.muchi.community.user.mapper;
 
-import com.muchi.community.base.entity.User;
+import com.muchi.community.user.entity.User;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;

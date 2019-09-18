@@ -1,4 +1,4 @@
-package com.muchi.community.base.entity;
+package com.muchi.community.user.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 

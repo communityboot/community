@@ -2,8 +2,7 @@ package com.muchi.community.message.service.impl;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.muchi.community.base.entity.User;
-import com.muchi.community.common.utils.MzResult;
+import com.muchi.community.user.entity.User;
 import com.muchi.community.message.entity.BaseMessage;
 import com.muchi.community.message.mapper.BaseMessageMapper;
 import com.muchi.community.message.mapper.BaseMessageRecordMapper;

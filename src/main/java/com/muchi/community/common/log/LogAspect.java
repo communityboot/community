@@ -1,6 +1,6 @@
 package com.muchi.community.common.log;
 
-import com.muchi.community.base.entity.User;
+import com.muchi.community.user.entity.User;
 import com.muchi.community.shiro.component.CurrentLoginUser;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;

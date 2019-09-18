@@ -1,4 +1,4 @@
-package com.muchi.community.base.controller;
+package com.muchi.community.user.controller;
 
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Controller;
  * @since 2019-09-17
  */
 @Controller
-@RequestMapping("/base/sysUser")
+@RequestMapping("/user/sysUser")
 public class SysUserController {
 
 }

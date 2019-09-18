@@ -1,6 +1,6 @@
-package com.muchi.community.base.service;
+package com.muchi.community.user.service;
 
-import com.muchi.community.base.entity.User;
+import com.muchi.community.user.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
