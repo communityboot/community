@@ -4,11 +4,11 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 
-import java.time.LocalDateTime;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <p>
@@ -45,7 +45,7 @@ public class BaseMessageRecord implements Serializable {
      * 阅读时间
      */
     @TableField("readTime")
-    private LocalDateTime readTime;
+    private Date readTime;
 
     /**
      * 是否阅读
@@ -57,13 +57,13 @@ public class BaseMessageRecord implements Serializable {
      * 创建时间
      */
     @TableField("createDate")
-    private LocalDateTime createDate;
+    private Date createDate;
 
     /**
      * 更新时间
      */
     @TableField("lastModified")
-    private LocalDateTime lastModified;
+    private Date lastModified;
 
     public Integer getId() {
         return id;
@@ -89,11 +89,11 @@ public class BaseMessageRecord implements Serializable {
         this.msgId = msgId;
     }
 
-    public LocalDateTime getReadTime() {
+    public Date getReadTime() {
         return readTime;
     }
 
-    public void setReadTime(LocalDateTime readTime) {
+    public void setReadTime(Date readTime) {
         this.readTime = readTime;
     }
 
@@ -105,19 +105,19 @@ public class BaseMessageRecord implements Serializable {
         this.isRead = isRead;
     }
 
-    public LocalDateTime getCreateDate() {
+    public Date getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(LocalDateTime createDate) {
+    public void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }
 
-    public LocalDateTime getLastModified() {
+    public Date getLastModified() {
         return lastModified;
     }
 
-    public void setLastModified(LocalDateTime lastModified) {
+    public void setLastModified(Date lastModified) {
         this.lastModified = lastModified;
     }
 

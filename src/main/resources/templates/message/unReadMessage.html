@@ -8,12 +8,12 @@
 </head>
 <body>
     <!-- 内容主体区域 -->
-    <div th:each="unread:${unreadMsg}">
+    <div th:each="unread : ${unreadMsg}">
         <tr>
             <td th:text="${unread.getId()}"></td>
             <td th:text="${unread.msgTitle}"></td>
             <td th:text="${unread.msgContent}"></td>
-            <td th:text="${unread.msgSumary}"></td>
+            <!--<td th:text="${unread.msgSumary}"></td>-->
             <td th:text="${unread.loginIp}"></td>
         </tr>
     <ul class="fly-list">
