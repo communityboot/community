@@ -1,11 +1,10 @@
 package com.muchi.community.shiro.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.muchi.community.base.entity.User;
 import com.muchi.community.common.utils.LayuiVo;
 import com.muchi.community.common.utils.JsonResult;
-import com.muchi.community.common.utils.MzResult;
 import com.muchi.community.message.controller.BaseMessageController;
-import com.muchi.community.shiro.entity.User;
 import com.muchi.community.shiro.service.UserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -45,7 +44,7 @@ public class UserController{
      */
 	@PostMapping("/login")
 	@ResponseBody
-	public Map<String, Object> login(User user, BindingResult bindingResult, HttpSession session,Boolean rememberMe) {
+	public Map<String, Object> login(User user, BindingResult bindingResult, HttpSession session, Boolean rememberMe) {
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		// 1、JSR303

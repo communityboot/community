@@ -3,7 +3,7 @@ package com.muchi.community.shiro.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.muchi.community.shiro.entity.User;
+import com.muchi.community.base.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 

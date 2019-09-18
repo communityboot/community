@@ -46,7 +46,7 @@ public class CodeGen {
 
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
-        String projectPath = System.getProperty("user.dir");
+        final String projectPath = System.getProperty("user.dir");
         gc.setOutputDir(projectPath + "/src/main/java");
         gc.setAuthor("yuzq");
         gc.setOpen(false);
@@ -59,11 +59,11 @@ public class CodeGen {
         // dsc.setSchemaName("public");
         dsc.setDriverName("com.mysql.jdbc.Driver");
         dsc.setUsername("root");
-        dsc.setPassword("sa123");
+        dsc.setPassword("");
         mpg.setDataSource(dsc);
 
         // 包配置
-        PackageConfig pc = new PackageConfig();
+        final PackageConfig pc = new PackageConfig();
         pc.setModuleName(scanner("模块名"));
         pc.setParent("com.muchi.community");
         mpg.setPackageInfo(pc);

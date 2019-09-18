@@ -2,6 +2,7 @@ package com.muchi.community.shiro.entity;
 
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.muchi.community.base.entity.User;
 
 /**
  * shiro 权限 用户角色

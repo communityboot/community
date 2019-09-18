@@ -1,11 +1,11 @@
 package com.muchi.community.shiro.shiroRealm;
 
+import com.muchi.community.base.entity.User;
 import com.muchi.community.shiro.dao.PermissionDao;
 import com.muchi.community.shiro.dao.RoleDao;
 import com.muchi.community.shiro.dao.UserDao;
 import com.muchi.community.shiro.entity.Permission;
 import com.muchi.community.shiro.entity.Role;
-import com.muchi.community.shiro.entity.User;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;

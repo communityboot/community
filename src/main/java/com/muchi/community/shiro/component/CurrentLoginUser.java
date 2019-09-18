@@ -1,6 +1,6 @@
 package com.muchi.community.shiro.component;
 
-import com.muchi.community.shiro.entity.User;
+import com.muchi.community.base.entity.User;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.stereotype.Component;
 
@@ -14,6 +14,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class CurrentLoginUser {
 
+    /**
+     * h
+     * @return
+     */
     public User getCurrentUser(){
         User userLogin = (User) SecurityUtils.getSubject().getPrincipal();
         return userLogin;

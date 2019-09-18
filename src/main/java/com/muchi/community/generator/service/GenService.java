@@ -46,7 +46,7 @@ public class GenService {
                 "                {type: 'checkbox', fixed: 'left'}";
         sb.append(prefix);*/
         for(int i=0;i<fieledComments.size();i++){
-            sb.append(", {field: '").append(fieledComments.get(i).getField()).append("', title: '").append("', width: 80}");
+            sb.append(", {field: '").append(fieledComments.get(i).getField()).append("', title: '").append(fieledComments.get(i).getTitle()).append("', width: 80}");
         }
         sb.append("     ]]\n" +
                 "        });");

@@ -2,9 +2,9 @@ package com.muchi.community.shiro.service.impl;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.muchi.community.base.entity.User;
 import com.muchi.community.common.utils.JsonResult;
 import com.muchi.community.shiro.dao.UserDao;
-import com.muchi.community.shiro.entity.User;
 import com.muchi.community.shiro.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,7 @@ import java.util.UUID;
  * @author ChenHQ
  * @title: UserServiceImpl
  * @projectName community
- * @description: TODO
+ * @description:
  * @date 2019/8/25
  */
 @Service

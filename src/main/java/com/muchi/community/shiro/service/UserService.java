@@ -2,8 +2,8 @@ package com.muchi.community.shiro.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.muchi.community.base.entity.User;
 import com.muchi.community.common.utils.JsonResult;
-import com.muchi.community.shiro.entity.User;
 
 import java.util.List;
 
