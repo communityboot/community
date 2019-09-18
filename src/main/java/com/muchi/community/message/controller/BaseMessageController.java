@@ -12,11 +12,13 @@ import com.muchi.community.message.service.IBaseMessageRecordService;
 import com.muchi.community.message.service.IBaseMessageService;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.stereotype.Controller;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * <p>
@@ -68,14 +70,10 @@ public class BaseMessageController {
         }
     }
 
-    @RequestMapping("/getUnreadMsg")
-    @ResponseBody
-    public MzResult getUnreadMsg(){
-        return messageService.getUnreadMsg();
-    }
-
     @RequestMapping("/toUnreadMessage")
-    public String toUnreadMessage(){
+    public String toUnreadMessage(Model model){
+        List<BaseMessage> unreadMsg= messageService.getUnreadMsg();
+        model.addAttribute("unreadMsg",unreadMsg);
         return "message/unReadMessage";
     }
 

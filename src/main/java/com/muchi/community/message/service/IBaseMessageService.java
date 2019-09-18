@@ -24,5 +24,5 @@ public interface IBaseMessageService extends IService<BaseMessage> {
 
     Integer getUnReadMessageNum();
 
-    MzResult getUnreadMsg();
+    List<BaseMessage> getUnreadMsg();
 }

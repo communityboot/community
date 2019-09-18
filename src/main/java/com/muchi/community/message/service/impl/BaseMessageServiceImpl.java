@@ -63,12 +63,11 @@ public class BaseMessageServiceImpl extends ServiceImpl<BaseMessageMapper, BaseM
     /**
      * @return 查询未读公告
      */
-    public MzResult getUnreadMsg(){
+    public List<BaseMessage> getUnreadMsg(){
         if(this.getUnread()!=null){
-            List<BaseMessage> baseMessages = messageMapper.selectBatchIds(this.getUnread());
-            return MzResult.success(baseMessages);
+            return  messageMapper.selectBatchIds(this.getUnread());
         }
-        return MzResult.failMsg("公告读取失败！");
+        return null;
     }
 
     private HashSet<Integer> getUnread(){

@@ -8,13 +8,21 @@
 </head>
 <body>
     <!-- 内容主体区域 -->
+    <div th:each="unread:${unreadMsg}">
+        <tr>
+            <td th:text="${unread.getId()}"></td>
+            <td th:text="${unread.msgTitle}"></td>
+            <td th:text="${unread.msgContent}"></td>
+            <td th:text="${unread.msgSumary}"></td>
+            <td th:text="${unread.loginIp}"></td>
+        </tr>
     <ul class="fly-list">
         <li>
             <a href="" class="fly-avatar">
                 <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg" alt="贤心">
             </a>
             <h2>
-                <a class="layui-badge">分享</a>
+                <a class="layui-badge" >分享</a>
                 <a href="">基于 layui 的极简社区页面模版</a>
             </h2>
             <div class="fly-list-info">
@@ -33,6 +41,6 @@
             </div>
         </li>
     </ul>
-
+    </div>
 </body>
 </html>
