@@ -1,5 +1,6 @@
 package com.muchi.community;
 
+import com.muchi.community.common.service.MailService;
 import com.muchi.community.generator.entity.FieledComment;
 import com.muchi.community.generator.entity.TableInfo;
 import com.muchi.community.generator.service.GenService;
@@ -23,6 +24,9 @@ public class GenTest {
     @Autowired
     private GenService genService;
 
+    @Autowired
+    private MailService mailService;
+
     @Test
     public void testGen(){
         List<FieledComment> admin = genService.getTableInfo("admin");
@@ -32,5 +36,10 @@ public class GenTest {
     @Test
     public void testTable(){
         List<TableInfo> tableInfos = genService.genTable();
+    }
+
+    @Test
+    public void testMail(){
+        mailService.sendMail("1065265077@qq.com");
     }
 }

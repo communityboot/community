@@ -3,6 +3,8 @@ package com.muchi.community.dict.service;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.muchi.community.dict.entity.BaseDict;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.muchi.community.dict.vo.DictVo;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -20,5 +22,8 @@ public interface IBaseDictService extends IService<BaseDict> {
     List<BaseDict> getAllDict(Page page);
 
     int delDictBatch(String[] ids);
+
+    List<DictVo> getDictByType(String dictLabel);
+
 
 }

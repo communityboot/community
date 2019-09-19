@@ -5,6 +5,7 @@ import com.muchi.community.dict.entity.BaseDict;
 import com.muchi.community.dict.mapper.BaseDictMapper;
 import com.muchi.community.dict.service.IBaseDictService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.muchi.community.dict.vo.DictVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +36,11 @@ public class BaseDictServiceImpl extends ServiceImpl<BaseDictMapper, BaseDict> i
     public int delDictBatch(String[] ids) {
         List<String> strings = Arrays.asList(ids);
         return baseDictMapper.deleteBatchIds(strings);
+    }
+
+    @Override
+    public List<DictVo> getDictByType(String dictLabel) {
+        return baseDictMapper.getDictByType(dictLabel);
     }
 
 }

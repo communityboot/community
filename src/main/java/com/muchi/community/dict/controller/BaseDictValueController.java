@@ -92,7 +92,6 @@ public class BaseDictValueController {
     @PostMapping("/getDictByCode")
     @ResponseBody
     public  LayuiVo getDictByCode(String dicCode) {
-
         List<BaseDictValue> dictByCode = dictValueService.getDictByCode(dicCode);
         return LayuiVo.successByData(0L,dictByCode);
     }

@@ -4,10 +4,12 @@ package com.muchi.community.dict.controller;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.muchi.community.common.utils.LayuiVo;
 import com.muchi.community.common.constant.JsonConstant;
+import com.muchi.community.common.utils.MzResult;
 import com.muchi.community.common.utils.UUIDUtil;
 import com.muchi.community.dict.entity.BaseDict;
 import com.muchi.community.dict.service.IBaseDictService;
 import com.muchi.community.dict.service.IBaseDictValueService;
+import com.muchi.community.dict.vo.DictVo;
 import org.apache.ibatis.annotations.Param;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
@@ -69,7 +71,6 @@ public class BaseDictController {
             model.addAttribute("dict",dictInfo);
             return map;
         }
-
         map.put("result","参数错误！");
         return map;
     }
@@ -128,5 +129,12 @@ public class BaseDictController {
         return map;
     }
 
-
+    @RequestMapping("/getDictByType")
+    @ResponseBody
+    public MzResult getDictByType(@RequestParam("dictLabel") String dictLabel){
+        List<DictVo> dictByType = dictService.getDictByType(dictLabel);
+        if(dictByType!=null){
+            return MzResult.success(dictByType);
+        }return MzResult.failMsg("字典查询失败！");
+    }
 }

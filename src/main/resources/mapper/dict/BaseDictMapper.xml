@@ -6,4 +6,16 @@
         select * from base_dict
     </select>
 
+    <select id="getDictByType" parameterType="String" resultType="com.muchi.community.dict.vo.DictVo">
+        SELECT
+	dictLabel,
+	dict_key dictKey,
+	dict_val dictVal
+        FROM
+	base_dict a
+	LEFT JOIN base_dict_value b ON a.id = b.dict_id
+        WHERE
+	dictLabel = #{dictLabel}
+    </select>
+
 </mapper>
