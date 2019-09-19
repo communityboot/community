@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * <p>
@@ -63,8 +64,11 @@ public class BaseMessageServiceImpl extends ServiceImpl<BaseMessageMapper, BaseM
      * @return 查询未读公告列表
      */
     public List<BaseMessage> getUnreadMsg(){
-        if(this.getUnread()!=null){
-            return  messageMapper.selectBatchIds(this.getUnread());
+        if(!Objects.requireNonNull(this.getUnread()).isEmpty()){
+            List<BaseMessage> baseMessages = messageMapper.selectBatchIds(this.getUnread());
+            if(baseMessages!=null){
+                return baseMessages;
+            }
         }
         return null;
     }

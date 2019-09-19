@@ -74,8 +74,12 @@ public class BaseMessageController {
     @RequestMapping("/toUnreadMessage")
     public String toUnreadMessage(Model model){
         List<BaseMessage> unreadMsg= messageService.getUnreadMsg();
-        model.addAttribute("unreadMsg",unreadMsg);
-        return "message/unReadMessage";
+        if(unreadMsg!=null){
+            model.addAttribute("unreadMsg",unreadMsg);
+            return "message/unReadMessage";
+        }
+        return "message/noMessage";
+
     }
 
     @RequestMapping("/getUnreadMsgDetail/{id}")
