@@ -113,6 +113,17 @@ public class User implements Serializable {
      */
     private String remarks;
 
+
+    public boolean isAdmin()
+    {
+        return isAdmin(this.id);
+    }
+
+    public static boolean isAdmin(String id)
+    {
+        return id != null && "1".equals(id);
+    }
+
     public String getId() {
         return id;
     }

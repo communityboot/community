@@ -46,6 +46,7 @@ public class BaseDictController {
     private IBaseDictValueService dictValueService;
 
     @RequestMapping("/toDictPage")
+    @RequiresPermissions("system:dict:view")
     public String toDictPage() {
         return "admin/dict";
     }

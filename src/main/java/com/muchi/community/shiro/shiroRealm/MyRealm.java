@@ -1,5 +1,7 @@
 package com.muchi.community.shiro.shiroRealm;
 
+import com.muchi.community.common.utils.ShiroUtils;
+import com.muchi.community.shiro.service.ISysMenuService;
 import com.muchi.community.user.entity.User;
 import com.muchi.community.shiro.dao.PermissionDao;
 import com.muchi.community.shiro.dao.RoleDao;
@@ -32,26 +34,47 @@ public class MyRealm extends AuthorizingRealm {
 	@Autowired
 	private RoleDao roleDao;
 
+
 	@Autowired
-	private PermissionDao permissionDao;
+	private ISysMenuService menuService;
 
 	/**
 	 * 授权
 	 */
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-		String userName=(String) SecurityUtils.getSubject().getPrincipal();
-		SimpleAuthorizationInfo info=new SimpleAuthorizationInfo();
-		Set<String> roles=new HashSet<String>();
-		List<Role> rolesByUserName = roleDao.getRolesByUserName(userName);
-		for(Role role:rolesByUserName) {
-			roles.add(role.getRoleName());
+
+		User user = ShiroUtils.getUser();
+		// 角色列表
+		Set<String> roles = new HashSet<String>();
+		// 功能列表
+		Set<String> menus = new HashSet<String>();
+		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+		// 管理员拥有所有权限
+		if (user.isAdmin())
+		{
+			info.addRole("admin");
+			info.addStringPermission("*:*:*");
 		}
-		List<Permission> permissionsByUserName = permissionDao.getPermissionsByUserName(userName);
-		for(Permission permission:permissionsByUserName) {
-			info.addStringPermission(permission.getPermissionName());
+		else
+		{
+			//TODO: 需要导入的是service层
+			List<Role> rolesByUserName = roleDao.getRolesByUserName(user.getUserName());
+			for(Role role:rolesByUserName) {
+				roles.add(role.getRoleName());
+			}
+
+
+			//menus = menuService.selectPermsByUserId(user.getId());
+			//普通用户模拟菜单
+			menus.add("system:dict:view");
+
+			// 角色加入AuthorizationInfo认证对象
+			info.setRoles(roles);
+			// 权限加入AuthorizationInfo认证对象
+			info.setStringPermissions(menus);
 		}
-		info.setRoles(roles);
+
 		return info;
 	}
 
@@ -74,6 +97,14 @@ public class MyRealm extends AuthorizingRealm {
 		} else {
 			return null;
 		}
+	}
+
+	/**
+	 * 清理缓存权限
+	 */
+	public void clearCachedAuthorizationInfo()
+	{
+		this.clearCachedAuthorizationInfo(SecurityUtils.getSubject().getPrincipals());
 	}
 
 }

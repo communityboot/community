@@ -7,6 +7,7 @@ import com.muchi.community.common.utils.LayuiVo;
 import com.muchi.community.common.utils.UUIDUtil;
 import com.muchi.community.dict.entity.BaseDictValue;
 import com.muchi.community.dict.service.IBaseDictValueService;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,6 +47,7 @@ public class BaseDictValueController {
     }
 
     @RequestMapping("/dictPage")
+    @RequiresPermissions("system:dict:view")
     public Map<String,String> toDictValPage(@RequestParam("dictId")String dictId, Model model){
         Map<String ,String> map=new HashMap<>();
         map.put(JsonConstant.RESULT, JsonConstant.SUCCESS);
