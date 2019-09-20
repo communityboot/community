@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>消息管理</title>
     <link rel="stylesheet" th:href="@{/webjars/layui/2.5.4/css/layui.css}" media="all">
+    <script th:src="@{/static/js/DictUtil.js}"></script>
     <script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -68,31 +69,6 @@
     });
 </script>
 <script th:inline="none">
-    function getDictTag(dictType) {
-        let dictMap={
-
-        };
-        // 以 消息类型为例
-        // 走字典接口查询相对应的键值
-        $.ajax({
-            type: "post",
-            url: "/dv/getDictByCode?dicCode="+dictType,
-            //cache:false,
-            async:false,
-            success: function (data) {
-                if (data.code === 200) {
-                    var a=data.data.length;
-                    for(var i = 0 ; i < a;i++){
-                        let di=data.data[i].dictKey;
-                        dictMap[""+di+""]=data.data[i].dictVal;
-                    }
-                } else {
-                    alert("信息有误，请检查!");
-                }
-            }
-        });
-        return dictMap;
-    }
     layui.use('table', function () {
         var table = layui.table;
         var $ = layui.$;

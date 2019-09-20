@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>字典管理</title>
     <link rel="stylesheet" th:href="@{/webjars/layui/2.5.4/css/layui.css}" media="all">
+    <script th:src="@{/static/js/DictUtil.js}"></script>
     <script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -64,7 +65,7 @@
                 {type: 'checkbox', fixed: 'left'}
                 , {field: 'userName', title: '用户名'}
                 , {field: 'phone', title: '手机号'}
-                , {field: 'status', title: '用户状态'}
+                , {field: 'status', title: '用户状态',templet: function(d) {return getDictTag('dict13')[d.status];}}
                 , {field: 'email', title: '邮箱'}
                 , {field: 'address', title: '地址'}
                 , {field: 'gender', title: '性别'}
