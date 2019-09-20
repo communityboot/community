@@ -15,6 +15,6 @@ import java.util.List;
  */
 public interface IBaseMessageRecordService extends IService<BaseMessageRecord> {
 
-    List<Integer> getUnreadIds(Integer userId);
+    List<String> getUnreadIds(String userId);
 
 }

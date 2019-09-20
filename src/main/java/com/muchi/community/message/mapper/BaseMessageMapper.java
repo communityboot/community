@@ -24,6 +24,6 @@ public interface BaseMessageMapper extends BaseMapper<BaseMessage> {
     List<BaseMessage>  getAllMessage(Page page);
 
     @Select("SELECT id FROM base_message")
-    List<Integer> getMessageIds();
+    List<String> getMessageIds();
 
 }

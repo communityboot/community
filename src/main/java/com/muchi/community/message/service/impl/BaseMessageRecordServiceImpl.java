@@ -24,7 +24,7 @@ public class BaseMessageRecordServiceImpl extends ServiceImpl<BaseMessageRecordM
     private BaseMessageRecordMapper recordMapper;
 
     @Override
-    public List<Integer> getUnreadIds(Integer userId) {
+    public List<String> getUnreadIds(String userId) {
         return recordMapper.getUnreadIds(userId);
     }
 }

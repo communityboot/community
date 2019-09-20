@@ -89,7 +89,9 @@ public class BaseMessageController {
         BaseMessage unreadMsgDetail = messageService.getUnreadMsgDetail(id);
         model.addAttribute("msgDetail",unreadMsgDetail);
         BaseMessageRecord messageRecord=new BaseMessageRecord();
-        messageRecord.setUserId(CurrentUserUtil.getCurrentUser().getId());
+        String userId = CurrentUserUtil.getCurrentUser().getId();
+        messageRecord.setId(userId+id);
+        messageRecord.setUserId(userId);
         messageRecord.setIsRead(1);
         messageRecord.setMsgId(id);
         messageRecord.setReadTime(new Date());

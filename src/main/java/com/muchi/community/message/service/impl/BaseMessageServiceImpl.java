@@ -46,7 +46,7 @@ public class BaseMessageServiceImpl extends ServiceImpl<BaseMessageMapper, BaseM
      * @return 公告表所有的id
      */
     @Override
-    public List<Integer> getMessageIds() {
+    public List<String> getMessageIds() {
         return messageMapper.getMessageIds();
     }
 
@@ -73,13 +73,13 @@ public class BaseMessageServiceImpl extends ServiceImpl<BaseMessageMapper, BaseM
         return null;
     }
 
-    private HashSet<Integer> getUnread(){
-        List<Integer> messageIds = this.getMessageIds();
+    private HashSet<String> getUnread(){
+        List<String> messageIds = this.getMessageIds();
         User user = (User) SecurityUtils.getSubject().getPrincipal();
         if(user !=null){
-            List<Integer> unreadIds = recordMapper.getUnreadIds(Integer.parseInt(user.getId()));
-            HashSet<Integer> h1=new HashSet<>(messageIds);
-            HashSet<Integer> h2=new HashSet<>(unreadIds);
+            List<String> unreadIds = recordMapper.getUnreadIds(user.getId());
+            HashSet<String> h1=new HashSet<>(messageIds);
+            HashSet<String> h2=new HashSet<>(unreadIds);
             h1.removeAll(h2);
             messageIds.clear();
             messageIds.addAll(h1);

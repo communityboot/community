@@ -20,7 +20,7 @@ public interface IBaseMessageService extends IService<BaseMessage> {
 
     List<BaseMessage> getAllDict(Page page);
 
-    List<Integer> getMessageIds();
+    List<String> getMessageIds();
 
     Integer getUnReadMessageNum();
 

@@ -22,6 +22,6 @@ import java.util.List;
 public interface BaseMessageRecordMapper extends BaseMapper<BaseMessageRecord> {
 
     @Select("select msgId from base_message_record where userId=#{userId}")
-    List<Integer> getUnreadIds(@Param("userId") Integer userId);
+    List<String> getUnreadIds(@Param("userId") String userId);
 
 }

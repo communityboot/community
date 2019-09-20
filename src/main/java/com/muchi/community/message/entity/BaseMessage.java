@@ -26,8 +26,8 @@ public class BaseMessage implements Serializable {
     /**
      * 主键
      */
-    @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    @TableId(value = "id")
+    private String id;
 
     /**
      * 消息类型
@@ -122,11 +122,11 @@ public class BaseMessage implements Serializable {
      */
     private String memo;
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 

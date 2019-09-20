@@ -26,8 +26,8 @@ public class BaseMessageRecord implements Serializable {
     /**
      * 主键
      */
-    @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    @TableId(value = "id")
+    private String id;
 
     /**
      * 用户id
@@ -65,11 +65,11 @@ public class BaseMessageRecord implements Serializable {
     @TableField("lastModified")
     private Date lastModified;
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
