@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org"><head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/layui/css/global.css}" />
+    <link rel="stylesheet" type="text/css" href="https://www.layuicdn.com/layui/css/layui.css" />
+    <title>用户信息</title>
+</head>
+<body>
+    <div class="fly-home fly-panel">
+        <img th:src="@{/static/xwz.jpeg}" alt="yuzq">
+        <i class="iconfont icon-renzheng" title="Fly社区认证"></i>
+        <h1 th:text="${userInfo.userName}">
+
+            <i class="iconfont icon-nan"></i>
+            <!-- <i class="iconfont icon-nv"></i>  -->
+            <i class="layui-badge fly-badge-vip">VIP3</i>
+            <!--
+            <span style="color:#c00;">（管理员）</span>
+            <span style="color:#5FB878;">（社区之光）</span>
+            <span>（该号已被封）</span>
+            -->
+        </h1>
+
+        <p style="padding: 10px 0; color: #5FB878;">认证信息： </p>
+
+        <p class="fly-home-info">
+            <i class="iconfont icon-kiss" title="飞吻"></i><span style="color: #FF7200;">66666 积分</span>
+            <i class="iconfont icon-shijian"></i><span th:text="${userInfo.createTime}">2015-6-17 加入</span>
+            <i class="iconfont icon-chengshi"></i><span th:text="${userInfo.address}"></span>
+        </p>
+
+        <p class="fly-home-sign">（人生仿若一场修行）</p>
+
+        <div class="fly-sns" data-user="">
+            <a href="javascript:;" class="layui-btn layui-btn-primary fly-imActive" data-type="addFriend">加为好友</a>
+            <a href="javascript:;" class="layui-btn layui-btn-normal fly-imActive" data-type="chat">发起会话</a>
+        </div>
+    </div>
+</body>
+</html>

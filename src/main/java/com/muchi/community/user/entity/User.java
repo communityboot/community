@@ -1,6 +1,9 @@
 package com.muchi.community.user.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -13,6 +16,7 @@ import java.util.Date;
  * @author yuzq
  * @since 2019-09-17
  */
+@TableName("sys_user")
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -99,6 +103,8 @@ public class User implements Serializable {
     /**
      * 创建时间
      */
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     @TableField("createTime")
     private Date createTime;
 
@@ -248,6 +254,17 @@ public class User implements Serializable {
         this.salt = salt;
     }
 
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
 
     public String getRemarks() {
         return remarks;

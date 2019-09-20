@@ -4,6 +4,7 @@ import com.muchi.community.user.entity.User;
 import com.muchi.community.user.mapper.SysUserMapper;
 import com.muchi.community.user.service.SysIUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,4 +18,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, User> implements SysIUserService {
 
+    @Autowired
+    private SysUserMapper userMapper;
+
+    /**
+     * 查看
+     * @param id 用户id
+     * @return  用户信息
+     */
+    @Override
+    public User getUserInfoById(String id) {
+        return userMapper.selectById(id);
+    }
 }
