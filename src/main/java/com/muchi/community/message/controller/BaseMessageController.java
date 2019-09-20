@@ -59,6 +59,7 @@ public class BaseMessageController {
     public MsgResult addMsg(@RequestBody BaseMessage baseMessage, HttpServletRequest request){
         if(baseMessage!=null){
             String username = CurrentUserUtil.getCurrentUser().getUserName();
+            baseMessage.setId(UUIDUtil.genUUID());
             baseMessage.setMsgCreator(username);
             baseMessage.setLoginIp(IpUtils.getIpAddr(request));
             baseMessage.setMsgStatus(1);
