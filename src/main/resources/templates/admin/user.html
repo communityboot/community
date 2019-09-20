@@ -68,7 +68,7 @@
                 , {field: 'status', title: '用户状态',templet: function(d) {return getDictTag('dict13')[d.status];}}
                 , {field: 'email', title: '邮箱'}
                 , {field: 'address', title: '地址'}
-                , {field: 'gender', title: '性别'}
+                , {field: 'gender', title: '性别',templet: function(d) {return getGenderDict()[d.gender];}}
                 , {field: 'birthday', title: '生日'}
                 , {field: 'createTime', title: '创建时间'}
                 , {field: 'remarks', title: '备注'}
