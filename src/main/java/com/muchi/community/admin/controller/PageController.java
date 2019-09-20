@@ -32,11 +32,6 @@ public class PageController {
         return "main";
     }
 
-
-    /**
-     *
-     * @return druid管理界面
-     */
     @RequestMapping("/druidMonitor")
     public String druidMonitor(){
         return "/admin/druid";
@@ -60,5 +55,10 @@ public class PageController {
     @RequestMapping("/Mainframe")
     public String Mainframe(){
         return "portal/MainFrame";
+    }
+
+    @RequestMapping("/userAdd")
+    public String userAdd(){
+        return "admin/userAdd";
     }
 }

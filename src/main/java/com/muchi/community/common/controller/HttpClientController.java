@@ -2,6 +2,7 @@ package com.muchi.community.common.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,13 @@ import org.springframework.web.client.RestTemplate;
 @Controller
 @RequestMapping("/http")
 public class HttpClientController {
+
+    @Value("${weather.appId}")
+    private String appId;
+
+
+    @Value("${weather.appSecret}")
+    private String appSecret;
 
     @Autowired
     private RestTemplate restTemplate;
