@@ -11,7 +11,7 @@
             `sys_user` t2
         WHERE
             t2.id = t1.user_id
-          AND t2.user_name = #{username}
+          AND t2.userName = #{username}
     </select>
 
 </mapper>

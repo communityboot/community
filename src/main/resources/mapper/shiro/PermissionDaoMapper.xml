@@ -4,7 +4,7 @@
 <mapper namespace="com.muchi.community.shiro.dao.PermissionDao">
 
     <select id="getPermissionsByUserName" parameterType="string" resultType="com.muchi.community.shiro.entity.Permission">
-        select p.* from sys_user u,sys_user_role ur,sys_role_permission rp,sys_permission p where u.id=ur.user_id and ur.role_id=rp.role_id and rp.permission_id=p.id and u.user_name=#{userName}
+        select p.* from sys_user u,sys_user_role ur,sys_role_permission rp,sys_permission p where u.id=ur.user_id and ur.role_id=rp.role_id and rp.permission_id=p.id and u.userName=#{userName}
     </select>
 
 </mapper>
