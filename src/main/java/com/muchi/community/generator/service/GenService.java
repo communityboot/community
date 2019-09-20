@@ -53,4 +53,21 @@ public class GenService {
         System.out.println(sb.toString());
 
     }
+
+    public void genCrudPage(List<FieledComment> fc){
+        String formId="<form id=\"editForm\" lay-filter=\"editForm\" class=\"layui-form model-form\">";
+        StringBuilder sb=new StringBuilder();
+        for(int i=0;i<fc.size();i++){
+            String divPre=" <div class=\"layui-form-item\">"+fc.get(i).getTitle()+"<span style=\"color: red;\">*</span></label>\n";
+            String divMid="<div class=\"layui-input-block\">\n";
+            String divNext=" <input id=\""+fc.get(i).getField()+"\" name=\""+fc.get(i).getField()+"\" placeholder=\""+"请输入"+fc.get(i).getTitle()+"\" type=\"text\" class=\"layui-input\"/>\n     </div>\n" +
+                    "        </div>";
+            sb.append(divPre).append(divMid).append(divNext);
+        }
+        String divTail="    </form>\n" +
+                "</div>";
+       String form= formId+sb.toString()+divTail;
+        System.out.println(form);
+
+    }
 }

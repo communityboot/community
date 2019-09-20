@@ -7,19 +7,17 @@
 </head>
 <body>
 <div id="edit">
-    <form id="editForm" lay-filter="menuForm" class="layui-form model-form">
+    <form id="editForm" lay-filter="editForm" class="layui-form model-form">
         <div class="layui-form-item">
             <label class="layui-form-label">字典ID<span style="color: red;">*</span></label>
             <div class="layui-input-block">
-                <input id="dictId" name="id" placeholder="请输入名称" type="text" class="layui-input"
-                       disabled="disabled"/>
+                <input id="dictId" name="id" placeholder="请输入名称" type="text" class="layui-input" disabled="disabled"/>
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">字典名称<span style="color: red;">*</span></label>
             <div class="layui-input-block">
-                <input id="dictName" name="dictName" placeholder="请输入字典名称" type="text" class="layui-input"
-                       lay-verify="required" required/>
+                <input id="dictName" name="dictName" placeholder="请输入字典名称" type="text" class="layui-input" lay-verify="required" required/>
             </div>
         </div>
         <div class="layui-form-item">
@@ -35,7 +33,8 @@
                 <input id="check1" name="enabled" title="启用" type="radio" value="1"/>
                 <input id="check2" type="radio" name="enabled" value="0" title="不启用"/>
             </div>
-
+        </div>
+        <div class="layui-form-item">
             <label class="layui-form-label">备注</label>
             <div class="layui-input-block">
                 <input id="remark" name="remark" placeholder="请输入备注" type="text" class="layui-input"/>
@@ -48,5 +47,12 @@
         </div>
     </form>
 </div>
+<script>
+    //JavaScript代码区域
+    layui.use('form', function(){
+        var form = layui.form;
+        form.render();
+    });
+</script>
 </body>
 </html>

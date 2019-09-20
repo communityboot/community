@@ -34,6 +34,12 @@ public class GenTest {
     }
 
     @Test
+    public void testGenForm(){
+        List<FieledComment> admin = genService.getTableInfo("sys_user");
+        genService.genCrudPage(admin);
+    }
+
+    @Test
     public void testTable(){
         List<TableInfo> tableInfos = genService.genTable();
     }

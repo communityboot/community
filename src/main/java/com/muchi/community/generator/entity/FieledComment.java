@@ -7,8 +7,10 @@ package com.muchi.community.generator.entity;
  */
 public class FieledComment {
 
+    //字段名
     private String field;
 
+    //注释
     private String title;
 
     public String getField() {
