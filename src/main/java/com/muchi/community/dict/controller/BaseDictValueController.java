@@ -47,7 +47,6 @@ public class BaseDictValueController {
     }
 
     @RequestMapping("/dictPage")
-    @RequiresPermissions("system:dict:view")
     public Map<String,String> toDictValPage(@RequestParam("dictId")String dictId, Model model){
         Map<String ,String> map=new HashMap<>();
         map.put(JsonConstant.RESULT, JsonConstant.SUCCESS);
@@ -56,6 +55,7 @@ public class BaseDictValueController {
     }
 
     @RequestMapping("/getDictVal/{dId}")
+    @RequiresPermissions("system:dictvalue:view")
     @ResponseBody
     public LayuiVo getDictValue(Page page, @RequestParam("limit") int limit, @RequestParam(value = "page", defaultValue = "1") int currentPage,@PathVariable("dId") String dictID){
         page.setSize(limit);
