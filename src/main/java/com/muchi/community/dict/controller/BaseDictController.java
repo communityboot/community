@@ -62,13 +62,40 @@ public class BaseDictController {
         return LayuiVo.successLayui(page.getTotal(),list);
     }
 
-    @RequestMapping("/getAllTest")
+/*    @RequestMapping("/getAllTest")
     @ResponseBody
-    public LayuiVo getAllTest(@RequestParam("limit") int limit, @RequestParam(value = "page", defaultValue = "1") int currentPage) {
+    public LayuiVo getAllTest(@RequestParam("limit") int limit, @RequestParam(value = "page", defaultValue = "1") int currentPage,BaseDict dict) {
         Page<BaseDict> page= new Page<>(currentPage,limit);
         QueryWrapper<BaseDict> wrapper=new QueryWrapper<>();
         IPage dictIPage=dictService.getAllDictTest(page,wrapper);
-        return LayuiVo.successLayui(page.getTotal(),dictIPage);
+        return LayuiVo.successLayui(page.getTotal(),dictIPage.getRecords());
+    }*/
+
+/*    @RequestMapping("/getAllLamp")
+    @ResponseBody
+    public LayuiVo getAllLamp(@RequestParam("limit") int limit, @RequestParam(value = "page", defaultValue = "1") int currentPage, @RequestParam(required = false) BaseDict dict) {
+        Page<BaseDict> page= new Page<>(currentPage,limit);
+        QueryWrapper<BaseDict> wrapper=new QueryWrapper<>();
+        if(dict!=null){
+            if(dict.getDictName()!=null){
+                wrapper.lambda().eq(dict.getDictLabel()!=null,BaseDict::getDictName,dict.getDictName());
+                if(dict.getDictLabel()!=null){
+                    wrapper.lambda().eq(BaseDict::getDictLabel,dict.getDictLabel());
+                }
+            }
+        }
+        IPage dictIPage=dictService.getAllDictTest(page,wrapper);
+        return LayuiVo.successLayui(page.getTotal(),dictIPage.getRecords());
+    }*/
+
+    @RequestMapping("/getAllLamp")
+    @ResponseBody
+    public LayuiVo getAllLamp(@RequestParam("limit") int limit, @RequestParam(value = "page", defaultValue = "1") int currentPage,@Param("dictLabel") String dictLabel,@Param("dictName") String dictName) {
+        Page<BaseDict> page= new Page<>(currentPage,limit);
+        QueryWrapper<BaseDict> wrapper=new QueryWrapper<>();
+        wrapper.lambda().eq(dictName!=null,BaseDict::getDictName,dictName);
+        IPage dictIPage=dictService.getAllDictTest(page,wrapper);
+        return LayuiVo.successLayui(page.getTotal(),dictIPage.getRecords());
     }
 
     @RequestMapping("/getDictInfo")
