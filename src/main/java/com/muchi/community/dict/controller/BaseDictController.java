@@ -1,6 +1,8 @@
 package com.muchi.community.dict.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.muchi.community.common.utils.LayuiVo;
 import com.muchi.community.common.constant.JsonConstant;
@@ -58,6 +60,15 @@ public class BaseDictController {
         page.setCurrent(currentPage);
         List<BaseDict> list = dictService.getAllDict(page);
         return LayuiVo.successLayui(page.getTotal(),list);
+    }
+
+    @RequestMapping("/getAllTest")
+    @ResponseBody
+    public LayuiVo getAllTest(@RequestParam("limit") int limit, @RequestParam(value = "page", defaultValue = "1") int currentPage) {
+        Page<BaseDict> page= new Page<>(currentPage,limit);
+        QueryWrapper<BaseDict> wrapper=new QueryWrapper<>();
+        IPage dictIPage=dictService.getAllDictTest(page,wrapper);
+        return LayuiVo.successLayui(page.getTotal(),dictIPage);
     }
 
     @RequestMapping("/getDictInfo")

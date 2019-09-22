@@ -71,7 +71,6 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
      */
     @Override
     public List<User> userQuery(Page page, User user) {
-
         List<User> users = userDao.userQuery(page, user);
         return users;
     }

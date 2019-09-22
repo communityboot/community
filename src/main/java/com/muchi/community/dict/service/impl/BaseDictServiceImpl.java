@@ -1,5 +1,7 @@
 package com.muchi.community.dict.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.muchi.community.dict.entity.BaseDict;
 import com.muchi.community.dict.mapper.BaseDictMapper;
@@ -11,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 /**
  * <p>
@@ -30,6 +31,11 @@ public class BaseDictServiceImpl extends ServiceImpl<BaseDictMapper, BaseDict> i
     @Override
     public List<BaseDict> getAllDict(Page page) {
         return baseDictMapper.getAllDict(page);
+    }
+
+    @Override
+    public IPage<BaseDict> getAllDictTest(Page<BaseDict> page, QueryWrapper<BaseDict> wrapper) {
+        return baseDictMapper.selectPage(page,wrapper);
     }
 
     @Override
