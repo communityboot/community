@@ -1,22 +1,15 @@
 package com.muchi.community.shiro.controller;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.muchi.community.common.utils.LayuiVo;
-import com.muchi.community.common.utils.ShiroUtils;
-import com.muchi.community.dict.controller.BaseDictController;
-import com.muchi.community.dict.entity.BaseDict;
-import com.muchi.community.dict.service.IBaseDictService;
-import com.muchi.community.dict.service.IBaseDictValueService;
 import com.muchi.community.shiro.entity.SysMenu;
 import com.muchi.community.shiro.service.ISysMenuService;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.*;
 
 /**
  * @author ChenHQ
@@ -37,6 +30,7 @@ public class MenuController {
 
     /**
      * 菜单首页
+     *
      * @return
      */
     @RequestMapping("/toMenuPage")
@@ -48,13 +42,45 @@ public class MenuController {
     //@RequiresPermissions("system:menu:list")
     @GetMapping("/list")
     @ResponseBody
-    public LayuiVo list(SysMenu menu)
-    {
-        String userId = ShiroUtils.getUserId();
+    public LayuiVo list(SysMenu menu) {
+        //String userId = ShiroUtils.getUserId();
+        String userId = "1";
         List<SysMenu> menuList = menuService.selectMenuList(menu, userId);
-        return LayuiVo.successLayui(0L,menuList);
+
+        //将菜单封装成指定格式
+        List<SysMenu> sysMenus = parseTree(menuList);
+
+        return LayuiVo.successLayui(0L, sysMenus);
     }
 
 
+    /**
+     * 解析树状结构数据，返回指定正确格式的json
+     *
+     * @param menuList
+     * @return
+     */
+    public List<SysMenu> parseTree(List<SysMenu> menuList) {
 
-}
+        List<SysMenu> listParent = new ArrayList();//表示父菜单
+
+        Map<Long, SysMenu> map = new HashMap();//这个map是为了让儿子通过id和pid的关系找到父级的
+
+        for (SysMenu menu : menuList) {
+            map.put(menu.getMenuId(), menu);
+        }
+
+        for (SysMenu menu : menuList) {
+            if (menu.getParentId() == 0) {//最顶级的父菜单
+                listParent.add(menu);
+            } else { //儿子，还需要通过儿子去找到父亲
+                SysMenu parent = map.get(menu.getParentId());//通过儿子的pid找到它父亲
+                parent.getChildren().add(menu);
+            }
+        }
+
+            return listParent;
+        }
+
+
+    }
