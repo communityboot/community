@@ -1,1 +1,0 @@
-var basePath='http://localhost:8088'
