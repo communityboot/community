@@ -145,42 +145,11 @@
             var checkStatus = table.checkStatus(obj.config.id);
             switch (obj.event) {
                 case 'addDict':
-                    var data = checkStatus.data;
-                    layer.open({
-                        title: "字典信息修改",
-                        type: 1,
-                        skin: 'layui-layer-rim', //加上边框
-                        area: ['700px', '480px'], //宽高
-                        content: $("#edit")
-                    });
+                    openLayer('字典信息修改', '#edit')
                     break;
                 case 'delDict':
                     var data = checkStatus.data;
-                    var arr = [];
-                    for (var i = 0; i < data.length; i++) {
-                        arr.push(data[i].id);
-                    }
-                    layer.confirm('确定删除吗？', {
-                        btn: ['取消', '确定'] //按钮
-                    }, function () {
-                        layer.closeAll();
-                    }, function () {
-                        $.ajax({
-                            type: "post",
-                            url: "/dv/delDictValBatch",
-                            dataType: 'json',
-                            data: {"ids": arr},
-                            success: function (data) {
-                                if (data.result === "success") {
-                                    layer.msg("删除成功!");
-                                    obj.del();
-                                } else {
-                                    layer.msg(data.msg);
-                                    layer.close(index);
-                                }
-                            }
-                        });
-                    });
+                    deleteItems(data);
                     break;
                 case 'modifyDict':
                     var data = checkStatus.data;
@@ -220,7 +189,7 @@
                 default:
                     break;
             }
-        });
+        })
     });
 </script>
 <script>
@@ -236,7 +205,7 @@
                 success: function (data) {
                     console.log(JSON.stringify(data));
                     if (data.msg === "success") {
-                        layer.msg("更新成功");
+                        layer.msg("更新成功",{icon: 1});
                         window.parent.location.reload();//修改成功后刷新父界面
                         layer.closeAll();
                     } else {
