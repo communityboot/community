@@ -90,10 +90,13 @@ public class BaseDictController {
 
     @RequestMapping("/getAllLamp")
     @ResponseBody
-    public LayuiVo getAllLamp(@RequestParam("limit") int limit, @RequestParam(value = "page", defaultValue = "1") int currentPage,@Param("dictLabel") String dictLabel,@Param("dictName") String dictName) {
+    public LayuiVo getAllLamp(@RequestParam("limit") int limit, @RequestParam(value = "page", defaultValue = "1") int currentPage,
+                              @Param("dictName") String dictName, @Param("dictLabel") String dictLabel
+                                , @Param("enabled") Integer enabled) {
         Page<BaseDict> page= new Page<>(currentPage,limit);
         QueryWrapper<BaseDict> wrapper=new QueryWrapper<>();
-        wrapper.lambda().eq(dictName!=null,BaseDict::getDictName,dictName);
+        wrapper.lambda().eq(!dictName.equals(""),BaseDict::getDictName,dictName).eq(!dictLabel.equals(""),BaseDict::getDictLabel,dictLabel)
+                .eq(enabled!=null,BaseDict::getEnabled,enabled);
         IPage dictIPage=dictService.getAllDictTest(page,wrapper);
         return LayuiVo.successLayui(page.getTotal(),dictIPage.getRecords());
     }
