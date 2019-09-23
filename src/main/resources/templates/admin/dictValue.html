@@ -5,7 +5,7 @@
     <title>字典值管理</title>
     <link rel="stylesheet" th:href="@{/webjars/layui/2.5.4/css/layui.css}" media="all">
     <script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
-    <script th:src="@{/static/js/DictUtil.js}" th:inline="javascript"></script>
+    <script th:src="@{/static/js/CommonJs.js}" th:inline="javascript"></script>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -258,6 +258,7 @@
     function suAjax(data) {
         if(data.msg==="success"){
             console.log("data："+data);
+            console.log("data------>"+JSON.stringify(data));
             alert("哈哈哈a");
         }
     }
@@ -273,7 +274,9 @@
     layui.use('form',function () {
         var form = layui.form;
         form.on('submit(testBttt)', function (data) {
-            ajaxDemo('/dv/updateDict',JSON.stringify(data.field),suAjax);
+            console.log(data);
+            alert("123")
+            ajaxDemo(baseUrl+'/dv/updateDict',JSON.stringify(data.field),suAjax);
             return false;
         })
     })

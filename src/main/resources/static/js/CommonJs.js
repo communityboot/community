@@ -2,7 +2,7 @@
  * 定义请求前缀
  * @type {string}
  */
-let baseUtil='http://localhost:8088';
+let baseUrl ='http://localhost:8088';
 
 /**
  * @param url 请求地址

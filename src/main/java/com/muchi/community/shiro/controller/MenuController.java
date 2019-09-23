@@ -29,9 +29,8 @@ public class MenuController {
 
 
     /**
-     * 菜单首页
      *
-     * @return
+     * @return 菜单首页
      */
     @RequestMapping("/toMenuPage")
     public String toMenuPage() {
@@ -55,10 +54,8 @@ public class MenuController {
 
 
     /**
-     * 解析树状结构数据，返回指定正确格式的json
-     *
-     * @param menuList
-     * @return
+     * @param menuList 菜单列表
+     * @return  解析树状结构数据，返回指定正确格式的json
      */
     public List<SysMenu> parseTree(List<SysMenu> menuList) {
 
