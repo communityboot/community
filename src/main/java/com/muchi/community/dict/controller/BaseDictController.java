@@ -11,7 +11,6 @@ import com.muchi.community.common.utils.UUIDUtil;
 import com.muchi.community.dict.entity.BaseDict;
 import com.muchi.community.dict.service.IBaseDictService;
 import com.muchi.community.dict.service.IBaseDictValueService;
-import com.muchi.community.dict.vo.DictSearchVo;
 import com.muchi.community.dict.vo.DictVo;
 import org.apache.ibatis.annotations.Param;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -63,53 +62,25 @@ public class BaseDictController {
         return LayuiVo.successLayui(page.getTotal(),list);
     }
 
-/*    @RequestMapping("/getAllTest")
+    @RequestMapping("/getAllLamp")
     @ResponseBody
-    public LayuiVo getAllTest(@RequestParam("limit") int limit, @RequestParam(value = "page", defaultValue = "1") int currentPage,BaseDict dict) {
+    public LayuiVo getAllLamp(@RequestParam("limit") int limit, @RequestParam(value = "page", defaultValue = "1") int currentPage) {
         Page<BaseDict> page= new Page<>(currentPage,limit);
         QueryWrapper<BaseDict> wrapper=new QueryWrapper<>();
         IPage dictIPage=dictService.getAllDictTest(page,wrapper);
         return LayuiVo.successLayui(page.getTotal(),dictIPage.getRecords());
-    }*/
+    }
 
-/*    @RequestMapping("/getAllLamp")
+    @RequestMapping("/getAllLampTe")
     @ResponseBody
-    public LayuiVo getAllLamp(@RequestParam("limit") int limit, @RequestParam(value = "page", defaultValue = "1") int currentPage, @RequestParam(required = false) BaseDict dict) {
+    public LayuiVo getAllLampTe(@RequestParam("limit") int limit, @RequestParam(value = "page", defaultValue = "1") int currentPage,BaseDict dict) {
         Page<BaseDict> page= new Page<>(currentPage,limit);
         QueryWrapper<BaseDict> wrapper=new QueryWrapper<>();
         if(dict!=null){
-            if(dict.getDictName()!=null){
-                wrapper.lambda().eq(dict.getDictLabel()!=null,BaseDict::getDictName,dict.getDictName());
-                if(dict.getDictLabel()!=null){
-                    wrapper.lambda().eq(BaseDict::getDictLabel,dict.getDictLabel());
-                }
-            }
+            wrapper.lambda().eq(!dict.getDictName().equals(""),BaseDict::getDictName,dict.getDictName())
+                    .eq(!dict.getDictLabel().equals(""),BaseDict::getDictLabel,dict.getDictLabel())
+                    .eq(dict.getEnabled()!=null,BaseDict::getEnabled,dict.getEnabled());
         }
-        IPage dictIPage=dictService.getAllDictTest(page,wrapper);
-        return LayuiVo.successLayui(page.getTotal(),dictIPage.getRecords());
-    }*/
-
-/*    @RequestMapping("/getAllLamp")
-    @ResponseBody
-    public LayuiVo getAllLamp(@RequestParam("limit") int limit, @RequestParam(value = "page", defaultValue = "1") int currentPage,
-                              @Param("dictName") String dictName, @Param("dictLabel") String dictLabel
-                                , @Param("enabled") Integer enabled) {
-        Page<BaseDict> page= new Page<>(currentPage,limit);
-        QueryWrapper<BaseDict> wrapper=new QueryWrapper<>();
-        wrapper.lambda().eq(!dictName.equals(""),BaseDict::getDictName,dictName).eq(!dictLabel.equals(""),BaseDict::getDictLabel,dictLabel)
-                .eq(enabled!=null,BaseDict::getEnabled,enabled);
-        IPage dictIPage=dictService.getAllDictTest(page,wrapper);
-        return LayuiVo.successLayui(page.getTotal(),dictIPage.getRecords());
-    }*/
-
-    @RequestMapping("/getAllLamp")
-    @ResponseBody
-    public LayuiVo getAllLamp(@RequestParam("limit") int limit, @RequestParam(value = "page", defaultValue = "1") int currentPage, BaseDict dict) {
-        Page<BaseDict> page= new Page<>(currentPage,limit);
-        QueryWrapper<BaseDict> wrapper=new QueryWrapper<>();
-        wrapper.lambda().eq(!dict.getDictLabel().equals(""),BaseDict::getDictName,dict.getDictName())
-                        .eq(!dict.getDictLabel().equals(""),BaseDict::getDictLabel,dict.getDictLabel())
-                        .eq(dict.getEnabled()!=null,BaseDict::getEnabled,dict.getEnabled());
         IPage dictIPage=dictService.getAllDictTest(page,wrapper);
         return LayuiVo.successLayui(page.getTotal(),dictIPage.getRecords());
     }

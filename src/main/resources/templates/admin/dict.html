@@ -130,6 +130,7 @@
                 , url: '/dict/getAllLamp'
                 , toolbar: '#toolbarDemo'
                 , title: '字典表'
+                ,baseDict:{'dictName':'dictionary','dictLabel':'zidian','enabled':1}
                 , page: true
                 , even: true
                 , cellMinWidth: 30 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
@@ -149,8 +150,10 @@
                 console.log(data.field);
                 console.log(JSON.stringify(data.field));
                 tableGrid.reload({
-                    dataType:"json",
+                    url:'/dict/getAllLampTe',
+                    method:'post',
                     where:data.field
+
                 })
             });
             //头工具栏事件
