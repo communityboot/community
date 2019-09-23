@@ -2,6 +2,7 @@ package com.muchi.community.admin.controller;
 
 import com.muchi.community.admin.service.IAdminService;
 import com.muchi.community.common.log.Log;
+import com.muchi.community.common.utils.CurrentUserUtil;
 import com.muchi.community.common.utils.MzResult;
 import com.muchi.community.message.service.IBaseMessageService;
 import org.slf4j.LoggerFactory;
@@ -38,7 +39,9 @@ public class AdminController {
     @RequestMapping("/mainPage")
     public String toIndex(Model model){
         Integer unReadMessageNum = messageService.getUnReadMessageNum();
+        String userName = CurrentUserUtil.getCurrentUser().getUserName();
         model.addAttribute("UnReadNum",unReadMessageNum);
+        model.addAttribute("userName",userName);
         return "commons/Frame";
     }
 

@@ -37,11 +37,6 @@ public class PageController {
         return "/admin/druid";
     }
 
-    @RequestMapping("/MainDemo")
-    public String mainDemo(){
-        return "mainDemo";
-    }
-
     @RequestMapping("/message")
     public String messagePage(){
         return "message/message";

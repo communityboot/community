@@ -30,7 +30,7 @@
             <li class="layui-nav-item">
                 <a href="javascript:;">
                     <img th:src="@{/static/xwz.jpeg}" class="layui-nav-img">
-                    admin
+                    <span th:text="${userName}"></span>
                 </a>
                 <dl class="layui-nav-child">
                     <dd><a href="" onclick="changePage('/sysUser/getUserInfoById') ;return false">基本资料</a></dd>

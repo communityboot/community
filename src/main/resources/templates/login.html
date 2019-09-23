@@ -73,7 +73,7 @@
 			success:function (data) {
 				if(data.success===true){
 					console.log(data);
-					window.location.href = "http://localhost:8088/admin/mainPage";
+					window.location.href = basePath+"/admin/mainPage";
 				}else {
 					alert(data.errorInfo);
 				}
@@ -81,5 +81,6 @@
 		});
 	}
 </script>
+<script th:src="@{/static/js/BasePath.js}" th:inline="none"></script>
 </body>
 </html>
