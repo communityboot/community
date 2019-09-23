@@ -145,11 +145,11 @@
             var checkStatus = table.checkStatus(obj.config.id);
             switch (obj.event) {
                 case 'addDict':
-                    openLayer('字典信息修改', '#edit')
+                    openLayer('字典信息修改', '#edit');
                     break;
                 case 'delDict':
                     var data = checkStatus.data;
-                    deleteItems(data);
+                    deleteItems(data,baseUrl+'/dv/delDictValBatch');
                     break;
                 case 'modifyDict':
                     var data = checkStatus.data;
@@ -206,8 +206,8 @@
                     console.log(JSON.stringify(data));
                     if (data.msg === "success") {
                         layer.msg("更新成功",{icon: 1});
-                        window.parent.location.reload();//修改成功后刷新父界面
-                        layer.closeAll();
+                        location.reload();
+                        return false;
                     } else {
                         layer.msg("信息有误，请检查!");
                     }

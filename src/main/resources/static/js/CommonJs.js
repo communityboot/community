@@ -39,7 +39,7 @@ function openLayer(title,div) {
     });
 }
 
-function deleteItems(data) {
+function deleteItems(data,url) {
     let arr = [];
     for (let i = 0; i < data.length; i++) {
         arr.push(data[i].id);
@@ -51,14 +51,15 @@ function deleteItems(data) {
     }, function () {
         $.ajax({
             type: "post",
-            url: "/dv/delDictValBatch",
+            url: url,
             dataType: 'json',
             data: {"ids": arr},
             success: function (data) {
-                if (data.result === "success") {
-                    layer.msg("删除成功!");
+                if (data.msg === "success") {
+                    layer.msg('删除成功！', {icon: 1});
+                    location.reload();//修改成功后刷新父界面
                 } else {
-                    layer.msg(data.msg);
+                    layer.msg(data.msg, {icon: 5});
                 }
             }
         });
