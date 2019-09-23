@@ -15,62 +15,64 @@
 <div id="demo"></div>
 <table class="layui-hide" id="menu" lay-filter="menu"></table>
 </body>
-<script th:src="@{/webjars/layui/2.5.4/layui.js}"></script>
+<script th:src="@{/static/layui/layui.js}"></script>
 <script type="text/javascript">
 
-    layui.use(['treetable', 'table', 'layer'], function () {
+
+    layui.config({
+        base: '/static/layui/lay/modules/'
+    }).extend({
+        treetable: 'treetable-lay/treetable',
+    });
+
+    layui.use(['treetable', 'table', 'layer','jquery'], function () {
+        var $ = layui.jquery;
         var table = layui.table;
-        var layer = layui.layer;
         var treetable = layui.treetable;
-        //渲染表格
+
+        // 渲染表格
         var renderTable = function () {
             layer.load(2);
             treetable.render({
-                elem: '#menu', //传入元素选择器
-                url: '/menu/list',
-                idField: 'id',
-                treeId: 'id',//树形id字段名称,
-                treeUpId: 'pId',//树形父id字段名称
-                treeShowName: 'name',//以树形式显示的字段
-                cols: [
+                treeColIndex: 1,
+                treeSpid: -1,
+                treeIdName: 'Menuid',//自身的id
+                treePidName: 'parentid',//父节点的id
+                elem: '#menu',
+                data: '/menu/list',//这里可以去看文档,可以用url,也可以直接使用json字符串
+                page: false,//不可分页
+
+                cols: [{//表头格式
+                    type: 'numbers'
+                }, {
+                    field: 'menuName',//对于的json字符的键
+                    minWidth: 200,//宽度
+                    title: '权限名称'
+                }, {
+                    field: 'Authid',
+                    title: '权限标识'
+                }, {
+                    field: 'href',
+                    title: '菜单url'
+                },
                     {
-                        width: 100, title: '操作', align: 'center'/*toolbar: '#barDemo'*/
-                        , templet: function (d) {
-                            var html = '';
-                            var addBtn = '<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="add">添加</a>';
-                            var delBtn = '<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>';
-                            return addBtn + delBtn;
-                        }
-                    }
-                    , {field: 'menuName', edit: 'text', width: 300, title: '水果名称'}
-                    , {field: 'menuId', width: 100, title: 'id'}
-                    , {field: 'parentId', title: 'pid'}
-                ]
-                , page: false
-            })
+                        field: 'mark',
+                        title: '备注'
+                    }, {
+                        templet: '#auth-state',
+                        width: 220,
+                        align: 'center',
+                        title: '操作'
+                    }],
+                done: function () {
+                    layer.closeAll('loading');
+                },
+
+            });
         }
-    });
 
-
-        /* layui.treeGird({
-             elem: '#demo', //传入元素选择器
-             url: '/menu/list',
-             //nodes: ,
-             layout: [
-                 {name: '菜单名称', field: 'name', treeNodes: true, headerClass: 'value_col', colClass: 'value_col', style: 'width: 20%'},
-                 {name: '连接地址', field: 'test', treeNodes: false, headerClass: '', colClass: '', style: 'width: 20%'},
-                 {name: '菜单名称2', treeNodes: false, headerClass: '', colClass: '', style: 'width: 20%'},
-                 {
-                     name: '操作',
-                     headerClass: 'value_col',
-                     colClass: 'value_col',
-                     style: 'width: 20%',
-                     render: function (row) {
-                         return '<a class="layui-btn layui-btn-danger layui-btn-mini"><i class="layui-icon">&#xe640;</i> 删除</a><a class="layui-btn layui-btn-danger layui-btn-mini"><i class="layui-icon">&#xe640;</i> 修改</a>'; //列渲染
-                     }
-                 },
-             ]
-         });*/
+        renderTable();
+    })
 
 </script>
 
