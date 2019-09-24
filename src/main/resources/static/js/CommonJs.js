@@ -15,7 +15,7 @@ function ajaxDemo(url,data,callback) {
         type:'post',
         contentType: "application/json; charset=utf-8",
         dataType: 'json',
-        data:data,
+        data:JSON.stringify(data.field),
         success:callback,
     })
 }
@@ -39,6 +39,11 @@ function openLayer(title,div) {
     });
 }
 
+/**
+ *
+ * @param data 传方法的data   var data = checkStatus.data;
+ * @param url 后台地址 例如   baseUrl+/xxx/xx
+ */
 function deleteItems(data,url) {
     let arr = [];
     for (let i = 0; i < data.length; i++) {
@@ -56,12 +61,26 @@ function deleteItems(data,url) {
             data: {"ids": arr},
             success: function (data) {
                 if (data.msg === "success") {
-                    layer.msg('删除成功！', {icon: 1});
-                    location.reload();//修改成功后刷新父界面
-                } else {
-                    layer.msg(data.msg, {icon: 5});
-                }
+                    layer.msg(data.msg, {time:1000,icon: 1},function () {
+                        location.reload();
+                    });
+                } else {layer.msg(data.msg, {icon: 5});}
             }
         });
     });
+}
+
+/**
+ *
+ * @param type 更新还是新增成功
+ * @param data 传入得到的返回值
+ */
+function saveorupd(data) {
+    if (data.msg === "success") {
+        layer.msg(data.msg,{time:1000,icon: 1},function () {
+            location.reload();
+        });
+    } else {
+        layer.msg(data.msg,{time:3000,icon: 3});
+    }
 }

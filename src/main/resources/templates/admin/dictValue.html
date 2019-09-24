@@ -74,14 +74,11 @@
                 <button class="layui-btn layui-btn-sm layui-bg-orange" lay-event="modifyDict"><i
                         class="layui-icon layui-icon-edit"></i>&nbsp;修改
                 </button>
-                <button class="layui-btn layui-btn-sm layui-bg-orange" lay-event="testBtn"><i
-                       id="testBtn" class="layui-icon layui-icon-edit"></i>&nbsp;测试
-                </button>
             </div>
         </script>
     </div>
     <div id="edit" hidden="hidden">
-        <form id="editForm" lay-filter="menuForm" class="layui-form model-form">
+        <form id="editForm" lay-filter="editForm" class="layui-form model-form">
             <input th:id="dictId" th:value="${dictId}" name="dictId" hidden="hidden"/>
             <div class="layui-form-item">
                 <label class="layui-form-label">字典显示的名字<span style="color: red;">*</span></label>
@@ -106,7 +103,6 @@
             <div class="layui-form-item" align="center">
                 <button class="layui-btn " id="closeDialog">取消</button>
                 <button class="layui-btn" lay-submit lay-filter="submitBtn">立即提交</button>
-                <button class="layui-btn" lay-submit lay-filter="testBttt">立即提交</button>
             </div>
         </form>
     </div>
@@ -154,7 +150,6 @@
                 case 'modifyDict':
                     var data = checkStatus.data;
                     if (data.length === 1) {
-                        var $ = layui.jquery, form = layui.form;
                         $.ajax({
                             type: "post",
                             url: "/dict/getDictInfo",
@@ -172,13 +167,7 @@
                                 }
                             }
                         });
-                        layer.open({
-                            title: "字典信息修改",
-                            type: 1,
-                            skin: 'layui-layer-rim', //加上边框
-                            area: ['700px', '480px'], //宽高
-                            content: $("#edit")
-                        });
+                        openLayer('字典信息修改','#edit');
                     } else if (data.length === 0) {
                         layer.msg("所选数量为0，请选择需要操作的数据");
 
@@ -196,59 +185,10 @@
     layui.use('form', function () {
         var form = layui.form;
         form.on('submit(submitBtn)', function (data) {
-            $.ajax({
-                type: "post",
-                url: "/dv/updateDict",
-                contentType: "application/json; charset=utf-8",
-                dataType: 'json',
-                data: JSON.stringify(data.field),
-                success: function (data) {
-                    console.log(JSON.stringify(data));
-                    if (data.msg === "success") {
-                        layer.msg("更新成功",{icon: 1});
-                        location.reload();
-                        return false;
-                    } else {
-                        layer.msg("信息有误，请检查!");
-                    }
-                }
-            });
+            ajaxDemo(baseUrl+'/dv/updateDict',data,saveorupd);
             return false;
         });
     });
-    $("#closeDialog").click(function () {
-        $("#dictId").val("");
-        $("#dictName").val("");
-        $("#dictLabel").val("");
-        layer.closeAll();
-        return false;
-    });
-
-    function suAjax(data) {
-        if(data.msg==="success"){
-            console.log("data："+data);
-            console.log("data------>"+JSON.stringify(data));
-            alert("哈哈哈a");
-        }
-    }
-    function errorAjax() {
-        alert("aaab");
-    }
-
-    $("#testBtn").on('click',function () {
-        alert("哈哈哈");
-    })
-</script>
-<script>
-    layui.use('form',function () {
-        var form = layui.form;
-        form.on('submit(testBttt)', function (data) {
-            console.log(data);
-            alert("123")
-            ajaxDemo(baseUrl+'/dv/updateDict',JSON.stringify(data.field),suAjax);
-            return false;
-        })
-    })
 </script>
 </body>
 </html>
