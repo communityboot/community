@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>公告添加</title>
     <link rel="stylesheet" type="text/css" href="https://www.layuicdn.com/layui/css/layui.css" />
+    <script th:src="@{/static/js/CommonJs.js}" th:inline="javascript"></script>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -226,26 +227,7 @@
         var form = layui.form;
         $=layui.jquery;
         form.on('submit(submitBtn)', function (data) {
-             console.log(data);
-             console.log("field"+JSON.stringify(data.field));
-             console.log("data"+JSON.stringify(data));
-           $.ajax({
-                type: "post",
-                url: "/m/addMsg",
-                cache:false,
-                async:false,
-                contentType: "application/json; charset=utf-8",
-                dataType: 'json',
-                data: JSON.stringify(data.field),
-                success: function (data) {
-                    if (data.code === 200) {
-                        layer.msg("添加成功！")
-                    } else {
-                        console.log(JSON.stringify(data.field));
-                        layer.msg(data.msg);
-                    }
-                }
-            });
+            ajaxDemo('/m/addMsg',JSON.stringify(data.field),saveDrump);
             return false;
         });
     });

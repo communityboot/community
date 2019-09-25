@@ -15,7 +15,7 @@ function ajaxDemo(url,data,callback) {
         type:'post',
         contentType: "application/json; charset=utf-8",
         dataType: 'json',
-        data:JSON.stringify(data.field),
+        data:data,
         success:callback,
     })
 }
@@ -60,27 +60,68 @@ function deleteItems(data,url) {
             dataType: 'json',
             data: {"ids": arr},
             success: function (data) {
-                if (data.msg === "success") {
-                    layer.msg(data.msg, {time:1000,icon: 1},function () {
+                if (data.code === 200) {
+                    layer.msg(data.msg, {time:1500,icon: 1},function () {
                         location.reload();
                     });
-                } else {layer.msg(data.msg, {icon: 5});}
+                } else {layer.msg(data.msg,{time:1000,icon: 1})}
             }
         });
     });
 }
 
 /**
- *
- * @param type 更新还是新增成功
  * @param data 传入得到的返回值
  */
 function saveorupd(data) {
-    if (data.msg === "success") {
+    if (data.code === 200) {
         layer.msg(data.msg,{time:1000,icon: 1},function () {
             location.reload();
         });
     } else {
         layer.msg(data.msg,{time:3000,icon: 3});
+    }
+}
+
+/**
+ * 保存成功之后需要跳转页面
+ * @param data 传入data就行
+ * @param url 新增成功需要跳转的地址
+ */
+function saveDrump(data) {
+    if (data.msg === 200) {
+        layer.msg(data.msg,{time:1000,icon: 1},function () {
+            window.location.href=(baseUrl+data.data);
+        });
+    } else {
+        layer.msg(data.msg,{time:3000,icon: 3});
+    }
+}
+
+function modify(data,url,callback) {
+    if (data.length === 1) {
+        ajaxDemo(url,"id="+data[0].id,callback);
+/*        $.ajax({
+            type: "post",
+            url: "/dict/getDictInfo",
+            dataType: 'json',
+            data: "id=" + data[0].id,
+            success: function (data) {
+                if (data.result === "000") {
+                    $("#dictId").val(data.dict.id);
+                    $("#dictName").val(data.dict.dictName);
+                    $("#dictLabel").val(data.dict.dictLabel);
+                    $("#remark").val(data.dict.remark);
+                    form.render();
+                } else {
+                    layer.msg("信息有误，请检查!");
+                }
+            }
+        });*/
+        openLayer('字典信息修改','#edit');
+    } else if (data.length === 0) {
+        layer.msg("所选数量为0，请选择需要操作的数据");
+    } else {
+        layer.msg("所选数量超过1，只能对单条数据进行编辑！")
     }
 }

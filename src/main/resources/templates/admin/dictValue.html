@@ -12,100 +12,82 @@
 </head>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
-        <!-- 内容主体区域 -->
-        <input th:id="dictValId" th:value="${dictId}" hidden="hidden"/>
-        <div>
-            <div class="layui-row layui-col-space15">
-                <div class="layui-col-md12">
-                    <div class="layui-card">
-                        <blockquote class="layui-elem-quote">字典管理</blockquote>
-                        <div class="layui-col-md12">
-                            <div class="layui-card">
-                                <div class="layui-card-body">
-                                    <div class="layui-form-item">
-                                        <label class="layui-form-label">字典名称</label>
-                                        <div class="layui-input-inline">
-                                            <input style="height: 32px; width: 110px" type="text" name="dictName"
-                                                   lay-verify="required" placeholder="输入字典名称" autocomplete="off"
-                                                   class="layui-input">
-                                        </div>
-                                        <label class="layui-form-label">字典代号</label>
-                                        <div class="layui-input-inline">
-                                            <input style="height: 32px; width: 110px" type="text" name="dictLabel"
-                                                   lay-verify="required" placeholder="输入字典代号" autocomplete="off"
-                                                   class="layui-input">
-                                        </div>
-                                        <select name="area1" class="fsSelect" dict="city" addNull="1">
-                                            <option code="1" name="22" >hhh</option>
-                                            <option>1</option>
-                                            <option>1</option>
-                                            <option>1</option>
-                                        </select>
-
-                                        <select name="city" lay-verify="required"  lay-verType="tips" class="fsSelect" dict="city" addNull="1">
-                                        <option value="1">1</option>
-                                        <option value="2">1</option>
-                                        <option value="3">1</option>
-                                        <option value="3"></option>
-                                        <option value="3"></option>
-                                        </select>
-                                        <button class="layui-btn layui-btn-sm layui-bg-blue "><i
-                                                class="layui-icon layui-icon-search"></i>&nbsp;搜索
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <hr class="layui-bg-orange">
-                </div>
-            </div>
-        </div>
-
-        <table class="layui-hide" id="dictValue" lay-filter="dictValue"></table>
-        <script type="text/html" id="toolbarDemo">
-            <div class="layui-btn-container">
-                <button class="layui-btn layui-btn-sm layui-bg-green" lay-event="addDict"><i
-                        class="layui-icon layui-icon-add-1"></i>&nbsp;新增
-                </button>
-                <button class="layui-btn layui-btn-sm layui-bg-red" lay-event="delDict"><i
-                        class="layui-icon layui-icon-delete"></i>&nbsp;删除
-                </button>
-                <button class="layui-btn layui-btn-sm layui-bg-orange" lay-event="modifyDict"><i
-                        class="layui-icon layui-icon-edit"></i>&nbsp;修改
-                </button>
-            </div>
-        </script>
+    <!-- 内容主体区域 -->
+    <input th:id="dictValId" th:value="${dictId}" hidden="hidden"/>
+    <div class="layui-card">
+        <blockquote class="layui-elem-quote">字典管理</blockquote>
     </div>
-    <div id="edit" hidden="hidden">
-        <form id="editForm" lay-filter="editForm" class="layui-form model-form">
-            <input th:id="dictId" th:value="${dictId}" name="dictId" hidden="hidden"/>
+    <div style="margin-left: 5%">
+        <form id="searchForm" lay-filter="searchForm" class="layui-form model-form">
             <div class="layui-form-item">
-                <label class="layui-form-label">字典显示的名字<span style="color: red;">*</span></label>
-                <div class="layui-input-block">
-                    <input id="dictKey" name="dictKey" placeholder="请输入字典显示的名" type="text" class="layui-input"/>
+                <div class="layui-inline">
+                    <input id="dictNameSearch" name="dictName" class="layui-input" type="text" placeholder="字典名称"
+                           autocomplete="off"/></div>
+                <div class="layui-inline">
+                    <input id="dictLabelSearch" name="dictLabel" class="layui-input" type="text" placeholder="字典类型"
+                           autocomplete="off"/>
                 </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">字典的值<span style="color: red;">*</span></label>
-                <div class="layui-input-block">
-                    <input id="dictVal" name="dictVal" placeholder="请输入字典的值" type="text" class="layui-input"
-                           lay-verify="required" required/>
+                <div class="layui-inline">
+                    <select id="status" name="enabled">
+                        <option value="">是否启用</option>
+                        <option value="1">启用</option>
+                        <option value="0">禁用</option>
+                    </select>
                 </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">字典排序<span style="color: red;">*</span></label>
-                <div class="layui-input-block">
-                    <input id="sort" name="sort" placeholder="请输入字典排序" type="text" class="layui-input"
-                           autocomplete="off" lay-verify="required" required/>
+                <div class="layui-inline">
+                    <a id="btnSearch" class="layui-btn icon-btn" lay-submit lay-filter="btnSearch"><i
+                            class="layui-icon">&#xe615;</i>搜索</a>
                 </div>
-            </div>
-            <div class="layui-form-item" align="center">
-                <button class="layui-btn " id="closeDialog">取消</button>
-                <button class="layui-btn" lay-submit lay-filter="submitBtn">立即提交</button>
             </div>
         </form>
     </div>
+    <hr class="layui-bg-orange">
+</div>
+
+<table class="layui-hide" id="dictValue" lay-filter="dictValue"></table>
+<script type="text/html" id="toolbarDemo">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm layui-bg-green" lay-event="addDict"><i
+                class="layui-icon layui-icon-add-1"></i>&nbsp;新增
+        </button>
+        <button class="layui-btn layui-btn-sm layui-bg-red" lay-event="delDict"><i
+                class="layui-icon layui-icon-delete"></i>&nbsp;删除
+        </button>
+        <button class="layui-btn layui-btn-sm layui-bg-orange" lay-event="modifyDict"><i
+                class="layui-icon layui-icon-edit"></i>&nbsp;修改
+        </button>
+    </div>
+</script>
+</div>
+<div id="edit" hidden="hidden">
+    <form id="editForm" lay-filter="editForm" class="layui-form model-form">
+        <input th:id="dictId" th:value="${dictId}" name="dictId" hidden="hidden"/>
+        <div class="layui-form-item">
+            <label class="layui-form-label">字典显示的名字<span style="color: red;">*</span></label>
+            <div class="layui-input-block">
+                <input id="dictKey" name="dictKey" placeholder="请输入字典显示的名" type="text" class="layui-input"/>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">字典的值<span style="color: red;">*</span></label>
+            <div class="layui-input-block">
+                <input id="dictVal" name="dictVal" placeholder="请输入字典的值" type="text" class="layui-input"
+                       lay-verify="required" required/>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">字典排序<span style="color: red;">*</span></label>
+            <div class="layui-input-block">
+                <input id="sort" name="sort" placeholder="请输入字典排序" type="text" class="layui-input"
+                       autocomplete="off" lay-verify="required" required/>
+            </div>
+        </div>
+        <div class="layui-form-item" align="center">
+            <button class="layui-btn " id="closeDialog">取消</button>
+            <button class="layui-btn" lay-submit lay-filter="submitBtn">立即提交</button>
+        </div>
+    </form>
+</div>
 <script type="text/javascript" th:src="@{/webjars/layui/2.5.4/layui.js}"></script>
 <script>
     //JavaScript代码区域
@@ -129,7 +111,7 @@
                 , {field: 'dictId', title: 'dictId'}
                 , {field: 'dictKey', title: '字典标签'}
                 , {field: 'dictVal', title: '字典键值'}
-                , {field: 'sort', title: '排序', dict:"city"}
+                , {field: 'sort', title: '排序', dict: "city"}
                 , {field: 'createTime', title: '创建时间'}
                 , {field: 'updateTime', title: '更新时间'}
             ]]
@@ -144,12 +126,14 @@
                     openLayer('字典信息修改', '#edit');
                     break;
                 case 'delDict':
-                    var data = checkStatus.data;
-                    deleteItems(data,baseUrl+'/dv/delDictValBatch');
+                    data = checkStatus.data;
+                    deleteItems(data, baseUrl + '/dv/delDictValBatch');
                     break;
                 case 'modifyDict':
                     var data = checkStatus.data;
-                    if (data.length === 1) {
+                    modify(data, '/dict/getDictInfo',)
+                    /*if (data.length === 1) {
+                        ajaxDemo('/dict/getDictInfo',data,)
                         $.ajax({
                             type: "post",
                             url: "/dict/getDictInfo",
@@ -173,7 +157,7 @@
 
                     } else {
                         layer.msg("所选数量超过1，只能对单条数据进行编辑！")
-                    }
+                    }*/
                     break;
                 default:
                     break;
@@ -185,7 +169,7 @@
     layui.use('form', function () {
         var form = layui.form;
         form.on('submit(submitBtn)', function (data) {
-            ajaxDemo(baseUrl+'/dv/updateDict',data,saveorupd);
+            ajaxDemo(baseUrl + '/dv/updateDict', data, saveorupd);
             return false;
         });
     });

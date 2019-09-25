@@ -38,6 +38,10 @@ public class MsgResult {
         return new MsgResult(JsonConstant.SUCCESSCODE,JsonConstant.SUCCESS);
     }
 
+    public static MsgResult successMsg(String msg){
+        return new MsgResult(JsonConstant.SUCCESSCODE,msg);
+    }
+
     public static MsgResult fail(){
         return new MsgResult(JsonConstant.FAIL_CODE,JsonConstant.FAIL);
     }

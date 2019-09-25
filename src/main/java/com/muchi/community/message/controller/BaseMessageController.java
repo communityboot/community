@@ -3,6 +3,7 @@ package com.muchi.community.message.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.muchi.community.common.constant.BusinessType;
+import com.muchi.community.common.constant.JsonConstant;
 import com.muchi.community.common.log.Log;
 import com.muchi.community.common.utils.*;
 import com.muchi.community.message.entity.BaseMessage;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -56,7 +58,7 @@ public class BaseMessageController {
     @RequestMapping("/addMsg")
     @ResponseBody
     @Log(title = "新增公告",action = BusinessType.ADD)
-    public MsgResult addMsg(@RequestBody BaseMessage baseMessage, HttpServletRequest request){
+    public MzResult addMsg(@RequestBody BaseMessage baseMessage, HttpServletRequest request){
         if(baseMessage!=null){
             String username = CurrentUserUtil.getCurrentUser().getUserName();
             baseMessage.setId(UUIDUtil.genUUID());
@@ -66,9 +68,9 @@ public class BaseMessageController {
             baseMessage.setMsgSender(username);
             baseMessage.setMsgReciver(username);
             messageService.save(baseMessage);
-            return MsgResult.success();
+            return MzResult.success("/message");
         }else{
-            return MsgResult.fail();
+            return MzResult.failMsg(JsonConstant.ADDFAIL);
         }
     }
 
@@ -100,4 +102,13 @@ public class BaseMessageController {
         return "message/messageDetail";
     }
 
+    @PostMapping("/delMsgBatch")
+    @ResponseBody
+    public  MsgResult delMsgBatch(@RequestParam(value = "ids[]") String[] ids) {
+        List<String> dictIds = Arrays.asList(ids);
+        if(messageService.removeByIds(dictIds)){
+            return MsgResult.successMsg(JsonConstant.DELSUCCESS);
+        }
+        return MsgResult.fail();
+    }
 }
