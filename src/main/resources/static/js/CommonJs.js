@@ -61,9 +61,7 @@ function deleteItems(data,url) {
             data: {"ids": arr},
             success: function (data) {
                 if (data.code === 200) {
-                    layer.msg(data.msg, {time:1500,icon: 1},function () {
-                        location.reload();
-                    });
+                    layer.msg(data.msg, {time:1500,icon: 1},function () {location.reload();});
                 } else {layer.msg(data.msg,{time:1000,icon: 1})}
             }
         });
@@ -88,7 +86,7 @@ function saveorupd(data) {
  * @param data 传入data就行
  * @param url 新增成功需要跳转的地址
  */
-function saveDrump(data) {
+function saveJump(data) {
     if (data.msg === 200) {
         layer.msg(data.msg,{time:1000,icon: 1},function () {
             window.location.href=(baseUrl+data.data);
@@ -98,26 +96,15 @@ function saveDrump(data) {
     }
 }
 
+/**
+ * 批量或者单条记录
+ * @param data
+ * @param url 后台请求的url
+ * @param callback 回调函数
+ */
 function modify(data,url,callback) {
     if (data.length === 1) {
         ajaxDemo(url,"id="+data[0].id,callback);
-/*        $.ajax({
-            type: "post",
-            url: "/dict/getDictInfo",
-            dataType: 'json',
-            data: "id=" + data[0].id,
-            success: function (data) {
-                if (data.result === "000") {
-                    $("#dictId").val(data.dict.id);
-                    $("#dictName").val(data.dict.dictName);
-                    $("#dictLabel").val(data.dict.dictLabel);
-                    $("#remark").val(data.dict.remark);
-                    form.render();
-                } else {
-                    layer.msg("信息有误，请检查!");
-                }
-            }
-        });*/
         openLayer('字典信息修改','#edit');
     } else if (data.length === 0) {
         layer.msg("所选数量为0，请选择需要操作的数据");

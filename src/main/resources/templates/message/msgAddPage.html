@@ -227,7 +227,7 @@
         var form = layui.form;
         $=layui.jquery;
         form.on('submit(submitBtn)', function (data) {
-            ajaxDemo('/m/addMsg',JSON.stringify(data.field),saveDrump);
+            ajaxDemo('/m/addMsg',JSON.stringify(data.field),saveJump);
             return false;
         });
     });
