@@ -132,32 +132,6 @@
                 case 'modifyDict':
                     var data = checkStatus.data;
                     modify(data, '/dict/getDictInfo',)
-                    /*if (data.length === 1) {
-                        ajaxDemo('/dict/getDictInfo',data,)
-                        $.ajax({
-                            type: "post",
-                            url: "/dict/getDictInfo",
-                            dataType: 'json',
-                            data: "id=" + data[0].id,
-                            success: function (data) {
-                                if (data.result === "000") {
-                                    $("#dictId").val(data.dict.id);
-                                    $("#dictName").val(data.dict.dictName);
-                                    $("#dictLabel").val(data.dict.dictLabel);
-                                    $("#remark").val(data.dict.remark);
-                                    form.render();
-                                } else {
-                                    layer.msg("信息有误，请检查!");
-                                }
-                            }
-                        });
-                        openLayer('字典信息修改','#edit');
-                    } else if (data.length === 0) {
-                        layer.msg("所选数量为0，请选择需要操作的数据");
-
-                    } else {
-                        layer.msg("所选数量超过1，只能对单条数据进行编辑！")
-                    }*/
                     break;
                 default:
                     break;
