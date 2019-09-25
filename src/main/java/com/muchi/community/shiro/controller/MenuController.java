@@ -47,9 +47,9 @@ public class MenuController {
         List<SysMenu> menuList = menuService.selectMenuList(menu, userId);
 
         //将菜单封装成指定格式
-        List<SysMenu> sysMenus = parseTree(menuList);
+        //List<SysMenu> sysMenus = parseTree(menuList);
 
-        return LayuiVo.successLayui(0L, sysMenus);
+        return LayuiVo.successLayui(0L, menuList);
     }
 
 
