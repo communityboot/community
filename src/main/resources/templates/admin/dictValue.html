@@ -13,26 +13,18 @@
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
     <!-- 内容主体区域 -->
-    <input th:id="dictValId" th:value="${dictId}" hidden="hidden"/>
     <div class="layui-card">
         <blockquote class="layui-elem-quote">字典管理</blockquote>
     </div>
-    <div style="margin-left: 5%">
+    <div style="margin-left: 1%">
         <form id="searchForm" lay-filter="searchForm" class="layui-form model-form">
             <div class="layui-form-item">
                 <div class="layui-inline">
-                    <input id="dictNameSearch" name="dictName" class="layui-input" type="text" placeholder="字典名称"
+                    <input id="dictNameSearch" name="dictName" class="layui-input" type="text" placeholder="字典标签"
                            autocomplete="off"/></div>
                 <div class="layui-inline">
-                    <input id="dictLabelSearch" name="dictLabel" class="layui-input" type="text" placeholder="字典类型"
+                    <input id="dictLabelSearch" name="dictLabel" class="layui-input" type="text" placeholder="字典键值"
                            autocomplete="off"/>
-                </div>
-                <div class="layui-inline">
-                    <select id="status" name="enabled">
-                        <option value="">是否启用</option>
-                        <option value="1">启用</option>
-                        <option value="0">禁用</option>
-                    </select>
                 </div>
                 <div class="layui-inline">
                     <a id="btnSearch" class="layui-btn icon-btn" lay-submit lay-filter="btnSearch"><i

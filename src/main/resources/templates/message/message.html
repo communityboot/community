@@ -14,39 +14,53 @@
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
         <!-- 内容主体区域 -->
-        <div>
-            <div class="layui-row layui-col-space15">
-                <div class="layui-col-md12">
-                    <div class="layui-card">
-                        <blockquote class="layui-elem-quote">消息管理</blockquote>
-                        <div class="layui-col-md12">
-                            <div class="layui-card">
-                                <div class="layui-card-body">
-                                    <div class="layui-form-item">
-                                        <label class="layui-form-label">消息别名</label>
-                                        <div class="layui-input-inline">
-                                            <input style="height: 32px; width: 110px" type="text" name="dictName"
-                                                   lay-verify="required" placeholder="输入消息别名" autocomplete="off"
-                                                   class="layui-input">
-                                        </div>
-                                        <label class="layui-form-label">字典代号</label>
-                                        <div class="layui-input-inline">
-                                            <input style="height: 32px; width: 110px" type="text" name="dictLabel"
-                                                   lay-verify="required" placeholder="输入字典代号" autocomplete="off"
-                                                   class="layui-input">
-                                        </div>
-                                        <button onclick="searchBtn()" class="layui-btn layui-btn-sm layui-bg-blue "><i
-                                                class="layui-icon layui-icon-search"></i>&nbsp;搜索
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <hr class="layui-bg-orange">
+    <div class="layui-card">
+        <blockquote class="layui-elem-quote">字典管理</blockquote>
+    </div>
+    <div class="layui-form-item" style="margin-left: 1%">
+        <form id="searchForm" lay-filter="searchForm" class="layui-form model-form">
+            <div class="layui-form-item">
+            <div class="layui-inline">
+                <select id="msgType" name="msgType">
+                    <option value="">公告类型</option>
+                    <option value="1">系统通知</option>
+                    <option value="0">社区公告</option>
+                    <option value="2">福利派送</option>
+                    <option value="3">社区广告</option>
+                </select>
+            </div>
+            <div class="layui-inline">
+                <select id="msgStatus" name="msgStatus">
+                    <option value="">公告状态</option>
+                    <option value="1">草稿</option>
+                    <option value="0">过期</option>
+                    <option value="2">生效中</option>
+                    <option value="3">待审核</option>
+                </select>
+            </div>
+                <div class="layui-inline">
+                    <input id="dictNameSearch" name="dictName" class="layui-input" type="text" placeholder="创建者"
+                           autocomplete="off"/></div>
+                <div class="layui-inline">
+                    <input id="dictLabelSearch" name="dictLabel" class="layui-input" type="text" placeholder="标题"
+                           autocomplete="off"/>
+                </div>
+                <div class="layui-inline">
+                    <select id="status" name="enabled">
+                        <option value="">是否启用</option>
+                        <option value="1">启用</option>
+                        <option value="0">禁用</option>
+                    </select>
+                </div>
+                <div class="layui-inline">
+                    <a id="btnSearch" class="layui-btn icon-btn" lay-submit lay-filter="btnSearch"><i
+                            class="layui-icon">&#xe615;</i>搜索</a>
                 </div>
             </div>
-        </div>
+        </form>
+    </div>
+    <hr class="layui-bg-orange">
+</div>
 
         <table class="layui-hide" id="dictValue" lay-filter="dictValue"></table>
         <script type="text/html" id="toolbarDemo">
@@ -101,7 +115,6 @@
 
         });
 
-
         //头工具栏事件
         table.on('toolbar(dictValue)', function (obj) {
             var $ = layui.jquery;
@@ -113,31 +126,6 @@
                 case 'delDict':
                     var data = checkStatus.data;
                     deleteItems(data,baseUrl+'/m/delMsgBatch');
-      /*              var arr = [];
-                    for (var i = 0; i < data.length; i++) {
-                        arr.push(data[i].id);
-                    }
-                    layer.confirm('确定删除吗？', {
-                        btn: ['取消', '确定'] //按钮
-                    }, function () {
-                        layer.closeAll();
-                    }, function () {
-                        $.ajax({
-                            type: "post",
-                            url: "/dv/delDictValBatch",
-                            dataType: 'json',
-                            data: {"ids": arr},
-                            success: function (data) {
-                                if (data.result === "success") {
-                                    layer.msg("删除成功!");
-                                    obj.del();
-                                } else {
-                                    layer.msg(data.msg);
-                                    layer.close(index);
-                                }
-                            }
-                        });
-                    });*/
                     break;
                 case 'modifyDict':
                     var data = checkStatus.data;
