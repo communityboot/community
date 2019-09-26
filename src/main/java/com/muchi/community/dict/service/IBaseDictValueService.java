@@ -28,5 +28,7 @@ public interface IBaseDictValueService extends IService<BaseDictValue> {
      */
     List<BaseDictValue> getDictByCode(String dicCode);
 
+    BaseDictValue getDictValById(String id);
+
 
 }

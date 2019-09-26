@@ -87,12 +87,12 @@ function saveorupd(data) {
  * @param url 新增成功需要跳转的地址
  */
 function saveJump(data) {
-    if (data.msg === 200) {
+    if (data.code === 200) {
         layer.msg(data.msg,{time:1000,icon: 1},function () {
             window.location.href=(baseUrl+data.data);
         });
     } else {
-        layer.msg(data.msg,{time:3000,icon: 3});
+        layer.msg(data.msg,{time:1000,icon: 3});
     }
 }
 
@@ -104,11 +104,58 @@ function saveJump(data) {
  */
 function modify(data,url,callback) {
     if (data.length === 1) {
-        ajaxDemo(url,"id="+data[0].id,callback);
+        ajaxDemo(url,dictValId=data[0].id,callback);
         openLayer('字典信息修改','#edit');
     } else if (data.length === 0) {
         layer.msg("所选数量为0，请选择需要操作的数据");
     } else {
         layer.msg("所选数量超过1，只能对单条数据进行编辑！")
     }
+}
+
+function reviewParams(data) {
+    //var inputs = $("input");
+    //var inputs = $("edit#input");
+    var div = document.getElementById("edit");//建议不要用数字定义ID
+    var inputs = div.getElementsByTagName("input");
+    var names={};
+    for(var i=0;i<inputs.length;i++) {
+        names[inputs[i].id]=inputs[i].id;
+    }
+    console.log(names);
+    console.log(names.dictKey);
+    var ss=names.dictKey;
+    $("#dictKey").val("哈哈哈哈");
+    $("#"+names.dictVal+"").val(data.data.ss);
+   for(var n in data.data ){
+
+   }
+    // for(var j=0;j<inputs.length;j++) {
+    //     var temp=names;
+    //      //document.getElementsByName(names[i])
+    //     $(names[i]).val(data.data.temp);
+    //     alert(temp);
+    //
+    // }
+
+    //     console.log(JSON.stringify(data));
+    // console.log(JSON.stringify(data.data.id));
+
+/*   for(var j=0;j<names.length;j++) {
+       var temp=names[i];
+       $(names[i]).val(data.data.temp);
+       alert("哈哈哈！");
+    }*/
+  /*      console.log(inputs);
+        console.log(names.length);*/
+
+/*    var names={};
+    for(var i=0;i<inputs.length;i++){
+        var name =inputs.eq(i).attr("name");
+        var value=inputs.eq(i).val();
+        names[name]=value;
+    }*/
+
+
+
 }

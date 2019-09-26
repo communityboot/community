@@ -59,7 +59,7 @@ public class CodeGen {
         // dsc.setSchemaName("public");
         dsc.setDriverName("com.mysql.jdbc.Driver");
         dsc.setUsername("root");
-        dsc.setPassword("");
+        dsc.setPassword("sa123");
         mpg.setDataSource(dsc);
 
         // 包配置

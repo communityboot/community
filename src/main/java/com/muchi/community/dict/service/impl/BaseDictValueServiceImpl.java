@@ -47,4 +47,9 @@ public class BaseDictValueServiceImpl extends ServiceImpl<BaseDictValueMapper, B
     public List<BaseDictValue> getDictByCode(String dicCode) {
         return mapper.getDictByCode(dicCode);
     }
+
+    @Override
+    public BaseDictValue getDictValById(String id) {
+        return mapper.selectById(id);
+    }
 }

@@ -4,9 +4,11 @@ package com.muchi.community.dict.controller;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.muchi.community.common.constant.JsonConstant;
 import com.muchi.community.common.utils.LayuiVo;
+import com.muchi.community.common.utils.MzResult;
 import com.muchi.community.common.utils.UUIDUtil;
 import com.muchi.community.dict.entity.BaseDictValue;
 import com.muchi.community.dict.service.IBaseDictValueService;
+import org.apache.ibatis.annotations.Param;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -96,5 +98,14 @@ public class BaseDictValueController {
     public  LayuiVo getDictByCode(String dicCode) {
         List<BaseDictValue> dictByCode = dictValueService.getDictByCode(dicCode);
         return LayuiVo.successByData(0L,dictByCode);
+    }
+
+    @PostMapping("/getDictValById")
+    @ResponseBody
+    public MzResult getDictValById(@RequestBody String dictValId){
+        BaseDictValue dictValById = dictValueService.getDictValById(dictValId);
+        if(dictValById!=null){
+            return MzResult.success(dictValById);
+        }return MzResult.failMsg(JsonConstant.ILLEGAL_ARGUMENT);
     }
 }
