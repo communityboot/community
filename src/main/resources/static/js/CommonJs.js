@@ -114,48 +114,13 @@ function modify(data,url,callback) {
 }
 
 function reviewParams(data) {
-    //var inputs = $("input");
-    //var inputs = $("edit#input");
-    var div = document.getElementById("edit");//建议不要用数字定义ID
+    var div = document.getElementById("edit");
     var inputs = div.getElementsByTagName("input");
     var names={};
     for(var i=0;i<inputs.length;i++) {
         names[inputs[i].id]=inputs[i].id;
     }
-    console.log(names);
-    console.log(names.dictKey);
-    var ss=names.dictKey;
-    $("#dictKey").val("哈哈哈哈");
-    $("#"+names.dictVal+"").val(data.data.ss);
-   for(var n in data.data ){
-
-   }
-    // for(var j=0;j<inputs.length;j++) {
-    //     var temp=names;
-    //      //document.getElementsByName(names[i])
-    //     $(names[i]).val(data.data.temp);
-    //     alert(temp);
-    //
-    // }
-
-    //     console.log(JSON.stringify(data));
-    // console.log(JSON.stringify(data.data.id));
-
-/*   for(var j=0;j<names.length;j++) {
-       var temp=names[i];
-       $(names[i]).val(data.data.temp);
-       alert("哈哈哈！");
-    }*/
-  /*      console.log(inputs);
-        console.log(names.length);*/
-
-/*    var names={};
-    for(var i=0;i<inputs.length;i++){
-        var name =inputs.eq(i).attr("name");
-        var value=inputs.eq(i).val();
-        names[name]=value;
-    }*/
-
-
-
+    for(var k in names){
+        $("#"+k+"").val(data.data[k]);
+    }
 }
