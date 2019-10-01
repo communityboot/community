@@ -24,8 +24,6 @@ layui.use(['table','form','jquery'], function () {
         ]]
     });
     form.on('submit(btnSearch)', function (data) {
-        console.log(data.field);
-        console.log(JSON.stringify(data.field));
         tableGrid.reload({
             url:'/dict/getAllLampTe',
             method:'post',

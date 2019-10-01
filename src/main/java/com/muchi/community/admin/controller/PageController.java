@@ -56,4 +56,10 @@ public class PageController {
     public String userAdd(){
         return "admin/userAdd";
     }
+
+    @RequestMapping("/aboutMz")
+    public String aboutMz(){
+        return "commons/AboutMuZhi";
+    }
+
 }
