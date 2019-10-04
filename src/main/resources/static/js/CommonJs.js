@@ -1,4 +1,9 @@
 /**
+ * 备注：使用该js的前提：需要在html中引入jquery，不然会出现 $，或者 ajax 没有定义
+ * <script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+ */
+
+/**
  * 定义请求前缀
  * @type {string}
  */
