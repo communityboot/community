@@ -21,7 +21,6 @@ public class PageController {
         return "regist";
     }
 
-
     @RequestMapping("/logout")
     public String logout(){
         return "logout";
@@ -60,6 +59,11 @@ public class PageController {
     @RequestMapping("/aboutMz")
     public String aboutMz(){
         return "commons/AboutMuZhi";
+    }
+
+    @RequestMapping("/index")
+    public String index(){
+        return "portal/index";
     }
 
 }
