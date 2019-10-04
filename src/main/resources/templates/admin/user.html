@@ -29,32 +29,34 @@
                         <div class="layui-form toolbar">
                             <div class="layui-form-item">
                                 <div class="layui-inline">
-                                    <input id="userName" class="layui-input" type="text" placeholder="用户名" autocomplete="off"/>
+                                    <input id="userName" name="userName" class="layui-input" type="text" placeholder="用户名" autocomplete="off"/>
                                 </div>
                                 <div class="layui-inline">
-                                    <input id="phone" class="layui-input" type="text" placeholder="手机号" autocomplete="off"/>
+                                    <input id="phone" name="phone" class="layui-input" type="text" placeholder="手机号" autocomplete="off"/>
                                 </div>
                                 <div class="layui-inline">
-                                    <select id="status">
+                                    <select id="status" name="status">
                                         <option value="">状态</option>
                                         <option value="1">启用</option>
                                         <option value="0">禁用</option>
                                     </select>
                                 </div>
                                 <div class="layui-inline">
-                                    <input id="email" class="layui-input" type="text" placeholder="邮箱" autocomplete="off"/>
+                                    <input id="email" name="email" class="layui-input" type="text" placeholder="邮箱" autocomplete="off"/>
                                 </div>
                                 <div class="layui-inline">
-                                    <select id="gender">
+                                    <select id="gender" name="gender">
                                         <option value="">性别</option>
-                                        <option value="1">男</option>
-                                        <option value="0">女</option>
+                                        <option value="0">男</option>
+                                        <option value="1">女</option>
                                     </select>
                                 </div>
                                 <div class="layui-inline">
-                                    <button id="btnSearch" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>搜索</button>
-                               <!--     <button id="btnAdd" class="layui-btn icon-btn"><i class="layui-icon">&#xe654;</i>添加</button>
-                                    <button id="btnBack" class="layui-btn icon-btn layui-btn-warm"><i class="layui-icon">&#x1006;</i>关闭</button>-->
+                                    <input id="address" name="address" class="layui-input" type="text" placeholder="地址" autocomplete="off"/>
+                                </div>
+                                <div class="layui-inline">
+                                    <a id="btnSearch" class="layui-btn icon-btn" lay-submit lay-filter="btnSearch"><i
+                                            class="layui-icon">&#xe615;</i>搜索</a>
                                 </div>
                             </div>
                         </div>
@@ -80,9 +82,10 @@
     });
 </script>
 <script th:inline="none">
-    layui.use('table', function() {
+    layui.use(['table','form'], function() {
         var table = layui.table;
-        table.render({
+        var form = layui.form;
+        var tableGrid=table.render({
             elem: '#dict'
             , url: '/user/userQuery'
             //,data:'username:admin'
@@ -102,6 +105,13 @@
                 , {field: 'remarks', title: '备注', width: 80}
             ]]
 
+        });
+        form.on('submit(btnSearch)', function (data) {
+            tableGrid.reload({
+                url:'/user/userSearch',
+                method:'post',
+                where:data.field
+            })
         });
 
         //头工具栏事件

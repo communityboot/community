@@ -76,11 +76,9 @@ public class BaseDictController {
     public LayuiVo getAllLampTe(@RequestParam("limit") int limit, @RequestParam(value = "page", defaultValue = "1") int currentPage,BaseDict dict) {
         Page<BaseDict> page= new Page<>(currentPage,limit);
         QueryWrapper<BaseDict> wrapper=new QueryWrapper<>();
-        if(dict!=null){
-            wrapper.lambda().eq(!dict.getDictName().equals(""),BaseDict::getDictName,dict.getDictName())
+        if(dict!=null){wrapper.lambda().eq(!dict.getDictName().equals(""),BaseDict::getDictName,dict.getDictName())
                     .eq(!dict.getDictLabel().equals(""),BaseDict::getDictLabel,dict.getDictLabel())
-                    .eq(dict.getEnabled()!=null,BaseDict::getEnabled,dict.getEnabled());
-        }
+                    .eq(dict.getEnabled()!=null,BaseDict::getEnabled,dict.getEnabled()); }
         IPage dictIPage=dictService.getAllDictTest(page,wrapper);
         return LayuiVo.successLayui(page.getTotal(),dictIPage.getRecords());
     }

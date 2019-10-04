@@ -1,7 +1,9 @@
 package com.muchi.community.shiro.dao;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.muchi.community.user.entity.User;
 import org.apache.ibatis.annotations.Mapper;
@@ -22,13 +24,7 @@ public interface UserDao extends BaseMapper<User> {
 	 User getUserByUserName(String userName);
 
 
-	/**
-	 * 分页查询用户
-	 * @param page
-	 * @param user
-	 * @return
-	 */
-	 List<User> userQuery(Page page, User user);
+	IPage<User> userQuery(Page<User> page, QueryWrapper<User> wrapper);
 
 
 }

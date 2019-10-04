@@ -1,5 +1,7 @@
 package com.muchi.community.shiro.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.muchi.community.user.entity.User;
 import com.muchi.community.common.utils.LayuiVo;
@@ -111,23 +113,34 @@ public class UserController{
 
 	/**
 	 * 分页查询（需要完善条件查询）
-	 * @param page
-	 * @param limit
-	 * @param currentPage
-	 * @return
+	 * @param limit 每页显示条数
+	 * @param currentPage 当前页
+	 * @return 用户信息
 	 */
 	@RequestMapping("/userQuery")
 	@ResponseBody
-	public LayuiVo userQuery(Page page, @RequestParam("limit") int limit, @RequestParam(value = "page", defaultValue = "1") int currentPage, @RequestParam(required = false) User user) {
-		page.setSize(limit);
-		page.setCurrent(currentPage);
-		List<User> users = userService.userQuery(page,user);
-		LayuiVo layUiVo = new LayuiVo();
-		layUiVo.setCode(0);
-		layUiVo.setMsg("成功");
-		layUiVo.setCount(page.getTotal());
-		layUiVo.setData(users);
-		return layUiVo;
+	public LayuiVo userQuery(@RequestParam("limit") int limit, @RequestParam(value = "page", defaultValue = "1") int currentPage) {
+		Page<User> page =new Page<>(currentPage,limit);
+		QueryWrapper<User> wrapper=new QueryWrapper<>();
+		IPage<User> userIPage = userService.userQuery(page, wrapper);
+		return LayuiVo.successLayui(userIPage.getTotal(),userIPage.getRecords());
+	}
+
+	@RequestMapping("/userSearch")
+	@ResponseBody
+	public LayuiVo userSearch(@RequestParam("limit") int limit, @RequestParam(value = "page", defaultValue = "1") int currentPage,User user) {
+		Page<User> page =new Page<>(currentPage,limit);
+		QueryWrapper<User> wrapper=new QueryWrapper<>();
+		if(user!=null){
+			wrapper.lambda().eq(!user.getUserName().equals(""),User::getUserName,user.getUserName())
+							.eq(!user.getPhone().equals(""),User::getPhone,user.getPhone())
+							.eq(!user.getEmail().equals(""),User::getEmail,user.getEmail())
+							.eq(user.getGender()!=null,User::getGender,user.getGender())
+							.eq(user.getStatus()!=null,User::getStatus,user.getStatus())
+							.eq(!user.getAddress().equals(""),User::getAddress,user.getAddress());
+		}
+		IPage<User> userIPage = userService.userQuery(page, wrapper);
+		return LayuiVo.successLayui(userIPage.getTotal(),userIPage.getRecords());
 	}
 
 

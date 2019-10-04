@@ -1,5 +1,7 @@
 package com.muchi.community.shiro.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.muchi.community.user.entity.User;
@@ -65,13 +67,12 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
 
     /**
      * 分页查询用户
-     * @param page
-     * @param user
-     * @return
+     * @param page 分页信息
+     * @param wrapper 包装类
+     * @return 用户信息
      */
     @Override
-    public List<User> userQuery(Page page, User user) {
-        List<User> users = userDao.userQuery(page, user);
-        return users;
+    public IPage<User> userQuery(Page<User> page, QueryWrapper<User> wrapper) {
+        return userDao.selectPage(page, wrapper);
     }
 }
