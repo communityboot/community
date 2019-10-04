@@ -1,11 +1,114 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>菜单管理</title>
+    <link rel="stylesheet" type="text/css" href="https://www.layuicdn.com/layui/css/layui.css"/>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+</head>
+
 <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all">
-<table id="dict"></table>
-<script type="text/javascript" th:src="@{/static/layui/layui.js}" ></script>
+<script src="https://www.layuicdn.com/layui/layui.js"></script>
+
+<body class="layui-layout-body">
+
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-card">
+        <blockquote class="layui-elem-quote">菜单管理</blockquote>
+    </div>
+    <div style="margin-left: 1%">
+        <form id="searchForm" lay-filter="searchForm" class="layui-form model-form">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <input id="menuNameSearch" name="menuName" class="layui-input" type="text" placeholder="菜单名称"
+                           autocomplete="off"/></div>
+                <div class="layui-inline">
+                    <input id="menuLabelSearch" name="menuLabel" class="layui-input" type="text" placeholder="菜单类型"
+                           autocomplete="off"/>
+                </div>
+                <div class="layui-inline">
+                    <select id="status" name="enabled">
+                        <option value="">是否启用</option>
+                        <option value="1">启用</option>
+                        <option value="0">禁用</option>
+                    </select>
+                </div>
+                <div class="layui-inline">
+                    <a id="btnSearch" class="layui-btn icon-btn" lay-submit lay-filter="btnSearch"><i
+                            class="layui-icon">&#xe615;</i>搜索</a>
+                </div>
+            </div>
+        </form>
+    </div>
+    <hr class="layui-bg-orange">
+    <table class="layui-hide" id="menu" lay-filter="menu"></table>
+</div>
+
+<div id="edit" hidden="hidden">
+    <form id="editForm" lay-filter="menuForm" class="layui-form model-form">
+        <div class="layui-form-item">
+            <label class="layui-form-label">菜单类型<span style="color: red;">*</span></label>
+            <div class="layui-input-block">
+                <input id="dictId" name="id" placeholder="请输入名称" type="text" class="layui-input" disabled="disabled"/>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">菜单名称<span style="color: red;">*</span></label>
+            <div class="layui-input-block">
+                <input id="dictName" name="dictName" placeholder="请输入字典名称" type="text" class="layui-input"
+                       lay-verify="required" required/>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">权限标识<span style="color: red;">*</span></label>
+            <div class="layui-input-block">
+                <input id="dictLabel" name="dictLabel" placeholder="请输入权限标识" type="text" class="layui-input"
+                       autocomplete="off" lay-verify="required" required/>
+            </div>
+        </div>
+        <!-- <div class="layui-form-item">
+             <label class="layui-form-label">是否启用<span style="color: red;">*</span></label>
+             <div class="layui-input-block">
+                 <input id="check1" name="enabled" title="启用" type="radio" value="1"/>
+                 <input id="check2" type="radio" name="enabled" value="0" title="不启用"/>
+             </div>
+
+             <label class="layui-form-label">备注</label>
+             <div class="layui-input-block">
+                 <input id="remark" name="remark" placeholder="请输入备注" type="text" class="layui-input"/>
+             </div>
+         </div>-->
+        <div class="layui-form-item" align="center">
+            <button class="layui-btn " id="closeDialog">取消</button>
+            <button class="layui-btn" lay-submit lay-filter="submitBtn">立即提交</button>
+        </div>
+    </form>
+</div>
+
+
+<script type="text/html" id="toolbarDemo">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm layui-bg-green" lay-event="addMenu"><i
+                class="layui-icon layui-icon-add-1"></i>&nbsp;新增
+        </button>
+        <button class="layui-btn layui-btn-sm layui-bg-red" lay-event="delMenu"><i
+                class="layui-icon layui-icon-delete"></i>&nbsp;删除
+        </button>
+        <button class="layui-btn layui-btn-sm layui-bg-orange" lay-event="modifyMenu"><i
+                class="layui-icon layui-icon-edit"></i>&nbsp;修改
+        </button>
+    </div>
+</script>
+
+<script th:src="@{/static/js/DictUtil.js}"></script>
+<script th:src="@{/static/js/CommonJs.js}"></script>
+<script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+
 <script>
     //JavaScript代码区域
-    layui.use('element', function(){
+    layui.use('element', function () {
         var element = layui.element;
     });
 </script>
@@ -22,8 +125,7 @@
         var treetable = layui.treetable;
 
         // 渲染表格
-        var renderTable = function () {//树桩表格参考文档：https://gitee.com/whvse/treetable-lay
-            alert("123")
+        var renderTable = function () {     //树桩表格参考文档：https://gitee.com/whvse/treetable-lay
             layer.load(2);
             treetable.render({
                 treeColIndex: 1,//树形图标显示在第几列
@@ -32,37 +134,165 @@
                 treePidName: 'parentId',//pid字段的名称
                 treeDefaultClose: false,//是否默认折叠
                 treeLinkage: true,//父级展开时是否自动展开所有子级
-                elem: '#dict',
+                elem: '#menu',
+                toolbar: '#toolbarDemo',
+                even: true,
+                cellMinWidth: 30, //全局定义常规单元格的最小宽度，layui 2.2.1 新增
                 url: '/menu/list',
                 page: false,
                 cols: [[
-                    {field: 'menuId', title: '编号'},
-                    {field: 'menuName', title: '菜单名称'},
-                    {field: 'url', title: '资源路径'},
-                    {field: 'orderNum', title: '排序'},
+                    {type: 'checkbox', fixed: 'left', width: 60},
+                    {field: 'menuId', title: '编号', width: 180},
+                    {field: 'menuName', title: '菜单名称', width: 180},
+                    {field: 'orderNum', title: '排序', width: 60},
+                    {field: 'url', title: '请求路径', width: 180},
                     {
-                        field: 'resType', title: '类型',
+                        field: 'resType', title: '类型', width: 120,
                         templet: function (d) {
                             if (d.menuType == 'M') {
                                 return '目录';
-                            } else if(d.menuType == 'C'){
+                            } else if (d.menuType == 'C') {
                                 return '菜单';
-                            }else {
+                            } else {
                                 return '按钮';
                             }
                         }
                     },
+                    {field: 'perms', title: '权限标识', width: 240},
+                    {fixed: 'right', width: 180, title: '操作', toolbar: '#toolbarDemo', width: 350}
                 ]],
                 done: function () {
                     layer.closeAll('loading');
                 }
             });
         };
-
         renderTable();
 
+
+        //头工具栏事件
+        table.on('toolbar(menu)', function (obj) {
+            var $ = layui.jquery;
+            console.log(obj)
+            var checkStatus = table.checkStatus(obj.config.id);
+            switch (obj.event) {
+                case 'addMenu':
+                    //openLayer('字典信息修改', '#edit');
+                    alert("头工具栏事件 123")
+                    break;
+                case 'delMenu':
+                    alert("头工具栏事件 456")
+                    data = checkStatus.data;
+                    console.log(data)
+                    if(data.length > 1){
+                        layer.msg("菜单不允许批量删除");
+                        return false;
+                    }
+                    deleteItems(data, baseUrl + '/menu/delMenuBatch');
+                    break;
+                case 'modifyMenu':
+                    alert("头工具栏事件 789")
+                    //var data = checkStatus.data;
+                    //modify(data, '/dv/getDictValById', reviewParams);
+                    break;
+                default:
+                    break;
+            }
+        })
+
+        //监听行工具事件
+        table.on('tool(menu)', function (obj) {
+            console.log(obj)
+            var $ = layui.jquery;
+            switch (obj.event) {
+                case 'addMenu':
+                    alert("弹出添加框")
+                    break;
+                    var data = checkStatus.data;
+                    layer.open({
+                        title: "字典信息修改",
+                        type: 1,
+                        skin: 'layui-layer-rim', //加上边框
+                        area: ['700px', '480px'], //宽高
+                        content: $("#edit")
+                    });
+                    break;
+                case 'delMenu':
+                    alert("删除菜单提醒")
+                    break;
+                    var data = checkStatus.data;
+                    var arr = [];
+                    for (var i = 0; i < data.length; i++) {
+                        arr.push(data[i].id);
+                    }
+                    layer.confirm('确定删除吗？', {
+                        btn: ['取消', '确定'] //按钮
+                    }, function () {
+                        layer.closeAll();
+                    }, function () {
+                        $.ajax({
+                            type: "post",
+                            url: "/menu/delBatchMenu",
+                            dataType: 'json',
+                            data: {"ids": arr},
+                            success: function (data) {
+                                if (data.result === "success") {
+                                    layer.msg("删除成功!");
+                                    window.parent.location.reload();//修改成功后刷新父界面
+                                    layer.closeAll();
+                                } else {
+                                    layer.msg(data.msg);
+                                }
+                            }
+                        });
+                    });
+                    break;
+                case 'modifyMenu':
+                    alert("修改菜单")
+                    break;
+                    var data = checkStatus.data;
+                    if (data.length === 1) {
+                        var $ = layui.jquery, form = layui.form;
+                        $.ajax({
+                            type: "post",
+                            url: "/menu/getMenuInfo",
+                            dataType: 'json',
+                            data: "id=" + data[0].id,
+                            success: function (data) {
+                                if (data.result === "000") {
+                                    // $("#dictId").val(data.dict.id);
+                                    // $("#dictName").val(data.dict.dictName);
+                                    // $("#dictLabel").val(data.dict.dictLabel);
+                                    // $("input[name=enabled][value= '1']").attr("checked", data.dict.enabled === 1 ? true : false);
+                                    // $("input[name=enabled][value= '0']").attr("checked", data.dict.enabled === 0 ? true : false)
+                                    // $("#remark").val(data.dict.remark);
+                                    // form.render();
+                                } else {
+                                    // layer.msg("信息有误，请检查!");
+                                }
+                            }
+                        });
+                        layer.open({
+                            title: "字典信息修改",
+                            type: 1,
+                            skin: 'layui-layer-rim', //加上边框
+                            area: ['700px', '480px'], //宽高
+                            content: $("#edit")
+                        });
+                    } else if (data.length === 0) {
+                        layer.msg("所选数量为0，请选择需要操作的数据");
+
+                    } else {
+                        layer.msg("所选数量超过1，只能对单条数据进行编辑！")
+                    }
+                    break;
+                default:
+                    break;
+            }
+        });
     });
+
 
 </script>
 
+</body>
 </html>

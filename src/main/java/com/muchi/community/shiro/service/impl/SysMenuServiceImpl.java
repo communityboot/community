@@ -29,16 +29,12 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuDao, SysMenu> impleme
      * @return 菜单列表
      */
     @Override
-    public List<SysMenu> selectMenusByUser(User user)
-    {
+    public List<SysMenu> selectMenusByUser(User user) {
         List<SysMenu> menus = new LinkedList<SysMenu>();
         // 管理员显示所有菜单信息
-        if (user.isAdmin())
-        {
+        if (user.isAdmin()) {
             menus = SysMenuDao.selectMenuNormalAll();
-        }
-        else
-        {
+        } else {
             menus = SysMenuDao.selectMenusByUserId(user.getId());
         }
         return getChildPerms(menus, 0);
@@ -50,20 +46,17 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuDao, SysMenu> impleme
      * @return 所有菜单信息
      */
     @Override
-    public List<SysMenu> selectMenuList(SysMenu menu, String userId)
-    {
+    public List<SysMenu> selectMenuList(SysMenu menu, String userId) {
         List<SysMenu> menuList = null;
-        if (User.isAdmin(userId))
-        {
+        if (User.isAdmin(userId)) {
             menuList = SysMenuDao.selectMenuList(menu);
-        }
-        else
-        {
+        } else {
             menu.getParams().put("userId", userId);
             menuList = SysMenuDao.selectMenuListByUserId(menu);
         }
         return menuList;
     }
+
 
     /**
      * 根据用户ID查询权限
@@ -72,14 +65,11 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuDao, SysMenu> impleme
      * @return 权限列表
      */
     @Override
-    public Set<String> selectPermsByUserId(String userId)
-    {
+    public Set<String> selectPermsByUserId(String userId) {
         List<String> perms = SysMenuDao.selectPermsByUserId(userId);
         Set<String> permsSet = new HashSet<>();
-        for (String perm : perms)
-        {
-            if (!StringUtils.isEmpty(perm))
-            {
+        for (String perm : perms) {
+            if (!StringUtils.isEmpty(perm)) {
                 permsSet.addAll(Arrays.asList(perm.trim().split(",")));
             }
         }
@@ -90,19 +80,16 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuDao, SysMenu> impleme
     /**
      * 根据父节点的ID获取所有子节点
      *
-     * @param list 分类表
+     * @param list     分类表
      * @param parentId 传入的父节点ID
      * @return String
      */
-    public List<SysMenu> getChildPerms(List<SysMenu> list, int parentId)
-    {
+    public List<SysMenu> getChildPerms(List<SysMenu> list, int parentId) {
         List<SysMenu> returnList = new ArrayList<SysMenu>();
-        for (Iterator<SysMenu> iterator = list.iterator(); iterator.hasNext();)
-        {
+        for (Iterator<SysMenu> iterator = list.iterator(); iterator.hasNext(); ) {
             SysMenu t = (SysMenu) iterator.next();
             // 一、根据传入的某个父节点ID,遍历该父节点的所有子节点
-            if (t.getParentId() == parentId)
-            {
+            if (t.getParentId() == parentId) {
                 recursionFn(list, t);
                 returnList.add(t);
             }
@@ -117,19 +104,15 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuDao, SysMenu> impleme
      * @param list
      * @param t
      */
-    private void recursionFn(List<SysMenu> list, SysMenu t)
-    {
+    private void recursionFn(List<SysMenu> list, SysMenu t) {
         // 得到子节点列表
         List<SysMenu> childList = getChildList(list, t);
         t.setChildren(childList);
-        for (SysMenu tChild : childList)
-        {
-            if (hasChild(list, tChild))
-            {
+        for (SysMenu tChild : childList) {
+            if (hasChild(list, tChild)) {
                 // 判断是否有子节点
                 Iterator<SysMenu> it = childList.iterator();
-                while (it.hasNext())
-                {
+                while (it.hasNext()) {
                     SysMenu n = (SysMenu) it.next();
                     recursionFn(list, n);
                 }
@@ -140,15 +123,12 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuDao, SysMenu> impleme
     /**
      * 得到子节点列表
      */
-    private List<SysMenu> getChildList(List<SysMenu> list, SysMenu t)
-    {
+    private List<SysMenu> getChildList(List<SysMenu> list, SysMenu t) {
         List<SysMenu> tlist = new ArrayList<SysMenu>();
         Iterator<SysMenu> it = list.iterator();
-        while (it.hasNext())
-        {
+        while (it.hasNext()) {
             SysMenu n = (SysMenu) it.next();
-            if (n.getParentId().longValue() == t.getMenuId().longValue())
-            {
+            if (n.getParentId().longValue() == t.getMenuId().longValue()) {
                 tlist.add(n);
             }
         }
@@ -158,11 +138,42 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuDao, SysMenu> impleme
     /**
      * 判断是否有子节点
      */
-    private boolean hasChild(List<SysMenu> list, SysMenu t)
-    {
+    private boolean hasChild(List<SysMenu> list, SysMenu t) {
         return getChildList(list, t).size() > 0 ? true : false;
     }
 
+
+    /**
+     * 查询菜单数量
+     *
+     * @param parentId 菜单父ID
+     * @return
+     */
+    @Override
+    public int selectCountMenuByParentId(String parentId) {
+        return SysMenuDao.selectCountMenuByParentId(parentId);
+    }
+
+    /**
+     * 查询菜单使用数量
+     *
+     * @param menuId 菜单ID
+     * @return
+     */
+    @Override
+    public int selectCountRoleMenuByMenuId(String menuId) {
+        return SysMenuDao.selectCountRoleMenuByMenuId(menuId);
+    }
+
+    /**
+     * 删除菜单
+     * @param menuId
+     * @return
+     */
+    @Override
+    public int deleteMenuById(String menuId) {
+        return SysMenuDao.deleteMenuById(menuId);
+    }
 
 
 }

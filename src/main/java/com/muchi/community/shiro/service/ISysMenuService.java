@@ -39,4 +39,27 @@ public interface ISysMenuService extends IService<SysMenu> {
      */
     public Set<String> selectPermsByUserId(String  userId);
 
+    /**
+     * 查询菜单数量
+     *
+     * @param parentId 菜单父ID
+     * @return 结果
+     */
+    public int selectCountMenuByParentId(String parentId);
+
+    /**
+     * 查询菜单使用数量
+     *
+     * @param menuId 菜单ID
+     * @return 结果
+     */
+    public int selectCountRoleMenuByMenuId(String menuId);
+
+    /**
+     * 根据id删除对应菜单
+     * @param menuId
+     */
+    public int deleteMenuById(String menuId);
+
+
 }

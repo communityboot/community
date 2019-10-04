@@ -1,6 +1,7 @@
 package com.muchi.community.shiro.controller;
 
 import com.muchi.community.common.utils.LayuiVo;
+import com.muchi.community.common.utils.ShiroUtils;
 import com.muchi.community.shiro.entity.SysMenu;
 import com.muchi.community.shiro.service.ISysMenuService;
 import org.slf4j.Logger;
@@ -54,6 +55,31 @@ public class MenuController {
 
 
     /**
+     * 批量删除菜单信息
+     * @param ids
+     * @return
+     */
+    @PostMapping("/delMenuBatch")
+    @ResponseBody
+    public LayuiVo delMenuBatch(@RequestParam(value = "ids[]") String ids) {
+        if (menuService.selectCountMenuByParentId(ids) > 0)
+        {
+            return LayuiVo.failCustomMsg("存在子菜单,不允许删除");
+        }
+        if (menuService.selectCountRoleMenuByMenuId(ids) > 0)
+        {
+            return LayuiVo.failCustomMsg("菜单已分配,不允许删除");
+        }
+        ShiroUtils.clearCachedAuthorizationInfo();
+
+        menuService.deleteMenuById(ids);
+        return LayuiVo.successByMsg();
+    }
+
+
+
+
+    /**
      * @param menuList 菜单列表
      * @return  解析树状结构数据，返回指定正确格式的json
      */
@@ -75,7 +101,6 @@ public class MenuController {
                 parent.getChildren().add(menu);
             }
         }
-
             return listParent;
         }
 
