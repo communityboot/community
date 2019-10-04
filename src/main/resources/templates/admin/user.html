@@ -13,59 +13,49 @@
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
     <!-- 内容主体区域 -->
-    <div >
-        <div class="layui-row layui-col-space15">
-            <div class="layui-col-md12">
-                    <blockquote class="layui-elem-quote">用户管理</blockquote>
-                <hr class="layui-bg-green">
-            </div>
-        </div>
+    <div class="layui-card">
+        <blockquote class="layui-elem-quote">用户管理</blockquote>
     </div>
-    <div class="layui-fluid">
-        <div class="layui-row layui-col-space15">
-            <div class="layui-col-sm12 layui-col-md12 layui-col-lg12">
-                <div class="layui-card">
-                    <div class="layui-card-body">
-                        <div class="layui-form toolbar">
-                            <div class="layui-form-item">
-                                <div class="layui-inline">
-                                    <input id="userName" name="userName" class="layui-input" type="text" placeholder="用户名" autocomplete="off"/>
-                                </div>
-                                <div class="layui-inline">
-                                    <input id="phone" name="phone" class="layui-input" type="text" placeholder="手机号" autocomplete="off"/>
-                                </div>
-                                <div class="layui-inline">
-                                    <select id="status" name="status">
-                                        <option value="">状态</option>
-                                        <option value="1">启用</option>
-                                        <option value="0">禁用</option>
-                                    </select>
-                                </div>
-                                <div class="layui-inline">
-                                    <input id="email" name="email" class="layui-input" type="text" placeholder="邮箱" autocomplete="off"/>
-                                </div>
-                                <div class="layui-inline">
-                                    <select id="gender" name="gender">
-                                        <option value="">性别</option>
-                                        <option value="0">男</option>
-                                        <option value="1">女</option>
-                                    </select>
-                                </div>
-                                <div class="layui-inline">
-                                    <input id="address" name="address" class="layui-input" type="text" placeholder="地址" autocomplete="off"/>
-                                </div>
-                                <div class="layui-inline">
-                                    <a id="btnSearch" class="layui-btn icon-btn" lay-submit lay-filter="btnSearch"><i
-                                            class="layui-icon">&#xe615;</i>搜索</a>
-                                </div>
-                            </div>
-                        </div>
-                        <table class="layui-hide" id="dict" lay-filter="dict"></table>
-                    </div>
+    <hr class="layui-bg-green">
+    <div style="margin-left: 1%">
+        <form id="searchForm" lay-filter="searchForm" class="layui-form model-form">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <input id="userName" name="userName" class="layui-input" type="text" placeholder="用户名" autocomplete="off"/>
+                </div>
+                <div class="layui-inline">
+                    <input id="phone" name="phone" class="layui-input" type="text" placeholder="手机号" autocomplete="off"/>
+                </div>
+                <div class="layui-inline">
+                    <select id="status" name="status">
+                        <option value="">状态</option>
+                        <option value="1">启用</option>
+                        <option value="0">禁用</option>
+                    </select>
+                </div>
+                <div class="layui-inline">
+                    <input id="email" name="email" class="layui-input" type="text" placeholder="邮箱" autocomplete="off"/>
+                </div>
+                <div class="layui-inline">
+                    <select id="gender" name="gender">
+                        <option value="">性别</option>
+                        <option value="0">男</option>
+                        <option value="1">女</option>
+                    </select>
+                </div>
+                <div class="layui-inline">
+                    <input id="address" name="address" class="layui-input" type="text" placeholder="地址" autocomplete="off"/>
+                </div>
+                <div class="layui-inline">
+                    <a id="btnSearch" class="layui-btn icon-btn" lay-submit lay-filter="btnSearch"><i
+                            class="layui-icon">&#xe615;</i>搜索</a>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
+    <table class="layui-hide" id="dict" lay-filter="dict"></table>
+</div>
+
     <script type="text/html" id="toolbarDemo">
         <div class="layui-btn-container">
             <button class="layui-btn layui-btn-sm layui-bg-green" lay-event="addDict"><i class="layui-icon layui-icon-add-1"></i>&nbsp;新增</button>
