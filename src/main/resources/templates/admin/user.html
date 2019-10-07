@@ -33,9 +33,7 @@
                         <option value="0">禁用</option>
                     </select>
                 </div>
-                <div class="layui-inline">
-                    <input id="email" name="email" class="layui-input" type="text" placeholder="邮箱" autocomplete="off"/>
-                </div>
+                <div class="layui-inline"><input id="email" name="email" class="layui-input" type="text" placeholder="邮箱" autocomplete="off"/></div>
                 <div class="layui-inline">
                     <select id="gender" name="gender">
                         <option value="">性别</option>
@@ -43,27 +41,22 @@
                         <option value="1">女</option>
                     </select>
                 </div>
-                <div class="layui-inline">
-                    <input id="address" name="address" class="layui-input" type="text" placeholder="地址" autocomplete="off"/>
-                </div>
-                <div class="layui-inline">
-                    <a id="btnSearch" class="layui-btn icon-btn" lay-submit lay-filter="btnSearch"><i
-                            class="layui-icon">&#xe615;</i>搜索</a>
-                </div>
+                <div class="layui-inline"><input id="address" name="address" class="layui-input" type="text" placeholder="地址" autocomplete="off"/></div>
+                <div class="layui-inline"><a id="btnSearch" class="layui-btn icon-btn" lay-submit lay-filter="btnSearch"><i class="layui-icon">&#xe615;</i>搜索</a></div>
             </div>
         </form>
     </div>
+    <hr class="layui-bg-green">
     <table class="layui-hide" id="dict" lay-filter="dict"></table>
 </div>
-
-    <script type="text/html" id="toolbarDemo">
-        <div class="layui-btn-container">
-            <button class="layui-btn layui-btn-sm layui-bg-green" lay-event="addDict"><i class="layui-icon layui-icon-add-1"></i>&nbsp;新增</button>
-            <button class="layui-btn layui-btn-sm layui-bg-orange" lay-event="modifyDict"><i class="layui-icon layui-icon-edit"></i>&nbsp;修改</button>
-            <button class="layui-btn layui-btn-sm layui-bg-red" lay-event="delDict"><i class="layui-icon layui-icon-delete"></i>&nbsp;删除</button>
-        </div>
-    </script>
 </div>
+<script type="text/html" id="toolbarDemo">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm layui-bg-green" lay-event="addDict"><i class="layui-icon layui-icon-add-1"></i>&nbsp;新增</button>
+        <button class="layui-btn layui-btn-sm layui-bg-orange" lay-event="modifyDict"><i class="layui-icon layui-icon-edit"></i>&nbsp;修改</button>
+        <button class="layui-btn layui-btn-sm layui-bg-red" lay-event="delDict"><i class="layui-icon layui-icon-delete"></i>&nbsp;删除</button>
+    </div>
+</script>
 <script type="text/javascript" th:src="@{/webjars/layui/2.5.4/layui.js}" ></script>
 <script>
     //JavaScript代码区域
