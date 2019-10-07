@@ -61,8 +61,8 @@ public class BaseMessageController {
         if(baseMessage!=null){
             wrapper.lambda().eq(baseMessage.getMsgType()!=null,BaseMessage::getMsgType,baseMessage.getMsgType())
                             .eq(baseMessage.getMsgStatus()!=null,BaseMessage::getMsgStatus,baseMessage.getMsgStatus())
-                            .eq(baseMessage.getMsgCreator()!=null,BaseMessage::getMsgCreator,baseMessage.getMsgCreator())
-                            .eq(baseMessage.getMsgTitle()!=null,BaseMessage::getMsgTitle,baseMessage.getMsgTitle());}
+                            .eq(!baseMessage.getMsgCreator().equals(""),BaseMessage::getMsgCreator,baseMessage.getMsgCreator())
+                            .eq(!baseMessage.getMsgTitle().equals(""),BaseMessage::getMsgTitle,baseMessage.getMsgTitle());}
         IPage<BaseMessage> ipage = messageService.searchMsg(page, wrapper);
         return LayuiVo.successLayui(page.getTotal(),ipage.getRecords());
     }
