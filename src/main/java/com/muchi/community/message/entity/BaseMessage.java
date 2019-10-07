@@ -62,7 +62,7 @@ public class BaseMessage implements Serializable {
     /**
      * 消息标题
      */
-    @TableField("msgCreator")
+    @TableField("msgTitle")
     private String msgTitle;
 
     /**
