@@ -76,6 +76,18 @@ public class MenuController {
         return LayuiVo.successByMsg();
     }
 
+    /**
+     * 添加或修改菜单信息
+     * @param sysMenu
+     * @return
+     */
+    @PostMapping("/update")
+    @ResponseBody
+    public LayuiVo update(@RequestBody SysMenu sysMenu) {
+        menuService.updateMenu(sysMenu);
+        return LayuiVo.successLayui(0L,sysMenu);
+    }
+
 
 
 
@@ -98,11 +110,16 @@ public class MenuController {
                 listParent.add(menu);
             } else { //儿子，还需要通过儿子去找到父亲
                 SysMenu parent = map.get(menu.getParentId());//通过儿子的pid找到它父亲
-                parent.getChildren().add(menu);
+                //parent.getChildren().add(menu);
             }
         }
             return listParent;
         }
+
+
+
+
+
 
 
     }

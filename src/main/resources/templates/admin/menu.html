@@ -46,11 +46,14 @@
 <div id="edit" hidden="hidden">
 
     <form id="editForm" lay-filter="editForm" class="layui-form model-form">
+
+        <input type="text" value="" name="menuId" hidden="hidden">
+
         <div class="layui-form-item">
             <label class="layui-form-label">上级菜单：<span style="color: red;">*</span></label>
             <div class="layui-input-block">
-                <input class="layui-input" type="text" onclick="" id="treeName" readonly="true"
-                       value="主目录">
+                <input class="layui-input" type="text" onclick="" id="treeName" readonly="true" name="parentId"
+                       value="0">
             </div>
         </div>
 
@@ -66,21 +69,21 @@
         <div class="layui-form-item">
             <label class="layui-form-label">菜单名称：<span style="color: red;">*</span></label>
             <div class="layui-input-block">
-                <input class="layui-input" type="text" value="">
+                <input class="layui-input" type="text" value="" name="menuName">
             </div>
         </div>
 
         <div class="layui-form-item">
             <label class="layui-form-label">请求地址：<span style="color: red;">*</span></label>
             <div class="layui-input-block">
-                <input class="layui-input" type="text" value="">
+                <input class="layui-input" type="text" value="" name="url">
             </div>
         </div>
 
         <div class="layui-form-item">
             <label class="layui-form-label">权限标识：<span style="color: red;">*</span></label>
             <div class="layui-input-block">
-                <input class="layui-input" type="text" value="">
+                <input class="layui-input" type="text" value="" name="perms">
             </div>
         </div>
 
@@ -307,6 +310,33 @@
 
 
 </script>
+
+
+<script>
+    layui.use(['form', 'jquery'], function () {
+        var form = layui.form;
+        var $ = layui.jquery;
+        form.on('submit(submitBtn)', function (data) {
+            $.ajax({
+                type: "post",
+                url: "/menu/update",
+                contentType: "application/json; charset=utf-8",
+                dataType: 'json',
+                data: JSON.stringify(data.field),
+                success: function (data) {
+                    if (data.result === "000") {
+                        layer.closeAll();
+                        layer.msg("更新成功")
+                    } else {
+                        layer.msg("信息有误，请检查!");
+                    }
+                }
+            });
+            return false;
+        });
+    });
+</script>
+
 
 </body>
 </html>

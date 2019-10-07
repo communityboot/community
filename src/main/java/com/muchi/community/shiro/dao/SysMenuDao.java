@@ -96,6 +96,9 @@ public interface SysMenuDao extends BaseMapper<SysMenu> {
      */
     public int deleteMenuById(String menuId);
 
+
+
+
 }
 
 

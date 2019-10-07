@@ -61,5 +61,11 @@ public interface ISysMenuService extends IService<SysMenu> {
      */
     public int deleteMenuById(String menuId);
 
+    /**
+     * 更新菜单信息
+     * @param sysMenu
+     */
+    public int updateMenu(SysMenu sysMenu);
+
 
 }

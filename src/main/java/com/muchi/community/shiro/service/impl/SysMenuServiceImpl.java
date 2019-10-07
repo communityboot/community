@@ -82,7 +82,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuDao, SysMenu> impleme
      *
      * @param list     分类表
      * @param parentId 传入的父节点ID
-     * @return String
+     * @return String4
      */
     public List<SysMenu> getChildPerms(List<SysMenu> list, int parentId) {
         List<SysMenu> returnList = new ArrayList<SysMenu>();
@@ -165,6 +165,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuDao, SysMenu> impleme
         return SysMenuDao.selectCountRoleMenuByMenuId(menuId);
     }
 
+
     /**
      * 删除菜单
      * @param menuId
@@ -174,6 +175,26 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuDao, SysMenu> impleme
     public int deleteMenuById(String menuId) {
         return SysMenuDao.deleteMenuById(menuId);
     }
+
+    /**
+     * 更新菜单信息
+     * @param sysMenu
+     * @return
+     */
+    @Override
+    public int updateMenu(SysMenu sysMenu) {
+
+        //如果菜单id为空，即为添加
+        if(sysMenu.getMenuId() == null){
+            //设置的菜单id为自增模式，所以不需要设置
+            SysMenuDao.insert(sysMenu);
+        }else{
+            //否则为更新操作
+            SysMenuDao.updateById(sysMenu);
+        }
+        return 0;
+    }
+
 
 
 }
