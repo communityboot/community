@@ -1,8 +1,8 @@
 package com.muchi.community.message.service;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.muchi.community.common.utils.MzResult;
-import com.muchi.community.dict.entity.BaseDict;
 import com.muchi.community.message.entity.BaseMessage;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -27,4 +27,6 @@ public interface IBaseMessageService extends IService<BaseMessage> {
     List<BaseMessage> getUnreadMsg();
 
     BaseMessage getUnreadMsgDetail(Integer id);
+
+    IPage<BaseMessage> searchMsg(Page<BaseMessage> page, QueryWrapper<BaseMessage> wrapper);
 }

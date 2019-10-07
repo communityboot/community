@@ -1,6 +1,8 @@
 package com.muchi.community.message.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.muchi.community.common.constant.BusinessType;
 import com.muchi.community.common.constant.JsonConstant;
@@ -10,6 +12,7 @@ import com.muchi.community.message.entity.BaseMessage;
 import com.muchi.community.message.entity.BaseMessageRecord;
 import com.muchi.community.message.service.IBaseMessageRecordService;
 import com.muchi.community.message.service.IBaseMessageService;
+import com.muchi.community.user.entity.User;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -47,6 +50,21 @@ public class BaseMessageController {
         page.setCurrent(currentPage);
         page.setSize(limit);
         return LayuiVo.successLayui(page.getTotal(),messageService.getAllDict(page));
+    }
+
+    @RequestMapping("/searchMsg")
+    @ResponseBody
+    @Log(title = "搜索消息功能",action = BusinessType.SELECT)
+    public LayuiVo searchMsg(@RequestParam("limit") int limit, @RequestParam(value = "page", defaultValue = "1") int currentPage, BaseMessage baseMessage) {
+      Page<BaseMessage> page=new Page<>(currentPage,limit);
+        QueryWrapper<BaseMessage> wrapper=new QueryWrapper<>();
+        if(baseMessage!=null){
+            wrapper.lambda().eq(baseMessage.getMsgType()!=null,BaseMessage::getMsgType,baseMessage.getMsgType())
+                            .eq(baseMessage.getMsgStatus()!=null,BaseMessage::getMsgStatus,baseMessage.getMsgStatus())
+                            .eq(baseMessage.getMsgCreator()!=null,BaseMessage::getMsgCreator,baseMessage.getMsgCreator())
+                            .eq(baseMessage.getMsgTitle()!=null,BaseMessage::getMsgTitle,baseMessage.getMsgTitle());}
+        IPage<BaseMessage> ipage = messageService.searchMsg(page, wrapper);
+        return LayuiVo.successLayui(page.getTotal(),ipage.getRecords());
     }
 
     @RequestMapping("/msgAddPage")

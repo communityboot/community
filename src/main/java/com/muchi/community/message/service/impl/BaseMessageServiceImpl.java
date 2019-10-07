@@ -1,5 +1,7 @@
 package com.muchi.community.message.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.muchi.community.user.entity.User;
@@ -97,5 +99,17 @@ public class BaseMessageServiceImpl extends ServiceImpl<BaseMessageMapper, BaseM
             return messageMapper.selectById(id);
         }
         return new BaseMessage();
+    }
+
+
+    /**
+     *
+     * @param page 分页信息
+     * @param wrapper 过滤条件
+     * @return 搜索的消息
+     */
+    @Override
+    public IPage<BaseMessage> searchMsg(Page<BaseMessage> page, QueryWrapper<BaseMessage> wrapper) {
+        return messageMapper.selectPage(page,wrapper);
     }
 }

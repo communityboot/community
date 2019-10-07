@@ -6,6 +6,7 @@
     <link rel="stylesheet" th:href="@{/webjars/layui/2.5.4/css/layui.css}" media="all">
     <script th:src="@{/static/js/DictUtil.js}"></script>
     <script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+    <script th:src="@{/static/js/CommonJs.js}" th:inline="javascript"></script>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -114,31 +115,7 @@
                     break;
                 case 'delDict':
                     var data = checkStatus.data;
-                    var arr = [];
-                    for (var i = 0; i < data.length; i++) {
-                        arr.push(data[i].id);
-                    }
-                    layer.confirm('确定删除吗？', {
-                        btn: ['取消', '确定'] //按钮
-                    }, function () {
-                        layer.closeAll();
-                    }, function () {
-                        $.ajax({
-                            type: "post",
-                            url: "/dict/delBatchDict",
-                            dataType: 'json',
-                            data: {"ids": arr},
-                            success: function (data) {
-                                if (data.result === "success") {
-                                    layer.msg("删除成功!");
-                                    window.parent.location.reload();//修改成功后刷新父界面
-                                    layer.closeAll();
-                                } else {
-                                    layer.msg(data.msg);
-                                }
-                            }
-                        });
-                    });
+                    deleteItems(data, baseUrl + '/user/delUserBatch');
                     break;
                 case 'modifyDict':
                     var data = checkStatus.data;

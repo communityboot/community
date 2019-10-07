@@ -15,9 +15,9 @@
 <div class="layui-layout layui-layout-admin">
         <!-- 内容主体区域 -->
     <div class="layui-card">
-        <blockquote class="layui-elem-quote">字典管理</blockquote>
+        <blockquote class="layui-elem-quote">消息管理管理</blockquote>
     </div>
-    <div class="layui-form-item" style="margin-left: 1%">
+    <div style="margin-left: 1%">
         <form id="searchForm" lay-filter="searchForm" class="layui-form model-form">
             <div class="layui-form-item">
             <div class="layui-inline">
@@ -39,19 +39,19 @@
                 </select>
             </div>
                 <div class="layui-inline">
-                    <input id="dictNameSearch" name="dictName" class="layui-input" type="text" placeholder="创建者"
+                    <input id="msgCreator" name="msgCreator" class="layui-input" type="text" placeholder="创建者"
                            autocomplete="off"/></div>
                 <div class="layui-inline">
-                    <input id="dictLabelSearch" name="dictLabel" class="layui-input" type="text" placeholder="标题"
+                    <input id="msgTitle" name="msgTitle" class="layui-input" type="text" placeholder="标题"
                            autocomplete="off"/>
                 </div>
-                <div class="layui-inline">
+         <!--       <div class="layui-inline">
                     <select id="status" name="enabled">
                         <option value="">是否启用</option>
                         <option value="1">启用</option>
                         <option value="0">禁用</option>
                     </select>
-                </div>
+                </div>-->
                 <div class="layui-inline">
                     <a id="btnSearch" class="layui-btn icon-btn" lay-submit lay-filter="btnSearch"><i
                             class="layui-icon">&#xe615;</i>搜索</a>
@@ -84,10 +84,11 @@
     });
 </script>
 <script th:inline="none">
-    layui.use('table', function () {
+    layui.use(['table','form'], function () {
         var table = layui.table;
         var $ = layui.$;
-        table.render({
+        var form = layui.form;
+        var tableGrid = table.render({
             elem: '#dictValue'
             , url: '/m/getAllMessage'
             , toolbar: '#toolbarDemo'
@@ -113,6 +114,13 @@
                 , {field: 'memo', title: '备注'}
             ]]
 
+        });
+        form.on('submit(btnSearch)', function (data) {
+            tableGrid.reload({
+                url:'/m/searchMsg',
+                method:'post',
+                where:data.field
+            })
         });
 
         //头工具栏事件

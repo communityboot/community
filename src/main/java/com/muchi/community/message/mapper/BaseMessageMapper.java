@@ -1,5 +1,7 @@
 package com.muchi.community.message.mapper;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.muchi.community.message.entity.BaseMessage;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
@@ -25,5 +27,7 @@ public interface BaseMessageMapper extends BaseMapper<BaseMessage> {
 
     @Select("SELECT id FROM base_message")
     List<String> getMessageIds();
+
+    IPage<BaseMessage> searchMsg(Page<BaseMessage> page, QueryWrapper<BaseMessage> wrapper);
 
 }

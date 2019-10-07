@@ -3,6 +3,7 @@ package com.muchi.community.shiro.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.muchi.community.common.constant.JsonConstant;
 import com.muchi.community.user.entity.User;
 import com.muchi.community.common.utils.LayuiVo;
 import com.muchi.community.common.utils.JsonResult;
@@ -19,6 +20,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -141,6 +143,16 @@ public class UserController{
 		}
 		IPage<User> userIPage = userService.userQuery(page, wrapper);
 		return LayuiVo.successLayui(userIPage.getTotal(),userIPage.getRecords());
+	}
+
+	@PostMapping("/delUserBatch")
+	@ResponseBody
+	public  LayuiVo delUserBatch(@RequestParam(value = "ids[]") String[] ids) {
+		List<String> dictIds = Arrays.asList(ids);
+		if(userService.removeByIds(dictIds)){
+			return LayuiVo.successCustomMsg(JsonConstant.DELSUCCESS);
+		}
+		return LayuiVo.failCustomMsg(JsonConstant.DELFAIL);
 	}
 
 
