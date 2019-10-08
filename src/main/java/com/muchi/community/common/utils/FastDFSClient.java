@@ -2,7 +2,7 @@ package com.muchi.community.common.utils;
 
 /**
  * @Author： yuzq
- * @Description:
+ * @Description: fastDFS上传下载工具类
  * @Date: 2019/10/7   9:17
  */
 

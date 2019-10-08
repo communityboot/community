@@ -54,6 +54,10 @@ public class MzResult {
         return new MzResult(JsonConstant.SUCCESSCODE,JsonConstant.SUCCESS,data);
     }
 
+    public static MzResult successMsg(String msg){
+        return new MzResult(JsonConstant.SUCCESSCODE,JsonConstant.SUCCESS,msg);
+    }
+
     public static MzResult fail(){
         return new MzResult(JsonConstant.FAIL_CODE,JsonConstant.FAIL);
     }

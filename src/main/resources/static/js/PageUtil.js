@@ -1,0 +1,1 @@
+const pictureUrl ='http://192.168.1.188/';

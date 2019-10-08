@@ -4,9 +4,8 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.muchi.community.common.constant.JsonConstant;
+import com.muchi.community.common.utils.*;
 import com.muchi.community.user.entity.User;
-import com.muchi.community.common.utils.LayuiVo;
-import com.muchi.community.common.utils.JsonResult;
 import com.muchi.community.message.controller.BaseMessageController;
 import com.muchi.community.shiro.service.UserService;
 import org.apache.shiro.SecurityUtils;
@@ -18,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 import java.util.Arrays;
@@ -34,10 +34,6 @@ public class UserController{
 
 	@Autowired
 	private UserService userService;
-
-	@Autowired
-	private BaseMessageController messageController;
-
 
     /**
      * 用户登录
@@ -232,6 +228,28 @@ public class UserController{
 		map.put("success", true);
 		map.put("msg", "当前用户具有 p 角色");
 		return map;
+	}
+
+	@RequestMapping("/uploadAvatar")
+	@ResponseBody
+	public MzResult uploadAvatar(MultipartFile file){
+		String avatarUrl = FastDFSClient.uploadImageAndCrtThumbImage(file);
+		if(avatarUrl!=null){
+			String id = CurrentUserUtil.getCurrentUser().getId();
+			String preAvatarUrl = userService.getById(id).getHeadPicUrl();
+			//获取之前的头像地址，如果不为空则删除服务器存的图片，节省内存
+			if(preAvatarUrl!=null){
+				FastDFSClient.deleteFile(preAvatarUrl);
+			}
+			User user=new User();
+			user.setId(id);
+			user.setHeadPicUrl(avatarUrl);
+			boolean b = userService.updateById(user);
+			if(b){
+				return MzResult.successMsg(JsonConstant.UPDATESUCCESS);
+			}
+		}
+		return MzResult.failMsg(JsonConstant.UPDATEFAIL);
 	}
 
 }

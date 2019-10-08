@@ -107,7 +107,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuDao, SysMenu> impleme
     private void recursionFn(List<SysMenu> list, SysMenu t) {
         // 得到子节点列表
         List<SysMenu> childList = getChildList(list, t);
-        t.setChildren(childList);
+      //  t.setChildren(childList);
         for (SysMenu tChild : childList) {
             if (hasChild(list, tChild)) {
                 // 判断是否有子节点

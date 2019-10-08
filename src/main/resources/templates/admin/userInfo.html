@@ -3,11 +3,15 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" th:href="@{/static/layui/css/global.css}" />
     <link rel="stylesheet" type="text/css" href="https://www.layuicdn.com/layui/css/layui.css" />
+    <script th:src="@{/static/js/PageUtil.js}" th:inline="javascript"></script>
     <title>用户信息</title>
 </head>
 <body>
-    <div class="fly-home fly-panel">
-        <img th:src="@{/static/xwz.jpeg}" alt="yuzq">
+    <div class="fly-home fly-panel" >
+        <img  th:inline="javascript" th:id="test7" th:src="@{'http://192.168.1.188/'+${userInfo.getHeadPicUrl()}}" alt="yuzq">
+<!--
+        <img  th:inline="javascript" th:id="test7" th:src="@{'http://192.168.1.188/'+${userInfo.getHeadPicUrl()}}" alt="yuzq">
+-->
         <i class="iconfont icon-renzheng" title="Fly社区认证"></i>
         <h1 th:text="${userInfo.userName}">
 
@@ -36,5 +40,28 @@
             <a href="javascript:;" class="layui-btn layui-btn-normal fly-imActive" data-type="chat">发起会话</a>
         </div>
     </div>
+    <script type="text/javascript" th:src="@{/webjars/layui/2.5.4/layui.js}" ></script>
+    <script>
+    layui.use('upload', function(){
+          var $ = layui.jquery,
+          upload = layui.upload;
+            upload.render({
+            elem: '#test7'
+            ,url: '/user/uploadAvatar'
+            ,size: 60 //限制文件大小，单位 KB
+            ,done: function(res){
+                if(res.code===200){
+                    layer.msg(res.msg,{time:1000,icon: 1},function () {
+                        location.reload();
+                    });
+                }
+                console.log(res)
+            }
+        });
+    });
+
+
+</script>
+
 </body>
 </html>

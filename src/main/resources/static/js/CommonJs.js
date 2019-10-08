@@ -118,6 +118,10 @@ function modify(data,url,callback) {
     }
 }
 
+/**
+ * 修改操作表单回显功能
+ * @param data
+ */
 function reviewParams(data) {
     var div = document.getElementById("edit");
     var inputs = div.getElementsByTagName("input");
