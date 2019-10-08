@@ -73,7 +73,7 @@ public class MenuController {
         ShiroUtils.clearCachedAuthorizationInfo();
 
         menuService.deleteMenuById(ids);
-        return LayuiVo.successByMsg();
+        return LayuiVo.successCustomMsg("删除成功");
     }
 
     /**

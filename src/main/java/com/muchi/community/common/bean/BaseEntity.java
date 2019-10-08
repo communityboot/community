@@ -1,5 +1,6 @@
 package com.muchi.community.common.bean;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.io.Serializable;
@@ -37,6 +38,7 @@ public class BaseEntity implements Serializable
     private String remark;
 
     /** 请求参数 */
+    @TableField(exist = false)
     private Map<String, Object> params;
 
     public String getSearchValue()

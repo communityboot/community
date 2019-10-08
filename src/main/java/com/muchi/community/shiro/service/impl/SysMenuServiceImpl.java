@@ -173,7 +173,9 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuDao, SysMenu> impleme
      */
     @Override
     public int deleteMenuById(String menuId) {
-        return SysMenuDao.deleteMenuById(menuId);
+        Map<String,Object> map = new HashMap<>();
+        map.put("menu_id",menuId);
+        return SysMenuDao.deleteByMap(map);
     }
 
     /**

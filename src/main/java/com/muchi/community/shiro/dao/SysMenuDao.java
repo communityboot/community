@@ -88,16 +88,6 @@ public interface SysMenuDao extends BaseMapper<SysMenu> {
      */
     public int selectCountRoleMenuByMenuId(String menuId);
 
-    /**
-     * 根据id删除菜单信息
-     *
-     * @param menuId 菜单ID
-     * @return 结果
-     */
-    public int deleteMenuById(String menuId);
-
-
-
 
 }
 

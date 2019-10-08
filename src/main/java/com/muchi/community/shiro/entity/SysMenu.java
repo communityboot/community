@@ -1,6 +1,7 @@
 package com.muchi.community.shiro.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.muchi.community.common.bean.BaseEntity;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -13,6 +14,7 @@ import java.util.List;
 /**
  * 菜单权限表 sys_menu
  */
+@TableName("sys_menu")
 public class SysMenu extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
@@ -51,8 +53,8 @@ public class SysMenu extends BaseEntity
     private String icon;
 
     /** 子菜单 */
-    //@TableField(exist = false)
-    //private List<SysMenu> children = new ArrayList<SysMenu>();
+    @TableField(exist = false)
+    private List<SysMenu> children = new ArrayList<SysMenu>();
 
     public Long getMenuId()
     {
@@ -170,7 +172,7 @@ public class SysMenu extends BaseEntity
         this.icon = icon;
     }
 
-    /*public List<SysMenu> getChildren()
+    public List<SysMenu> getChildren()
     {
         return children;
     }
@@ -178,7 +180,7 @@ public class SysMenu extends BaseEntity
     public void setChildren(List<SysMenu> children)
     {
         this.children = children;
-    }*/
+    }
 
 
 
