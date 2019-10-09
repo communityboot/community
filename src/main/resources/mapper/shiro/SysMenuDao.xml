@@ -145,16 +145,11 @@
 	</select>
 
 	<select id="selectCountMenuByParentId" resultType="Integer">
-		select count(1) from sys_menu where parent_id=#{menuId}
+		select count(1) from sys_menu where parent_id=#{parentId}
 	</select>
 
 	<select id="selectCountRoleMenuByMenuId" resultType="Integer">
 		select count(1) from sys_role_menu where menu_id=#{menuId}
 	</select>
 
-
-	<select id="deleteMenuById" resultType="Integer">
-		delete from sys_menu where menu_id=#{menuId}
-	</select>
-
-</mapper> 
+</mapper>

@@ -1,49 +1,61 @@
 package com.muchi.community.shiro.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.muchi.community.common.bean.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 菜单权限表 sys_menu
  */
 @TableName("sys_menu")
-public class SysMenu extends BaseEntity
+public class SysMenu
 {
     private static final long serialVersionUID = 1L;
 
     /** 菜单ID */
+    @TableField("menu_id")
+    @TableId
     private Long menuId;
 
     /** 菜单名称 */
+    @TableField("menu_name")
     private String menuName;
 
     /** 父菜单名称 */
+    @TableField(exist = false)
     private String parentName;
 
     /** 父菜单ID */
+    @TableField("parent_id")
     private Long parentId;
 
     /** 显示顺序 */
+    @TableField("order_num")
     private String orderNum;
 
     /** 菜单URL */
     private String url;
 
     /** 打开方式：menuItem页签 menuBlank新窗口 */
+    @TableField(exist = false)
     private String target;
 
     /** 类型:0目录,1菜单,2按钮 */
+    @TableField("menu_type")
     private String menuType;
 
     /** 菜单状态:0显示,1隐藏 */
+    @TableField(exist = false)
     private String visible;
 
     /** 权限字符串 */
@@ -55,6 +67,78 @@ public class SysMenu extends BaseEntity
     /** 子菜单 */
     @TableField(exist = false)
     private List<SysMenu> children = new ArrayList<SysMenu>();
+
+    /** 创建者 */
+    @TableField("create_by")
+    private String createBy;
+
+    /** 创建时间 */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @TableField("create_time")
+    private Date createTime;
+
+    /** 更新者 */
+    @TableField("update_by")
+    private String updateBy;
+
+    /** 更新时间 */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @TableField("update_time")
+    private Date updateTime;
+
+    private String remark;
+
+    /** 请求参数 */
+    @TableField(exist = false)
+    private Map<String, Object> params;
+
+    public Map<String, Object> getParams() {
+        return params;
+    }
+
+    public void setParams(Map<String, Object> params) {
+        this.params = params;
+    }
+
+    public String getCreateBy() {
+        return createBy;
+    }
+
+    public void setCreateBy(String createBy) {
+        this.createBy = createBy;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getUpdateBy() {
+        return updateBy;
+    }
+
+    public void setUpdateBy(String updateBy) {
+        this.updateBy = updateBy;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
 
     public Long getMenuId()
     {

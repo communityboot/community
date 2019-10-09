@@ -26,7 +26,7 @@ public interface SysMenuDao extends BaseMapper<SysMenu> {
      * @param userId 用户ID
      * @return 菜单列表
      */
-    public List<SysMenu> selectMenuAllByUserId(Long userId);
+    public List<SysMenu> selectMenuAllByUserId(String userId);
 
     /**
      * 查询系统正常显示菜单（不含按钮）
@@ -77,7 +77,7 @@ public interface SysMenuDao extends BaseMapper<SysMenu> {
      * @param parentId 菜单父ID
      * @return 结果
      */
-    public int selectCountMenuByParentId(String parentId);
+    public int selectCountMenuByParentId(long parentId);
 
 
     /**
@@ -86,7 +86,7 @@ public interface SysMenuDao extends BaseMapper<SysMenu> {
      * @param menuId 菜单ID
      * @return 结果
      */
-    public int selectCountRoleMenuByMenuId(String menuId);
+    public int selectCountRoleMenuByMenuId(long menuId);
 
 
 }

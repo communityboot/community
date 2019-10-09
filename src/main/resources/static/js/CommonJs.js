@@ -45,6 +45,32 @@ function openLayer(title,div) {
 }
 
 /**
+ * 指定对象信息删除
+ * @param data
+ * @param url
+ */
+function deleteItem(data,url) {
+    layer.confirm('确定删除吗？', {
+        btn: ['取消', '确定'] //按钮
+    }, function () {
+        layer.closeAll();
+    }, function () {
+        $.ajax({
+            type: "post",
+            url: url,
+            contentType : 'application/json',
+            data: JSON.stringify(data[0]),
+            success: function (data) {
+                if (data.code === 200) {
+                    layer.msg(data.msg, {time:1500,icon: 1},function () {location.reload();});
+                } else {layer.msg(data.msg,{time:1000,icon: 1})}
+            }
+        });
+    });
+}
+
+
+/**
  *
  * @param data 传方法的data   var data = checkStatus.data;
  * @param url 后台地址 例如   baseUrl+/xxx/xx

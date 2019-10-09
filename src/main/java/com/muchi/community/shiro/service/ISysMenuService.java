@@ -45,7 +45,7 @@ public interface ISysMenuService extends IService<SysMenu> {
      * @param parentId 菜单父ID
      * @return 结果
      */
-    public int selectCountMenuByParentId(String parentId);
+    public int selectCountMenuByParentId(long parentId);
 
     /**
      * 查询菜单使用数量
@@ -53,13 +53,13 @@ public interface ISysMenuService extends IService<SysMenu> {
      * @param menuId 菜单ID
      * @return 结果
      */
-    public int selectCountRoleMenuByMenuId(String menuId);
+    public int selectCountRoleMenuByMenuId(long menuId);
 
     /**
      * 根据id删除对应菜单
      * @param menuId
      */
-    public int deleteMenuById(String menuId);
+    public int deleteMenuById(long menuId);
 
     /**
      * 更新菜单信息

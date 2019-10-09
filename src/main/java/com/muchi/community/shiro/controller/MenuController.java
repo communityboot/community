@@ -55,24 +55,24 @@ public class MenuController {
 
 
     /**
-     * 批量删除菜单信息
-     * @param ids
+     * 删除菜单信息
+     * @param
      * @return
      */
     @PostMapping("/delMenuBatch")
     @ResponseBody
-    public LayuiVo delMenuBatch(@RequestParam(value = "ids[]") String ids) {
-        if (menuService.selectCountMenuByParentId(ids) > 0)
+    public LayuiVo delMenuBatch(@RequestBody SysMenu sysMenu) {
+        if (menuService.selectCountMenuByParentId(sysMenu.getMenuId()) > 0)
         {
             return LayuiVo.failCustomMsg("存在子菜单,不允许删除");
         }
-        if (menuService.selectCountRoleMenuByMenuId(ids) > 0)
+        if (menuService.selectCountRoleMenuByMenuId(sysMenu.getMenuId()) > 0)
         {
             return LayuiVo.failCustomMsg("菜单已分配,不允许删除");
         }
         ShiroUtils.clearCachedAuthorizationInfo();
 
-        menuService.deleteMenuById(ids);
+        menuService.deleteMenuById(sysMenu.getMenuId());
         return LayuiVo.successCustomMsg("删除成功");
     }
 

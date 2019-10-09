@@ -2,6 +2,7 @@ package com.muchi.community.shiro.service.impl;
 
 import com.alibaba.druid.util.StringUtils;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.muchi.community.common.utils.ShiroUtils;
 import com.muchi.community.shiro.dao.SysMenuDao;
 import com.muchi.community.shiro.entity.SysMenu;
 import com.muchi.community.shiro.service.ISysMenuService;
@@ -150,7 +151,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuDao, SysMenu> impleme
      * @return
      */
     @Override
-    public int selectCountMenuByParentId(String parentId) {
+    public int selectCountMenuByParentId(long parentId) {
         return SysMenuDao.selectCountMenuByParentId(parentId);
     }
 
@@ -161,7 +162,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuDao, SysMenu> impleme
      * @return
      */
     @Override
-    public int selectCountRoleMenuByMenuId(String menuId) {
+    public int selectCountRoleMenuByMenuId(long menuId) {
         return SysMenuDao.selectCountRoleMenuByMenuId(menuId);
     }
 
@@ -172,7 +173,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuDao, SysMenu> impleme
      * @return
      */
     @Override
-    public int deleteMenuById(String menuId) {
+    public int deleteMenuById(long menuId) {
         Map<String,Object> map = new HashMap<>();
         map.put("menu_id",menuId);
         return SysMenuDao.deleteByMap(map);
@@ -192,6 +193,8 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuDao, SysMenu> impleme
             SysMenuDao.insert(sysMenu);
         }else{
             //否则为更新操作
+            sysMenu.setUpdateBy(ShiroUtils.getLoginName());
+            sysMenu.setUpdateTime(new Date());
             SysMenuDao.updateById(sysMenu);
         }
         return 0;

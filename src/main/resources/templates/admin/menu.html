@@ -47,7 +47,7 @@
 
     <form id="editForm" lay-filter="editForm" class="layui-form model-form">
 
-        <input type="text" value="" name="menuId" hidden="hidden">
+        <input type="text" value="" id="menuId" name="menuId" hidden="hidden">
 
         <div class="layui-form-item">
             <label class="layui-form-label">上级菜单：<span style="color: red;">*</span></label>
@@ -69,28 +69,28 @@
         <div class="layui-form-item">
             <label class="layui-form-label">菜单名称：<span style="color: red;">*</span></label>
             <div class="layui-input-block">
-                <input class="layui-input" type="text" value="" name="menuName">
+                <input class="layui-input" type="text" value="" name="menuName" id="menuName">
             </div>
         </div>
 
         <div class="layui-form-item">
             <label class="layui-form-label">请求地址：<span style="color: red;">*</span></label>
             <div class="layui-input-block">
-                <input class="layui-input" type="text" value="" name="url">
+                <input class="layui-input" type="text" value="" name="url" id="url">
             </div>
         </div>
 
         <div class="layui-form-item">
             <label class="layui-form-label">权限标识：<span style="color: red;">*</span></label>
             <div class="layui-input-block">
-                <input class="layui-input" type="text" value="" name="perms">
+                <input class="layui-input" type="text" value="" name="perms" id="perms">
             </div>
         </div>
 
         <div class="layui-form-item">
             <label class="layui-form-label">显示排序：<span style="color: red;">*</span></label>
             <div class="layui-input-block">
-                <input class="layui-input" type="text" value="">
+                <input class="layui-input" type="text" value="" id="orderNum" name="orderNum">
             </div>
         </div>
 
@@ -194,27 +194,41 @@
             var checkStatus = table.checkStatus(obj.config.id);
             switch (obj.event) {
                 case 'addMenu':
-                    openLayer('字典信息修改', '#edit');
+                    openLayer('字典信息添加', '#edit');
                     break;
                 case 'delMenu':
-                    alert("头工具栏事件 456")
                     data = checkStatus.data;
                     console.log(data)
                     if (data.length > 1) {
                         layer.msg("菜单不允许批量删除");
                         return false;
                     }
-                    deleteItems(data, baseUrl + '/menu/delMenuBatch');
+                    deleteItem(data, baseUrl + '/menu/delMenuBatch');
                     break;
                 case 'modifyMenu':
                     alert("头工具栏事件 789")
-                    //var data = checkStatus.data;
+                    var data = checkStatus.data;
+                    console.log(data)
+                    showDatas(data)
+                    openLayer('字典信息修改', '#edit');
+
                     //modify(data, '/dv/getDictValById', reviewParams);
                     break;
                 default:
                     break;
             }
         })
+
+        function showDatas(data){
+            var $ = layui.jquery;
+            alert(data[0].menuId)
+            $("#menuId").val(data[0].menuId)
+            $("#parentId").val(data[0].parentId)
+            $("#menuName").val(data[0].menuName)
+            $("#url").val(data[0].url)
+            $("#perms").val(data[0].perms)
+            $("#orderNum").val(data[0].orderNum)
+        }
 
         //监听行工具事件
         table.on('tool(menu)', function (obj) {
