@@ -60,11 +60,14 @@
         <div class="layui-form-item">
             <label class="layui-form-label">菜单类型：<span style="color: red;">*</span></label>
             <div class="layui-input-block">
-                <input type="radio" name="menuType" value="M" title="目录" checked="">
-                <input type="radio" name="menuType" value="C" title="菜单">
-                <input type="radio" name="menuType" value="F" title="按钮">
+
+                <input type="radio" name="menuType" value="M" title="目录" id="M">
+                <input type="radio" name="menuType" value="C" title="菜单" id="C">
+                <input type="radio" name="menuType" value="F" title="按钮" id="F">
+
             </div>
         </div>
+
 
         <div class="layui-form-item">
             <label class="layui-form-label">菜单名称：<span style="color: red;">*</span></label>
@@ -118,7 +121,6 @@
     </div>
 </script>
 
-<script th:src="@{/static/js/DictUtil.js}"></script>
 <script th:src="@{/static/js/CommonJs.js}"></script>
 <script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
 
@@ -206,10 +208,12 @@
                     deleteItem(data, baseUrl + '/menu/delMenuBatch');
                     break;
                 case 'modifyMenu':
-                    alert("头工具栏事件 789")
                     var data = checkStatus.data;
-                    console.log(data)
                     showDatas(data)
+                    if (data.length > 1) {
+                        layer.msg("菜单不允许批量修改");
+                        return false;
+                    }
                     openLayer('字典信息修改', '#edit');
 
                     //modify(data, '/dv/getDictValById', reviewParams);
@@ -219,16 +223,34 @@
             }
         })
 
-        function showDatas(data){
+        //点击更新回显数据
+        function showDatas(data) {
             var $ = layui.jquery;
-            alert(data[0].menuId)
             $("#menuId").val(data[0].menuId)
             $("#parentId").val(data[0].parentId)
             $("#menuName").val(data[0].menuName)
             $("#url").val(data[0].url)
             $("#perms").val(data[0].perms)
             $("#orderNum").val(data[0].orderNum)
+
+            if (data[0].menuType === "M") {
+                $("#M").prop("checked", true);
+            } else if (data[0].menuType === "F") {
+                $("#F").prop("checked", true);
+            } else {
+                $("#C").prop("checked", true);
+            }
         }
+
+        $("#closeDialog").click(function () {
+            $("#dictId").val("");
+            $("#dictName").val("");
+            $("#dictLabel").val("");
+            layer.closeAll();
+            return false;
+        });
+
+
 
         //监听行工具事件
         table.on('tool(menu)', function (obj) {
@@ -236,7 +258,6 @@
             var $ = layui.jquery;
             switch (obj.event) {
                 case 'addMenu':
-                    alert("弹出添加框")
                     break;
                     var data = checkStatus.data;
                     layer.open({
