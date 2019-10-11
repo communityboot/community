@@ -1,9 +1,9 @@
 #配置数据源
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/community_feature1?useUnicode=true&characterEncoding=utf-8
+    url: jdbc:mysql://39.106.121.52:3306/community_feature1?useUnicode=true&characterEncoding=utf-8
     username: root
-    password: sa123
+    password: mz666
     driverClassName: com.mysql.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
@@ -45,6 +45,7 @@ logging:
     com.muchi.community.dict.mapper : debug
     com.muchi.community.user.mapper : debug
     com.muchi.community.message.mapper : debug
+    com.muchi.community.shiro.dao : debug
 
 debug: false
 
