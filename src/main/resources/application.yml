@@ -38,6 +38,8 @@ spring:
 # 配置tomcat端口
 server:
   port: 8088
+  servlet:
+    context-path: /community
 
 # 配置打印输出sql日志
 logging:

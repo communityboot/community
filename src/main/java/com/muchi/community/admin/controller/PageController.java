@@ -16,6 +16,11 @@ public class PageController {
         return "login";
     }
 
+    @RequestMapping("/")
+    public String toLogin(){
+        return "login";
+    }
+
     @RequestMapping("/regist")
     public String regist(){
         return "regist";
