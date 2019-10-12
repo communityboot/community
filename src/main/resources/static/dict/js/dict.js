@@ -4,7 +4,7 @@ layui.use(['table','form','jquery'], function () {
     var $ = layui.jquery;
     var tableGrid = table.render({
         elem: '#dict'
-        , url: '/dict/getAllLamp'
+        , url: baseUrl + '/dict/getAllLamp'
         , toolbar: '#toolbarDemo'
         , title: '字典表'
         ,baseDict:{'dictName':'dictionary','dictLabel':'zidian','enabled':1}
@@ -25,7 +25,7 @@ layui.use(['table','form','jquery'], function () {
     });
     form.on('submit(btnSearch)', function (data) {
         tableGrid.reload({
-            url:'/dict/getAllLampTe',
+            url:baseUrl + '/dict/getAllLampTe',
             method:'post',
             where:data.field
         })
@@ -58,7 +58,7 @@ layui.use(['table','form','jquery'], function () {
                 }, function () {
                     $.ajax({
                         type: "post",
-                        url: "/dict/delBatchDict",
+                        url: baseUrl + "/dict/delBatchDict",
                         dataType: 'json',
                         data: {"ids": arr},
                         success: function (data) {
@@ -79,7 +79,7 @@ layui.use(['table','form','jquery'], function () {
                     var $ = layui.jquery, form = layui.form;
                     $.ajax({
                         type: "post",
-                        url: "/dict/getDictInfo",
+                        url: baseUrl + "/dict/getDictInfo",
                         dataType: 'json',
                         data: "id=" + data[0].id,
                         success: function (data) {
@@ -122,7 +122,7 @@ layui.use(['table','form','jquery'], function () {
             layer.confirm('真的删除行么', function (index) {
                 $.ajax({
                     type: "post",
-                    url: "/dict/delDictById",
+                    url: baseUrl + "/dict/delDictById",
                     dataType: 'json',
                     data: "id=" + data.id,
                     success: function (data) {
@@ -142,7 +142,7 @@ layui.use(['table','form','jquery'], function () {
                 var $ = layui.jquery, form = layui.form;
                 $.ajax({
                     type: "post",
-                    url: "/dict/getDictInfo",
+                    url: baseUrl + "/dict/getDictInfo",
                     dataType: 'json',
                     data: "id=" + data.id,
                     success: function (data) {
@@ -169,7 +169,7 @@ layui.use(['table','form','jquery'], function () {
             });
         } else if (obj.event === 'manageDict') {
             let id = data.id;
-            window.location.href = "http://localhost:8088/dv/toDvPage/" + id;
+            window.location.href =baseUrl + "/dv/toDvPage/" + id;
         }
     });
 });
@@ -180,7 +180,7 @@ layui.use(['form', 'jquery'], function () {
     form.on('submit(submitBtn)', function (data) {
         $.ajax({
             type: "post",
-            url: "/dict/updateDict",
+            url: baseUrl + "/dict/updateDict",
             contentType: "application/json; charset=utf-8",
             dataType: 'json',
             data: JSON.stringify(data.field),

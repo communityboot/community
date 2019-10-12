@@ -7,8 +7,10 @@
  * 定义请求前缀
  * @type {string}
  */
-let baseUrl ='http://localhost:8088';
-
+//本地开发，请开启
+let baseUrl ='http://localhost:8088/community';
+    //部署服务器地址: druid.html 加载src页面的需要注意
+//let baseUrl ='http://39.106.121.52:8088/community';
 /**
  * @param url 请求地址
  * @param data 传给后端的数据

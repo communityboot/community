@@ -2,7 +2,7 @@ function getDictTag(dictType) {
     let dictMap = {};
     $.ajax({
         type: "post",
-        url: "/dv/getDictByCode?dicCode=" + dictType,
+        url: baseUrl + "/dv/getDictByCode?dicCode=" + dictType,
         //cache:false,
         async: false,
         success: function (data) {
