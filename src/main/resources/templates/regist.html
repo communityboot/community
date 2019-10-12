@@ -5,6 +5,7 @@
     <title>注册页面</title>
     <link rel="stylesheet" type="text/css" th:href="@{/static/login/css/regist.css}">
     <script type="text/javascript" th:src="@{/webjars/jquery/3.4.1/jquery.js}" ></script>
+    <script th:src="@{/static/js/CommonJs.js}" th:inline="javascript"></script>
 </head>
 <body>
     <div class="wrapper">
@@ -54,14 +55,14 @@
             }
 
 
-                $.post("http://localhost:8088/user/regist", {
+                $.post(baseUrl+"/user/regist", {
                     userName: $("#userName").val(),
                     password: pwd1,
                 }, function(result) {
                     if(result.success) {
 
                         alert("注册成功！");
-                        window.location.href = "http://localhost:8088/login";
+                        window.location.href = baseUrl+"/login";
                         //必须加上，否则跳转不了
                         return false;
                     } else {

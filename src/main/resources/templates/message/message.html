@@ -90,7 +90,7 @@
         var form = layui.form;
         var tableGrid = table.render({
             elem: '#dictValue'
-            , url: '/m/getAllMessage'
+            , url: baseUrl + '/m/getAllMessage'
             , toolbar: '#toolbarDemo'
             , title: '字典详情表'
             , page: true
@@ -117,7 +117,7 @@
         });
         form.on('submit(btnSearch)', function (data) {
             tableGrid.reload({
-                url:'/m/searchMsg',
+                url:baseUrl + '/m/searchMsg',
                 method:'post',
                 where:data.field
             })
@@ -129,7 +129,7 @@
             var checkStatus = table.checkStatus(obj.config.id);
             switch (obj.event) {
                 case 'addDict':
-                    window.location.href = "http://localhost:8088/m/msgAddPage";
+                    window.location.href = baseUrl + "/m/msgAddPage";
                     break;
                 case 'delDict':
                     var data = checkStatus.data;
@@ -141,7 +141,7 @@
                         var $ = layui.jquery, form = layui.form;
                         $.ajax({
                             type: "post",
-                            url: "/dict/getDictInfo",
+                            url: baseUrl + "/dict/getDictInfo",
                             dataType: 'json',
                             data: "id=" + data[0].id,
                             success: function (data) {
@@ -182,7 +182,7 @@
         form.on('submit(submitBtn)', function (data) {
             $.ajax({
                 type: "post",
-                url: "/dv/updateDict",
+                url: baseUrl + "/dv/updateDict",
                 contentType: "application/json; charset=utf-8",
                 dataType: 'json',
                 data: JSON.stringify(data.field),

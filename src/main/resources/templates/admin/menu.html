@@ -135,7 +135,7 @@
 <script th:inline="none">
 
     layui.config({
-        base: '/static/layui/lay/modules/'
+        base: '/community/static/layui/lay/modules/'
     }).extend({
         treetable: 'treetable-lay/treetable'
     }).use(['layer', 'table', 'treetable'], function () {
@@ -158,7 +158,7 @@
                 toolbar: '#toolbarDemo',
                 even: true,
                 cellMinWidth: 30, //全局定义常规单元格的最小宽度，layui 2.2.1 新增
-                url: '/menu/list',
+                url: baseUrl + '/menu/list',
                 page: false,
                 cols: [[
                     {type: 'checkbox', fixed: 'left', width: 60},
@@ -283,7 +283,7 @@
                     }, function () {
                         $.ajax({
                             type: "post",
-                            url: "/menu/delBatchMenu",
+                            url: baseUrl + "/menu/delBatchMenu",
                             dataType: 'json',
                             data: {"ids": arr},
                             success: function (data) {
@@ -306,7 +306,7 @@
                         var $ = layui.jquery, form = layui.form;
                         $.ajax({
                             type: "post",
-                            url: "/menu/getMenuInfo",
+                            url: baseUrl + "/menu/getMenuInfo",
                             dataType: 'json',
                             data: "id=" + data[0].id,
                             success: function (data) {
@@ -354,7 +354,7 @@
         form.on('submit(submitBtn)', function (data) {
             $.ajax({
                 type: "post",
-                url: "/menu/update",
+                url: baseUrl + "/menu/update",
                 contentType: "application/json; charset=utf-8",
                 dataType: 'json',
                 data: JSON.stringify(data.field),

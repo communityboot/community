@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="https://www.layuicdn.com/layui/css/layui.css" />
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <script th:src="@{/static/js/CommonJs.js}" th:inline="javascript"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 </head>
 <body class="layui-layout-body">
@@ -250,7 +251,7 @@
                 });
             } else if (obj.event === 'manageDict') {
                 let id=data.id;
-                window.location.href = "http://localhost:8088/dv/toDvPage/"+id;
+                window.location.href = baseUrl + "/dv/toDvPage/"+id;
             }
         });
     });

@@ -1,13 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
 <!-- 内容主体区域 -->
+<script th:src="@{/static/js/CommonJs.js}" th:inline="javascript"></script>
+<script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
 <div align="center">
-    <img src="/IMG_105.JPG">
+    <img id="bodyImg">
 </div>
 </body>
+
+<script>
+    $("#bodyImg").attr("src",baseUrl+"/IMG_105.JPG");
+</script>
+
+
 </html>

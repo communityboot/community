@@ -7,6 +7,7 @@
 
 		<link rel="stylesheet"  th:href="@{/webjars/layui/2.5.4/css/layui.css}" media="all">
 		<script type="text/javascript" th:src="@{/webjars/jquery/3.4.1/jquery.js}" ></script>
+		<script th:src="@{/static/js/CommonJs.js}" th:inline="javascript"></script>
 
 		<style type="text/css">
 			body {
@@ -46,7 +47,7 @@
 	</body>
 	<script type="text/javascript">
 		$("#selectBtn").click(function() {
-			$.post("http://localhost:8088/user/select", {}, function(result) {
+			$.post(baseUrl+"/user/select", {}, function(result) {
 				if(result.success) {
 					alert(result.msg);
 					return false;
@@ -58,7 +59,7 @@
 		});
 
 		$("#insertBtn").click(function() {
-			$.post("http://localhost:8088/user/insert", {}, function(result) {
+			$.post(baseUrl+"/user/insert", {}, function(result) {
 				if(result.success) {
 					alert(result.msg);
 					return false;
@@ -70,7 +71,7 @@
 		});
 
 		$("#updateBtn").click(function() {
-			$.post("http://localhost:8088/user/update", {}, function(result) {
+			$.post(baseUrl+"/user/update", {}, function(result) {
 				if(result.success) {
 					alert(result.msg);
 					return false;
@@ -82,7 +83,7 @@
 		});
 
 		$("#deleteBtn").click(function() {
-			$.post("http://localhost:8088/user/delete", {}, function(result) {
+			$.post(baseUrl+"/user/delete", {}, function(result) {
 				if(result.success) {
 					alert(result.msg);
 					return false;
@@ -94,7 +95,7 @@
 		});
 
 		$("#vipBtn").click(function() {
-			$.post("http://localhost:8088/user/vip", {}, function(result) {
+			$.post(baseUrl+"/user/vip", {}, function(result) {
 				if(result.success) {
 					alert(result.msg);
 					return false;
@@ -106,7 +107,7 @@
 		});
 
 		$("#ipBtn").click(function() {
-			$.post("http://localhost:8088/user/ip", {}, function(result) {
+			$.post(baseUrl+"/user/ip", {}, function(result) {
 				if(result.success) {
 					alert(result.msg);
 					return false;
@@ -117,7 +118,7 @@
 			});
 		});
 		$("#pBtn").click(function() {
-			$.post("http://localhost:8088/user/p", {}, function(result) {
+			$.post(baseUrl+"/user/p", {}, function(result) {
 				if(result.success) {
 					alert(result.msg);
 					return false;

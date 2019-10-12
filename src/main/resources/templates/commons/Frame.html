@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" th:href="@{/webjars/layui/2.5.4/css/layui.css}" media="all">
     <script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+    <script th:src="@{/static/js/CommonJs.js}"></script>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -33,23 +34,25 @@
                     <span th:text="${userName}"></span>
                 </a>
                 <dl class="layui-nav-child">
-                    <dd><a href="" onclick="changePage('/sysUser/getUserInfoById') ;return false">基本资料</a></dd>
+                    <dd><a href="" onclick="changePage(baseUrl+'/sysUser/getUserInfoById') ;return false">基本资料</a></dd>
                     <dd><a href="">安全设置</a></dd>
-                    <dd><a href="" onclick="changePage('/m/toUnreadMessage');return false" >未读消息<span th:text="${UnReadNum}"  id="unReadMessageNum" class="layui-badge">2</span></a></dd>
-            </dl>
+                    <dd><a href="" onclick="changePage(baseUrl+'/m/toUnreadMessage');return false">未读消息<span
+                            th:text="${UnReadNum}" id="unReadMessageNum" class="layui-badge">2</span></a></dd>
+                </dl>
             </li>
             <li class="layui-nav-item"><a href="/logout">退出</a></li>
         </ul>
     </div>
 
     <div class="layui-side layui-bg-black" th:fragment="sidebar">
-        <div class="layui-side-scroll" >
+        <div class="layui-side-scroll">
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
-            <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+            <ul class="layui-nav layui-nav-tree" lay-filter="test">
                 <li class="layui-nav-item layui-nav-itemed">
                     <a class="" href="javascript:;"><i class="layui-icon layui-icon-home"></i>&nbsp;主页</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="" onclick="changePage('/aboutMz') ;return false"><i class="layui-icon layui-icon-about"></i>&nbsp;关于牧之</a></dd>
+                        <dd><a href="" onclick="changePage(baseUrl+'/aboutMz') ;return false"><i
+                                class="layui-icon layui-icon-about"></i>&nbsp;关于牧之</a></dd>
                         <dd><a href="javascript:;"><i class="layui-icon layui-icon-dialogue"></i>&nbsp;加入牧之</a></dd>
                         <dd><a href="javascript:;"><i class="layui-icon layui-icon-survey"></i>&nbsp;投诉建议</a></dd>
                     </dl>
@@ -57,17 +60,22 @@
                 <li class="layui-nav-item layui-nav-itemed">
                     <a class="" href="javascript:;"><i class="layui-icon layui-icon-set-sm"></i>&nbsp;系统管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="" onclick="changePage('/user/toUserPage') ;return false"><i class="layui-icon layui-icon-group"></i>&nbsp;用户管理</a></dd>
-                        <dd><a href="" onclick="changePage('/menu/toMenuPage') ;return false"><i class="layui-icon layui-icon-tabs"></i>&nbsp;菜单管理</a></dd>
+                        <dd><a href="" onclick="changePage(baseUrl+'/user/toUserPage') ;return false"><i
+                                class="layui-icon layui-icon-group"></i>&nbsp;用户管理</a></dd>
+                        <dd><a href="" onclick="changePage(baseUrl+'/menu/toMenuPage') ;return false"><i
+                                class="layui-icon layui-icon-tabs"></i>&nbsp;菜单管理</a></dd>
                         <dd><a href=""><i class="layui-icon layui-icon-cart"></i>&nbsp;商家管理</a></dd>
-                        <dd><a href="" onclick="changePage('/dict/toDictPage');return false"><i class="layui-icon layui-icon-read"></i>&nbsp;字典管理</a></dd>
-                        <dd><a href="" onclick="changePage('/message');return false"><i class="layui-icon layui-icon-group"></i>&nbsp;通知公告</a></dd>
+                        <dd><a href="" onclick="changePage(baseUrl+'/dict/toDictPage');return false"><i
+                                class="layui-icon layui-icon-read"></i>&nbsp;字典管理</a></dd>
+                        <dd><a href="" onclick="changePage(baseUrl+'/message');return false"><i
+                                class="layui-icon layui-icon-group"></i>&nbsp;通知公告</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item">
                     <a href="javascript:;"><i class="layui-icon layui-icon-util"></i>&nbsp;系统监控</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="" onclick="changePage('/druidMonitor');return false"><i class="layui-icon layui-icon-console"></i>&nbsp;数据库监控</a></dd>
+                        <dd><a href="" onclick="changePage(baseUrl+'/druidMonitor');return false"><i
+                                class="layui-icon layui-icon-console"></i>&nbsp;数据库监控</a></dd>
                         <dd><a href="javascript:;"><i class="layui-icon layui-icon-chart-screen"></i>&nbsp;日志监控</a></dd>
                     </dl>
                 </li>
@@ -77,34 +85,39 @@
     <div class="layui-body">
         <!-- 内容主体区域 -->
         <div>
-            <iframe id="myIframe" width="100%"  src="/Mainframe" onload="changeFrameHeight()" frameborder="0" scrolling="no"></iframe>
+            <iframe id="myIframe" width="100%" onload="changeFrameHeight()" frameborder="0" scrolling="no"></iframe>
         </div>
     </div>
-    <div class="layui-footer" th:fragment="footbar" >
+    <div class="layui-footer" th:fragment="footbar">
         <!-- 底部固定区域 -->
         <p style="color: black">© muchi.com - 牧之社区版权所有</p>
     </div>
 </div>
 <script type="text/javascript" th:src="@{/webjars/layui/2.5.4/layui.js}"></script>
 <script>
+
+    //设置地址
+    $("#myIframe").attr('src', baseUrl + "/Mainframe")
+
     //JavaScript代码区域
     layui.use('element', function () {
         var element = layui.element;
     });
+
     function changePage(href) {
-        document.getElementById("myIframe").src=href;
+        document.getElementById("myIframe").src = href;
     }
 </script>
 <script>
-    function changeFrameHeight(){
-        var ifm= document.getElementById("myIframe");
+    function changeFrameHeight() {
+        var ifm = document.getElementById("myIframe");
         //ifm.height=document.documentElement.clientHeight;
-        ifm.height=document.documentElement.scrollHeight;
+        ifm.height = document.documentElement.scrollHeight;
     }
-    window.οnresize=function(){
-        changeFrameHeight();
 
-    } ;
+    window.onresize = function () {
+        changeFrameHeight();
+    };
 </script>
 </body>
 </html>

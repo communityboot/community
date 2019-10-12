@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" th:href="@{/static/layui/css/global.css}" />
+    <script th:src="@{/static/js/CommonJs.js}" th:inline="javascript"></script>
     <link rel="stylesheet" type="text/css" href="https://www.layuicdn.com/layui/css/layui.css" />
     <title>未读消息</title>
 </head>
@@ -40,7 +41,7 @@
     </div>
 <script type="text/javascript">
     function changePage(href) {
-        window.location.href = "http://localhost:8088/m/getUnreadMsgDetail/"+href;
+        window.location.href =baseUrl + "/m/getUnreadMsgDetail/"+href;
     }
 </script>
 </body>
