@@ -3,12 +3,12 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" th:href="@{/static/layui/css/global.css}" />
     <link rel="stylesheet" type="text/css" href="https://www.layuicdn.com/layui/css/layui.css" />
-    <script th:src="@{/static/js/PageUtil.js}" th:inline="javascript"></script>
+    <script th:src="@{/static/js/CommonJs.js}" th:inline="javascript"></script>
     <title>用户信息</title>
 </head>
 <body>
     <div class="fly-home fly-panel" >
-        <img  th:inline="javascript" th:id="test7" th:src="@{'http://192.168.1.188/'+${userInfo.getHeadPicUrl()}}" alt="yuzq">
+        <img  th:inline="javascript" th:id="test7" th:src="@{'http://39.106.121.52/'+${userInfo.getHeadPicUrl()}}" alt="yuzq">
 <!--
         <img  th:inline="javascript" th:id="test7" th:src="@{'http://192.168.1.188/'+${userInfo.getHeadPicUrl()}}" alt="yuzq">
 -->
@@ -47,7 +47,7 @@
           upload = layui.upload;
             upload.render({
             elem: '#test7'
-            ,url: '/user/uploadAvatar'
+            ,url: baseUrl+'/user/uploadAvatar'
             ,size: 60 //限制文件大小，单位 KB
             ,done: function(res){
                 if(res.code===200){
