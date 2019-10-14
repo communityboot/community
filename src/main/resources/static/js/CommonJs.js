@@ -153,11 +153,14 @@ function modify(data,url,callback) {
 function reviewParams(data) {
     var div = document.getElementById("edit");
     var inputs = div.getElementsByTagName("input");
-    var names={};
-    for(var i=0;i<inputs.length;i++) {
-        names[inputs[i].id]=inputs[i].id;
+    var names = {};
+    for (var i = 0; i < inputs.length; i++) {
+        names[inputs[i].id] = inputs[i].id;
     }
-    for(var k in names){
-        $("#"+k+"").val(data.data[k]);
+    if (data != null) {
+        for (var k in names) {
+            $("#" + k + "").val(data.data[k]);
+        }
     }
+
 }

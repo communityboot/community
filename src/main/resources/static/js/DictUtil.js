@@ -3,7 +3,6 @@ function getDictTag(dictType) {
     $.ajax({
         type: "post",
         url: baseUrl + "/dv/getDictByCode?dicCode=" + dictType,
-        //cache:false,
         async: false,
         success: function (data) {
             if (data.code === 200) {

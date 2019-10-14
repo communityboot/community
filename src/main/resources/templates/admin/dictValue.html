@@ -15,7 +15,6 @@
     <!-- 内容主体区域 -->
     <div class="layui-card">
         <blockquote class="layui-elem-quote">字典管理</blockquote>
-        <input th:id="dictValId" name="id" hidden="hidden" th:value="${dictId}">
     </div>
     <div style="margin-left: 1%">
         <form id="searchForm" lay-filter="searchForm" class="layui-form model-form">
@@ -54,17 +53,19 @@
 </div>
 <div id="edit" hidden="hidden">
     <form id="editForm" lay-filter="editForm" class="layui-form model-form">
-         <div class="layui-form-item">
-            <label class="layui-form-label">字典显示的名字<span style="color: red;">*</span></label>
+        <input th:id="dictId" name="dictId" hidden="hidden" th:value="${dictId}">
+        <input th:id="id" name="id" hidden="hidden">
+        <div class="layui-form-item">
+            <label class="layui-form-label">字典标签<span style="color: red;">*</span></label>
             <div class="layui-input-block">
-                <input id="dictKey" name="dictKey" placeholder="请输入字典显示的名" type="text" class="layui-input"/>
+                <input id="dictKey" name="dictKey" placeholder="请输入字典显示的名" type="text"  autocomplete="off"  class="layui-input"/>
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">字典的值<span style="color: red;">*</span></label>
+            <label class="layui-form-label">字典值<span style="color: red;">*</span></label>
             <div class="layui-input-block">
                 <input id="dictVal" name="dictVal" placeholder="请输入字典的值" type="text" class="layui-input"
-                       lay-verify="required" required/>
+                       autocomplete="off"  lay-verify="required" required/>
             </div>
         </div>
         <div class="layui-form-item">
@@ -91,7 +92,7 @@
     layui.use('table', function () {
         var table = layui.table;
         var $ = layui.$;
-        var dId = $("#dictValId").val();
+        var dId = $("#dictId").val();
         table.render({
             elem: '#dictValue'
             , url: baseUrl + '/dv/getDictVal/' + dId
@@ -116,6 +117,7 @@
             switch (obj.event) {
                 case 'addDict':
                     openLayer('字典信息修改', '#edit');
+                    reviewParams();
                     break;
                 case 'delDict':
                     data = checkStatus.data;
@@ -135,7 +137,6 @@
     layui.use('form', function () {
         var form = layui.form;
         form.on('submit(submitBtn)', function (data) {
-            reviewParams();
  /*           var inputs = $("input");
             var data={};
             for(var i=0;i<inputs.length;i++){
@@ -143,8 +144,8 @@
                 var value=inputs.eq(i).val();
                 data[name]=value;
             }*/
-
-            //ajaxDemo(baseUrl + '/dv/updateDict', data, saveorupd);
+            ajaxDemo(baseUrl + '/dv/updateDict', JSON.stringify(data.field), saveorupd);
+            console.log(JSON.stringify(data.field));
             return false;
         });
     });

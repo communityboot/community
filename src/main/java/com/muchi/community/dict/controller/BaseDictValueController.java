@@ -71,7 +71,7 @@ public class BaseDictValueController {
     @ResponseBody
     public LayuiVo updateDictValue(@RequestBody BaseDictValue baseDictValue){
         if (baseDictValue != null) {
-            if(baseDictValue.getId() == null){
+            if(baseDictValue.getId().equals("")){
                 baseDictValue.setId(UUIDUtil.genUUID());
             }
             boolean b = dictValueService.saveOrUpdate(baseDictValue);

@@ -80,7 +80,7 @@
                 {type: 'checkbox', fixed: 'left'}
                 , {field: 'userName', title: '用户名', width: 80}
                 , {field: 'phone', title: '手机号', width: 160}
-                , {field: 'status', title: '状态',templet: function(d) {return getDictTag('dict13')[d.status];}, width: 80}
+                , {field: 'status', title: '状态',templet: function(d) {return getDictTag('User_Status')[d.status];}, width: 80}
                 , {field: 'email', title: '邮箱', width: 150}
                 , {field: 'address', title: '地址', width: 200}
                 , {field: 'gender', title: '性别',templet: function(d) {return getGenderDict()[d.gender];}, width: 80}
