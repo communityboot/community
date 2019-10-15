@@ -137,7 +137,7 @@ function saveJump(data) {
  */
 function modify(data,url,callback) {
     if (data.length === 1) {
-        ajaxDemo(url,dictValId=data[0].id,callback);
+        ajaxDemo(url,id=data[0].id,callback);
         openLayer('字典信息修改','#edit');
     } else if (data.length === 0) {
         layer.msg("所选数量为0，请选择需要操作的数据");
@@ -145,7 +145,6 @@ function modify(data,url,callback) {
         layer.msg("所选数量超过1，只能对单条数据进行编辑！")
     }
 }
-
 /**
  * 修改操作表单回显功能
  * @param data

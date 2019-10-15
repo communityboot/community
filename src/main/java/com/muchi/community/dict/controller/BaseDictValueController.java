@@ -102,8 +102,8 @@ public class BaseDictValueController {
 
     @PostMapping("/getDictValById")
     @ResponseBody
-    public MzResult getDictValById(@RequestBody String dictValId){
-        BaseDictValue dictValById = dictValueService.getDictValById(dictValId);
+    public MzResult getDictValById(@RequestBody String id){
+        BaseDictValue dictValById = dictValueService.getDictValById(id);
         if(dictValById!=null){
             return MzResult.success(dictValById);
         }return MzResult.failMsg(JsonConstant.ILLEGAL_ARGUMENT);

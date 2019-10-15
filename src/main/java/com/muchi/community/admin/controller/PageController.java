@@ -56,11 +56,6 @@ public class PageController {
         return "portal/MainFrame";
     }
 
-    @RequestMapping("/userAdd")
-    public String userAdd(){
-        return "admin/userAdd";
-    }
-
     @RequestMapping("/aboutMz")
     public String aboutMz(){
         return "commons/AboutMuZhi";
