@@ -8,6 +8,7 @@ import com.muchi.community.common.utils.*;
 import com.muchi.community.user.entity.User;
 import com.muchi.community.message.controller.BaseMessageController;
 import com.muchi.community.shiro.service.UserService;
+import org.apache.catalina.connector.Request;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -94,6 +95,34 @@ public class UserController{
 
         //调用service接口执行注册
 		result = userService.registUser(user);
+
+		return  result;
+    }
+
+    /**
+     * 用户触发文件状态改变
+     * @return
+     */
+    @PostMapping("/uploadFile")
+	@ResponseBody
+    public JsonResult uploadFile(MultipartFile fileUpload) {
+        //创建返回对象
+		JsonResult result = new JsonResult();
+
+
+		return  result;
+    }
+
+    /**
+     * 用户提交相关信息
+     * @return
+     */
+    @PostMapping("/upload")
+	@ResponseBody
+    public JsonResult upload(Request request) {
+        //创建返回对象
+		JsonResult result = new JsonResult();
+
 
 		return  result;
     }

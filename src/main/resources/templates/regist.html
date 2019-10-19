@@ -5,27 +5,32 @@
     <title>注册页面</title>
     <link rel="stylesheet" type="text/css" th:href="@{/static/login/css/regist.css}">
     <script type="text/javascript" th:src="@{/webjars/jquery/3.4.1/jquery.js}" ></script>
+    <script src="https://www.layuicdn.com/layui/layui.js"></script>
     <script th:src="@{/static/js/CommonJs.js}" th:inline="javascript"></script>
 </head>
 <body>
     <div class="wrapper">
         <article>
-            <h1><em>"图片"</em><span>muchi技术有限公司</span></h1>
+            <h1><em></em><span>muchi技术有限公司</span></h1>
             <div class="main">
-                <form>
-                    <div class="tel">
-                        <input type="tel"  placeholder="手机号"><em>由11个字符组成！</em>
-                    </div>
+                <form enctype="multipart/form-data" method="post" id="upload" action="">
                     <div class="userName">
-                        <input type="text" id="userName"  placeholder="用户名"><em>由5-8个字符组成！</em>
+                        <input type="text" id="userName"  placeholder="您的真实姓名"><em></em>
                     </div>
-                    <div class="password">
-                        <input type="password" id="password1" name="pwd" placeholder="密码"><em>使用字母、数字、符号两种及以上的组合，8-12个字符</em>
+                    <div class="tel">
+                        <input type="tel"  placeholder="手机号"><em></em>
                     </div>
-                    <div class="againpwd">
-                        <input type="password" id="password2" name="pwd" placeholder="再次输入密码"><em>两次密码不一致</em>
+                    <div class="school">
+                        <input type="text" id="school" name="您的学校" placeholder="大学/学院"><em></em>
                     </div>
-                    <button type="button" id="regBtn">注册</button>
+                    <div class="specialty">
+                        <input type="text" id="specialty" name="您的专业" placeholder="您的所学专业"><em></em>
+                    </div>
+
+                    <div class="file">
+                        <input type="file" id="uploadFile" name="uploadFile" placeholder="上传附件"><em></em>
+                    </div>
+                    <button type="button" id="regBtn">提交</button>
                 </form>
             </div>
         </article>
@@ -44,34 +49,24 @@
 
 
     <script type="text/javascript">
-        $("#regBtn").click(function() {
-            //TODO 先判断输入的是否合法
-            var pwd1 = $("#password1").val();
-            var pwd2 = $("#password2").val();
 
-            if(pwd1 != pwd2){
-                alert("两次输入的密码不相同");
-                return false;
-            }
+        layui.use(['table','form'], function() {
+            var layer = layui.layer;
+            $("#regBtn").click(function() {
 
+                layer.confirm('如有多个附件上传，请将其打包至压缩文件，确定提交吗？', {
+                    btn: ['取消', '确定'] //按钮
+                }, function () {
+                    layer.closeAll();
+                }, function () {
+                   alert("确定")
 
-                $.post(baseUrl+"/user/regist", {
-                    userName: $("#userName").val(),
-                    password: pwd1,
-                }, function(result) {
-                    if(result.success) {
-
-                        alert("注册成功！");
-                        window.location.href = baseUrl+"/login";
-                        //必须加上，否则跳转不了
-                        return false;
-                    } else {
-                        alert(result.msg);
-                    }
+                   $("#upload").attr("action",baseUrl+"/user/upload").submit();
                 });
 
+            });
+        })
 
-        });
 
 
     </script>
