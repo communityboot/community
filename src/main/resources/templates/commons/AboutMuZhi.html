@@ -115,10 +115,11 @@
         //信息流
         flow.load({
             elem: '#main',
-            done: function (page, next) {
+            scrollElem: '#main',
+          done: function (page, next) {
                 var lis=[];
                 $.get(baseUrl+'/dv/getBaseDictVal/'+page,function (res) {
-                    console.log(JSON.stringify(res));
+                    //console.log(JSON.stringify(res));
                     layui.each(res.data,function (index,item) {
                         lis.push('<li class="layui-timeline-item">\n' +
                             '    <i class="layui-icon layui-timeline-axis"></i>\n' +
