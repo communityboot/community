@@ -1,75 +1,135 @@
 <!DOCTYPE html>
-<html  xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>注册页面</title>
     <link rel="stylesheet" type="text/css" th:href="@{/static/login/css/regist.css}">
-    <script type="text/javascript" th:src="@{/webjars/jquery/3.4.1/jquery.js}" ></script>
+    <script type="text/javascript" th:src="@{/webjars/jquery/3.4.1/jquery.js}"></script>
     <script src="https://www.layuicdn.com/layui/layui.js"></script>
     <script th:src="@{/static/js/CommonJs.js}" th:inline="javascript"></script>
 </head>
 <body>
-    <div class="wrapper">
-        <article>
-            <h1><em></em><span>muchi技术有限公司</span></h1>
-            <div class="main">
-                <form enctype="multipart/form-data" method="post" id="upload" action="">
-                    <div class="userName">
-                        <input type="text" id="userName"  placeholder="您的真实姓名"><em></em>
-                    </div>
-                    <div class="tel">
-                        <input type="tel"  placeholder="手机号"><em></em>
-                    </div>
-                    <div class="school">
-                        <input type="text" id="school" name="您的学校" placeholder="大学/学院"><em></em>
-                    </div>
-                    <div class="specialty">
-                        <input type="text" id="specialty" name="您的专业" placeholder="您的所学专业"><em></em>
-                    </div>
+<div class="wrapper">
+    <article>
+        <h1><em></em><span>muchi技术有限公司</span></h1>
+        <div class="main">
+            <form  method="post" id="upload" >
+                <div class="userName">
+                    <input type="text" id="username" name="username" placeholder="您的真实姓名"><em></em>
+                </div>
+                <div class="tel">
+                    <input type="tel" id="phone" name="phone" placeholder="手机号"><em></em>
+                </div>
+                <div class="school">
+                    <input type="text" id="school" name="school" placeholder="大学/学院"><em></em>
+                </div>
+                <div class="specialty">
+                    <input type="text" id="specialty" name="specialty" placeholder="您的所学专业"><em></em>
+                </div>
 
-                    <div class="file">
-                        <input type="file" id="uploadFile" name="uploadFile" placeholder="上传附件"><em></em>
-                    </div>
-                    <button type="button" id="regBtn">提交</button>
-                </form>
-            </div>
-        </article>
-        <footer>
-            <ul>
-                <li><a href="#">联系我们</a></li>
-                <li><a href="#">关于我们</a></li>
-                <li><a href="#">人才招聘</a></li>
-                <li><a href="#">友情链接</a></li>
-                <li><a href="#">公司地址</a></li>
-                <li><a href="#">关注我们</a></li>
-            </ul>
-            <p>本网站版权归muchi技术有限公司所有，未经许可，不得转载。</p>
-        </footer>
-    </div>
+                <div class="file">
+                    <input type="file" id="uploadFile" name="uploadFile" placeholder="上传附件"><em></em>
+                </div>
+
+                <input id="hiddenFile" type="hidden">
+
+                <button type="button" id="regBtn">提交</button>
+            </form>
+        </div>
+    </article>
+    <footer>
+        <ul>
+            <li><a href="#">联系我们</a></li>
+            <li><a href="#">关于我们</a></li>
+            <li><a href="#">人才招聘</a></li>
+            <li><a href="#">友情链接</a></li>
+            <li><a href="#">公司地址</a></li>
+            <li><a href="#">关注我们</a></li>
+        </ul>
+        <p>本网站版权归muchi技术有限公司所有，未经许可，不得转载。</p>
+    </footer>
+</div>
 
 
-    <script type="text/javascript">
+<script type="text/javascript">
 
-        layui.use(['table','form'], function() {
-            var layer = layui.layer;
-            $("#regBtn").click(function() {
+    layui.use(['table', 'form'], function () {
+        var layer = layui.layer;
 
-                layer.confirm('如有多个附件上传，请将其打包至压缩文件，确定提交吗？', {
-                    btn: ['取消', '确定'] //按钮
-                }, function () {
-                    layer.closeAll();
-                }, function () {
-                   alert("确定")
-
-                   $("#upload").attr("action",baseUrl+"/user/upload").submit();
-                });
-
+        $('#uploadFile').on('change', function (e) {
+            // 获取文件信息
+            var file = e.target.files[0];
+            // 实例化FormData
+            var formdata = new FormData();
+            // 将文件信息存入formdata，键名为file
+            // formdata会将文件信息序列化为ajax可识别的数据类型
+            formdata.append('fileUpload', file);
+            $.ajax({
+                type: 'post',
+                url: baseUrl + "/user/uploadFile",
+                data: formdata, // formdata直接赋值给data
+                processData: false, //formdata已将数据序列化，无需在处理
+                contentType: false, //formdata无需设置请求头
+                success: function (data) {
+                    //将隐藏域中的src字段进行填充
+                    var src = $("#hiddenFile").val()
+                    if (src) {
+                        $("#hiddenFile").val(src + "," + data.msg);
+                    } else {
+                        $("#hiddenFile").val(data.msg);
+                    }
+                }
             });
+        });
+
+
+        $("#regBtn").click(function () {
+            layer.confirm('如有多个附件上传，请将其打包至压缩文件,或多次选择文件即可，确定提交吗？', {
+                btn: ['取消', '确定'] //按钮
+            }, function () {
+                layer.closeAll();
+            }, function () {
+
+                username = $("#username").val();
+                phone = $("#phone").val();
+                school = $("#school").val();
+                specialty = $("#specialty").val();
+                src = $("#hiddenFile").val();
+
+                var flag = checkPhone()
+                if (flag) {
+                    $.ajax({
+                        type: 'post',
+                        url: baseUrl + "/user/upload",
+                        data:{"username":username,"phone":phone,"school":school,"specialty":specialty,"src":src},
+                        dataType:"json",
+                        success: function (data) {
+                            if(data.code != 200){
+                                layer.msg(data.msg)
+                                return false;
+                            }else {
+                                alert("感谢您的信任，我们将尽快与您联系！")
+                                window.location.href = baseUrl+"/index"
+                            }
+                        }
+                    });
+                }
+            })
         })
 
 
+        function checkPhone() {
+            var phone = $("#phone").val();
+            if (!(/^1[3456789]\d{9}$/.test(phone))) {
+                alert("手机号码有误，请重填");
+                return false;
+            } else {
+                return true;
+            }
+        }
 
-    </script>
+    })
+</script>
 
 
 </body>

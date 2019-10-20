@@ -31,9 +31,11 @@ spring:
   thymeleaf:
     cache: false
 
-
-
-
+  servlet:
+    multipart:
+      #最大上传文件大小
+      max-file-size: 20971520
+      max-request-size: 20971520
 
 # 配置tomcat端口
 server:
