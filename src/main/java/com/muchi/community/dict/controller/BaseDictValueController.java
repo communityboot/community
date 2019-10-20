@@ -1,6 +1,8 @@
 package com.muchi.community.dict.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.muchi.community.common.constant.JsonConstant;
 import com.muchi.community.common.utils.LayuiVo;
@@ -107,5 +109,13 @@ public class BaseDictValueController {
         if(dictValById!=null){
             return MzResult.success(dictValById);
         }return MzResult.failMsg(JsonConstant.ILLEGAL_ARGUMENT);
+    }
+
+    @RequestMapping("/getBaseDictVal/{page}")
+    @ResponseBody
+    public LayuiVo getAllLamp( @PathVariable("page") int currentPage) {
+        Page<BaseDictValue> page= new Page<>(currentPage,2);
+        IPage dictIPage=dictValueService.page(page);
+        return LayuiVo.successLayui(page.getTotal(),dictIPage.getRecords());
     }
 }
