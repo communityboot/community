@@ -1,6 +1,8 @@
 package com.muchi.community.common.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.muchi.community.admin.service.ISysCityService;
+import com.muchi.community.common.bean.WeatherMainVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
@@ -16,7 +18,7 @@ import org.springframework.web.client.RestTemplate;
  * @Date: 2019/9/20   13:41
  */
 @Controller
-@RequestMapping("/http")
+@RequestMapping("/weather")
 public class HttpClientController {
 
     @Value("${weather.appId}")
@@ -29,13 +31,28 @@ public class HttpClientController {
     @Autowired
     private RestTemplate restTemplate;
 
-    @RequestMapping("/getJson")
-    @ResponseBody
-    public String getJson(){
-        String url="https://www.tianqiapi.com/api/?version=v1&cityid=101240110&appid=87381976&appsecret=1qtJKYBo";
-        ResponseEntity<JSONObject> exchange = restTemplate.exchange(url, HttpMethod.GET, null, JSONObject.class);
-        return  exchange.getBody().toString();
+    @Autowired
+    private ISysCityService cityService;
 
+    @RequestMapping("/getCurrentDay")
+    @ResponseBody
+    public WeatherMainVo getJson(){
+        String url="https://www.tianqiapi.com/api/?version=v6&cityid=101240110&appid=87381976&appsecret=1qtJKYBo";
+        ResponseEntity<JSONObject> exchange = restTemplate.exchange(url, HttpMethod.GET, null, JSONObject.class);
+        String string = exchange.getBody().toString();
+        WeatherMainVo weatherMainVo = JSONObject.parseObject(string, WeatherMainVo.class);
+        return weatherMainVo;
+    }
+
+    @RequestMapping("/queryWeaByName")
+    @ResponseBody
+    public WeatherMainVo queryWeatherByName(String cityName){
+        String cityName1 = cityService.getIdByCityName(cityName);
+        String url="https://www.tianqiapi.com/api/?version=v6&cityid="+cityName1+"&appid=87381976&appsecret=1qtJKYBo";
+        ResponseEntity<JSONObject> exchange = restTemplate.exchange(url, HttpMethod.GET, null, JSONObject.class);
+        String string = exchange.getBody().toString();
+        WeatherMainVo weatherMainVo = JSONObject.parseObject(string, WeatherMainVo.class);
+        return weatherMainVo;
     }
 
 }
