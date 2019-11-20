@@ -1,52 +1,28 @@
-package com.muchi.community.common.controller;
+package com.muchi.community.common.service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.muchi.community.admin.service.ISysCityService;
 import com.muchi.community.common.bean.WeatherMainVo;
 import com.muchi.community.common.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 /**
  * @Author： yuzq
  * @Description:
- * @Date: 2019/9/20   13:41
+ * @Date: 2019/11/20   11:55
  */
-@Controller
-@RequestMapping("/weather")
-public class HttpClientController {
-
-    @Value("${weather.appId}")
-    private String appId;
-
-
-    @Value("${weather.appSecret}")
-    private String appSecret;
-
+@Service
+public class WeatherService {
     @Autowired
     private RestTemplate restTemplate;
+
     @Autowired
     private ISysCityService cityService;
 
-
-    @RequestMapping("/getCurrentDay")
-    @ResponseBody
-    public WeatherMainVo getJson(){
-        String url="https://www.tianqiapi.com/api/?version=v6&cityid=101240110&appid=87381976&appsecret=1qtJKYBo";
-        ResponseEntity<JSONObject> exchange = restTemplate.exchange(url, HttpMethod.GET, null, JSONObject.class);
-        String string = exchange.getBody().toString();
-        WeatherMainVo weatherMainVo = JSONObject.parseObject(string, WeatherMainVo.class);
-        return weatherMainVo;
-    }
-
-/*    @RequestMapping("/queryWeaByName")
-    @ResponseBody
     public WeatherMainVo queryWeatherByName(String cityName){
         String cityName1 = cityService.getIdByCityName(cityName);
         if(StringUtils.isEmpty(cityName1)){
@@ -57,6 +33,5 @@ public class HttpClientController {
         String string = exchange.getBody().toString();
         WeatherMainVo weatherMainVo = JSONObject.parseObject(string, WeatherMainVo.class);
         return weatherMainVo;
-    }*/
-
+    }
 }
