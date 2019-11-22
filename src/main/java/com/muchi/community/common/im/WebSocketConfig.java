@@ -20,10 +20,14 @@ public class WebSocketConfig implements WebSocketConfigurer {
     @Autowired
     private MessageHandshakeInterceptor interceptor;
 
+    @Autowired
+    private GroupHandshakeInterceptor groupHandshakeInterceptor;
+
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
         registry.addHandler(myHandler(), "/ws").setAllowedOrigins("*");
         registry.addHandler(myHandler(), "/ws/{id}").setAllowedOrigins("*").addInterceptors(interceptor);
+        registry.addHandler(myHandler(), "/ws/{id}/{roomId}").setAllowedOrigins("*").addInterceptors(groupHandshakeInterceptor);
     }
 
     public WebSocketHandler myHandler(){
