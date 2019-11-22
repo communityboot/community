@@ -77,7 +77,6 @@
 			data: {"userName": userName,"password":password,"rememberMe":rememberMe},
 			success:function (data) {
 				if(data.success===true){
-					console.log(data);
 					window.location.href = baseUrl+"/admin/mainPage";
 				}else {
 					alert(data.errorInfo);

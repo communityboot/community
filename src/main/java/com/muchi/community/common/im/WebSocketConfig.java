@@ -1,5 +1,6 @@
 package com.muchi.community.common.im;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.WebSocketHandler;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
@@ -16,9 +17,13 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 @EnableWebSocket
 public class WebSocketConfig implements WebSocketConfigurer {
 
+    @Autowired
+    private MessageHandshakeInterceptor interceptor;
+
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
         registry.addHandler(myHandler(), "/ws").setAllowedOrigins("*");
+        registry.addHandler(myHandler(), "/ws/{id}").setAllowedOrigins("*").addInterceptors(interceptor);
     }
 
     public WebSocketHandler myHandler(){

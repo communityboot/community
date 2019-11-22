@@ -41,10 +41,10 @@ public class AdminController {
     public String toIndex(Model model){
         Integer unReadMessageNum = messageService.getUnReadMessageNum();
         String userName = CurrentUserUtil.getCurrentUser().getUserName();
-        String avatarUrl = userService.getById(CurrentUserUtil.getCurrentUser().getId()).getHeadPicUrl();
-        if(avatarUrl==null){
-            //todo 这个需要上传几个默认的图片头像地址，避免空指针
-            avatarUrl="";
+        String id = CurrentUserUtil.getCurrentUser().getId();
+        String avatarUrl="";
+        if(id!=null){
+             avatarUrl = userService.getById(id).getHeadPicUrl();
         }
         model.addAttribute("UnReadNum",unReadMessageNum);
         model.addAttribute("userName",userName);
