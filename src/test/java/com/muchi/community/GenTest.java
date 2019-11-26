@@ -1,3 +1,4 @@
+/*
 package com.muchi.community;
 
 import com.muchi.community.common.service.MailService;
@@ -12,11 +13,13 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
+*/
 /**
  * @Author： yuzq
  * @Description:
  * @Date: 2019/9/2   16:06
- */
+ *//*
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class GenTest {
@@ -49,3 +52,4 @@ public class GenTest {
         mailService.sendMail("1065265077@qq.com");
     }
 }
+*/

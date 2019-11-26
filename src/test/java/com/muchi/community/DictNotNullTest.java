@@ -1,3 +1,4 @@
+/*
 package com.muchi.community;
 
 import com.muchi.community.common.validate.Person;
@@ -7,11 +8,13 @@ import org.junit.Test;
 
 import java.util.Map;
 
+*/
 /**
  * @Author： yuzq
  * @Description:
  * @Date: 2019/10/3   21:51
- */
+ *//*
+
 
 public class DictNotNullTest {
 
@@ -29,3 +32,4 @@ public class DictNotNullTest {
   }
 
 }
+*/

@@ -1,12 +1,15 @@
+/*
 package com.muchi.community.lambda;
 
 import com.muchi.community.common.utils.QRCodeUtil;
 
+*/
 /**
  * @Author： yuzq
  * @Description:
  * @Date: 2019/10/15   9:53
- */
+ *//*
+
 public class QRCodeTest {
 
     public static void main(String[] args) {
@@ -20,3 +23,4 @@ public class QRCodeTest {
 
 
 }
+*/

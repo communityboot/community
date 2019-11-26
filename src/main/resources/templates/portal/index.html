@@ -6,6 +6,8 @@
   <title>牧之科技</title>
   <link rel="stylesheet" th:href="@{/webjars/layui/2.5.4/css/layui.css}" media="all">
   <link rel="stylesheet" type="text/css" th:href="@{/static/portal/css/index.css}">
+  <script th:src="@{/static/js/CommonJs.js}"></script>
+
 </head>
 <body>
   <!-- nav部分 -->
@@ -22,10 +24,10 @@
           <span></span><span></span><span></span>
         </button>
         <ul class="layui-nav" lay-filter="">
-          <li class="layui-nav-item"><a href="product.html">牧之产品</a></li>
-          <li class="layui-nav-item"><a href="news.html">社区动态</a></li>
-          <li class="layui-nav-item"><a href="case.html">伙伴展示</a></li>
-          <li class="layui-nav-item"><a href="about.html">加入我们</a></li>
+          <li class="layui-nav-item"><a href="" onclick="changePage('/index/product');return false">牧之产品</a></li>
+          <li class="layui-nav-item"><a href="" onclick="changePage('/index/news');return false">社区动态</a></li>
+          <li class="layui-nav-item"><a href="" onclick="changePage('/index/case');return false">伙伴展示</a></li>
+          <li class="layui-nav-item"><a href="" onclick="changePage('/index/about');return false">加入我们</a></li>
           <li class="layui-nav-item"><a href="" target="_blank">成为伙伴</a></li>
         </ul>
       </div>
@@ -176,7 +178,7 @@
             </div>
             <div class="layui-col-sm6 layui-col-md4 layui-col-lg3">
               <p class="contact-top"><span class="right">该模板版权归 <a href="https://www.layui.com/" target="_blank">layui.com</a> 所有</span></p>
-              <p class="contact-bottom"><span class="right">Copyright&nbsp;©&nbsp;2016-2018&nbsp;&nbsp;ICP&nbsp;赣备888888号</span></p>
+              <p class="contact-bottom"><span class="right">Copyright&nbsp;©&nbsp;2018-2019&nbsp;&nbsp;ICP&nbsp;浙ICP备19044329号-1</span></p>
             </div>
           </div>
         </div>
@@ -184,7 +186,11 @@
     </div>
   </div>
   <script type="text/javascript" th:src="@{/webjars/layui/2.5.4/layui.js}"></script>
-
+<script type="text/javascript">
+  function changePage(href) {
+    window.location.href = baseUrl+href;
+  }
+</script>
   <!--[if lt IE 9]>
   <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
   <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>

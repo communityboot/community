@@ -1,14 +1,17 @@
+/*
 package com.muchi.community;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
+*/
 /**
  * @Author： yuzq
  * @Description:
  * @Date: 2019/9/16   20:09
- */
+ *//*
+
 public class ListRetainAll {
 
     public static void main(String[] args) {
@@ -43,3 +46,4 @@ public class ListRetainAll {
 
     }
 }
+*/
