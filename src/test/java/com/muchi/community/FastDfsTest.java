@@ -1,4 +1,4 @@
-/*
+
 package com.muchi.community;
 
 import com.muchi.community.common.utils.FastDFSClient;
@@ -9,12 +9,12 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.File;
 
-*/
+
 /**
  * @Author： yuzq
  * @Description:
  * @Date: 2019/10/7   9:24
- *//*
+ */
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
@@ -31,7 +31,6 @@ public class FastDfsTest {
 
     @Test
     public void testDelete(){
-        FastDFSClient.deleteFile("group1/M00/00/00/wKgBvF2alTSAC5gcAAEcz00quPA995.JPG");
+        FastDFSClient.deleteFile("group1/M00/00/00/rBgWYl3ffpOAes6oAAEcz8kg0W8653.JPG");
     }
 }
-*/

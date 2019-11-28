@@ -2,6 +2,7 @@
 <html  xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
+	<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 	<title>登陆页面</title>
 	<link rel="stylesheet" type="text/css" th:href="@{/static/login/css/login.css}">
 
@@ -67,9 +68,9 @@
 
 
 	function login(){
-		var userName= $("#userName").val();
-		var password= $("#password").val();
-		var rememberMe = $("#rememberMe").prop("checked");
+		let userName= $("#userName").val();
+		let password= $("#password").val();
+		let rememberMe = $("#rememberMe").prop("checked");
 		$.ajax({
 			type: "post",
 			url: baseUrl + "/user/login",

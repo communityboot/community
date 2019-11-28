@@ -8,9 +8,10 @@
  * @type {string}
  */
 //本地开发，请开启
-const baseUrl ='http://localhost:8088/community';
+//const baseUrl ='http://localhost:8088/community';
     //部署服务器地址: druid.html 加载src页面的需要注意
 //const baseUrl ='http://39.106.121.52:8088/community';
+const baseUrl ='https://www.mzrealm.com/community';
 /**
  * @param url 请求地址
  * @param data 传给后端的数据

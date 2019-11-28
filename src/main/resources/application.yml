@@ -67,7 +67,7 @@ fdfs:
 #  tracker-list: 192.168.1.188:22122
 #  web-server-url: http://192.168.1.188/
   tracker-list: 39.106.121.52:22122
-  web-server-url: http://39.106.121.52/
+  web-server-url: https://39.106.121.52/
 
 
 
