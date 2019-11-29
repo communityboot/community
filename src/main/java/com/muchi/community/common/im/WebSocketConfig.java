@@ -23,9 +23,13 @@ public class WebSocketConfig implements WebSocketConfigurer {
     @Autowired
     private GroupHandshakeInterceptor groupHandshakeInterceptor;
 
+    @Autowired
+    private ConversationInterceptor conversationInterceptor;
+
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        registry.addHandler(myHandler(), "/ws").setAllowedOrigins("*");
+        registry.addHandler(myHandler(), "/ws/robot").setAllowedOrigins("*");
+        registry.addHandler(myHandler(), "/ws").setAllowedOrigins("*").addInterceptors(conversationInterceptor);
         registry.addHandler(myHandler(), "/ws/{id}").setAllowedOrigins("*").addInterceptors(interceptor);
         registry.addHandler(myHandler(), "/ws/{id}/{roomId}").setAllowedOrigins("*").addInterceptors(groupHandshakeInterceptor);
     }

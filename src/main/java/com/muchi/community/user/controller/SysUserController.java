@@ -10,6 +10,7 @@ import com.muchi.community.user.entity.User;
 import com.muchi.community.user.service.SysIUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @since 2019-09-17
  */
 @Controller
+@CrossOrigin
 @RequestMapping("/sysUser")
 public class SysUserController {
 
@@ -51,5 +53,15 @@ public class SysUserController {
         return MzResult.success(userInfoById);
         }
     return MzResult.failMsg(JsonConstant.ILLEGAL_ARGUMENT);
+    }
+
+    @RequestMapping("/startConversation")
+    public String startConversation(){
+        return "commons/socketClient";
+    }
+
+    @RequestMapping("/robotConversation")
+    public String robotConversation(){
+        return "commons/robotClient";
     }
 }

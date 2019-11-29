@@ -2,6 +2,8 @@ package com.muchi.community.common.im;
 
 import com.muchi.community.common.bean.WeatherMainVo;
 import com.muchi.community.common.service.WeatherService;
+import com.muchi.community.common.utils.CurrentUserUtil;
+import com.muchi.community.user.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
@@ -9,6 +11,7 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,15 +23,7 @@ import java.util.Map;
 @Component
 public class WebsocketHandler extends TextWebSocketHandler {
 
-    private static WeatherService weatherService;
-
-    private static final Map<Long, WebSocketSession> SESSIONS = new HashMap<>();
-
-
-    @Autowired
-    public void setWeatherService(WeatherService weatherService){
-        WebsocketHandler.weatherService=weatherService;
-    }
+    private static final Map<String, WebSocketSession> SESSIONS = new HashMap<>();
 
     private static MLRobotService mLRobotService;
 
@@ -39,8 +34,9 @@ public class WebsocketHandler extends TextWebSocketHandler {
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-        Long uid = (Long) session.getAttributes().get("uid");
-        Long roomId = (Long) session.getAttributes().get("roomId");
+        System.out.println("当前有 "+SESSIONS.size()+"人在线");
+        String uid = (String) session.getAttributes().get("uid");
+        String roomId = (String) session.getAttributes().get("roomId");
         if(roomId==null){
             if(uid!=null){
                 SESSIONS.put(uid,session);
@@ -67,8 +63,9 @@ public class WebsocketHandler extends TextWebSocketHandler {
 
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-        Long uid = (Long) session.getAttributes().get("uid");
-        Long roomId = (Long) session.getAttributes().get("roomId");
+       // User currentUser = CurrentUserUtil.getCurrentUser();
+        String uid = (String) session.getAttributes().get("uid");
+        String roomId = (String) session.getAttributes().get("roomId");
         if(roomId==null){
             if(uid==null){
                 String msg = message.getPayload();
@@ -77,7 +74,7 @@ public class WebsocketHandler extends TextWebSocketHandler {
             }else {
                 String[] split = message.getPayload().split("，");
                 //获取需要发送的人
-                WebSocketSession toSession = SESSIONS.get(Long.parseLong(split[0]));
+                WebSocketSession toSession = SESSIONS.get(split[0]);
                 if (toSession != null && toSession.isOpen()) {
                     toSession.sendMessage(new TextMessage(split[1]));
                 }else {
@@ -95,8 +92,9 @@ public class WebsocketHandler extends TextWebSocketHandler {
 
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-        Long uid = (Long) session.getAttributes().get("uid");
+        String uid = (String) session.getAttributes().get("uid");
         SESSIONS.remove(uid);
+        System.out.println("用户"+uid+"退出登录当前还有 "+SESSIONS.size()+"人在线");
         session.close();
     }
 }

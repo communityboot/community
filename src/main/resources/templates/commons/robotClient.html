@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>websocket</title>
+</head>
+
+<body>
+  <div id="chat">
+    <div id="message">
+    </div>
+  </div>
+  <div style="width: 320px; text-align: center;">
+    <input type="text" id="pl" />
+    <input type="button" value="发送" id="submit" />
+    <input type="button" value="关闭" id="close" />
+  </div>
+</body>
+<script type="text/javascript">
+  // 很重要 必须写，判断浏览器是否支持websocket
+  var message = document.getElementById("message")
+  function pushClient(val) {
+    let p = document.createElement("p");
+    p.style.textAlign = 'right';
+    p.style.color = 'green';
+    p.appendChild(document.createTextNode(val));
+    message.appendChild(p);
+  }
+  function pushServer(val) {
+    let p = document.createElement("p");
+    p.style.textAlign = 'left';
+    p.style.color = 'red';
+    p.appendChild(document.createTextNode(val));
+    message.appendChild(p);
+  }
+  var CreateWebSocket = (function () {
+    return function (urlValue) {
+      if (window.WebSocket) return new WebSocket(urlValue);
+      if (window.MozWebSocket) return new MozWebSocket(urlValue);
+      return false;
+    }
+  })();
+  // 实例化websoscket websocket有两种协议ws(不加密)和wss(加密)
+  //var webSocket = CreateWebSocket("ws://39.106.121.52:8088/community/ws");
+  var webSocket = CreateWebSocket("ws://localhost:8088/community/ws/robot");
+  webSocket.onopen = function (evt) {
+    // 一旦连接成功，就发送第一条数据
+    // webSocket.send("第一条数据")
+  };
+  webSocket.onmessage = function (evt) {
+    // 这是服务端返回的数据
+    pushServer(evt.data)
+  };
+  // 关闭连接
+  webSocket.onclose = function (evt) {
+    console.log("Connection closed.")
+  };
+  // input事件发送数据
+  document.getElementById("submit").onclick = function () {
+    var str = document.getElementById("pl").value
+    pushClient(str);
+    webSocket.send(str)
+  }
+</script>
+<style>
+  #chat {
+    width: 320px;
+    min-height: 400px;
+    height: auto;
+    border: 1px solid gray;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+  }
+
+  #message {
+    width: 100%;
+    padding: 0.5rem;
+    color: green;
+    text-align: right;
+    align-items: center;
+  }
+</style>
+
+</html>
