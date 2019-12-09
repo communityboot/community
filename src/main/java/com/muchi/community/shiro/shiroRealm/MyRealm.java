@@ -32,7 +32,6 @@ public class MyRealm extends AuthorizingRealm {
 	@Autowired
 	private RoleDao roleDao;
 
-
 	@Autowired
 	private ISysMenuService menuService;
 
@@ -88,10 +87,10 @@ public class MyRealm extends AuthorizingRealm {
 			User userLogin = new User();
 			userLogin.setUserName(userName);
 			userLogin.setId(user.getId());
-
 			// Object principal, Object credentials, String realmName
-			AuthenticationInfo authcInfo = new SimpleAuthenticationInfo(userLogin, user.getPassword(), getName());
-			return authcInfo;
+			//AuthenticationInfo authcInfo = new SimpleAuthenticationInfo(userLogin, user.getPassword(), getName());
+			SimpleAuthenticationInfo info=new SimpleAuthenticationInfo(userLogin,user.getPassword(),getName());
+			return info;
 		} else {
 			return null;
 		}

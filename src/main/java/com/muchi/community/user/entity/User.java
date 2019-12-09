@@ -3,6 +3,7 @@ package com.muchi.community.user.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.crazycake.shiro.AuthCachePrincipal;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
@@ -17,7 +18,7 @@ import java.util.Date;
  * @since 2019-09-17
  */
 @TableName("sys_user")
-public class User implements Serializable {
+public class User implements AuthCachePrincipal,Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -298,5 +299,10 @@ public class User implements Serializable {
                 ", updateTime=" + updateTime +
                 ", remarks=" + remarks +
                 "}";
+    }
+
+    @Override
+    public String getAuthCacheKey() {
+        return null;
     }
 }

@@ -14,6 +14,8 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.subject.Subject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -40,7 +42,7 @@ public class UserController {
     @Autowired
     private SchoolProjectService schoolProjectService;
 
-    /**
+    private static Logger logger = LoggerFactory.getLogger(UserController.class);    /**
      * 用户登录
      *
      * @param user
@@ -52,7 +54,7 @@ public class UserController {
     @ResponseBody
     public Map<String, Object> login(User user, BindingResult bindingResult, HttpSession session, Boolean rememberMe) {
         Map<String, Object> map = new HashMap<String, Object>();
-
+        //logger.info("用户:"+user.getUserName()+"登录，密码是"+user.getPassword());
         // 1、JSR303
         if (bindingResult.hasErrors()) {
             map.put("success", false);
@@ -65,6 +67,7 @@ public class UserController {
         UsernamePasswordToken token = new UsernamePasswordToken(user.getUserName(), user.getPassword(), rememberMe);
 
         try {
+            logger.info("用户:"+user.getUserName()+"登录登录成功！");
             subject.login(token);
             map.put("success", true);
 //			MzResult unReadMessageNum = messageController.getUnReadMessageNum();

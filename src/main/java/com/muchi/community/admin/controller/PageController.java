@@ -16,11 +16,6 @@ public class PageController {
         return "login";
     }
 
-    @RequestMapping("/")
-    public String toLogin(){
-        return "login";
-    }
-
     @RequestMapping("/regist")
     public String regist(){
         return "regist";
@@ -28,7 +23,7 @@ public class PageController {
 
     @RequestMapping("/logout")
     public String logout(){
-        return "logout";
+        return "login";
     }
 
     @RequestMapping("/main")
