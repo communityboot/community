@@ -32,9 +32,6 @@ public class MyRealm extends AuthorizingRealm {
 	@Autowired
 	private RoleDao roleDao;
 
-	@Autowired
-	private ISysMenuService menuService;
-
 	/**
 	 * 授权
 	 */
@@ -104,4 +101,8 @@ public class MyRealm extends AuthorizingRealm {
 		this.clearCachedAuthorizationInfo(SecurityUtils.getSubject().getPrincipals());
 	}
 
+	@Override
+	protected void clearCache(PrincipalCollection principals) {
+		super.clearCache(principals);
+	}
 }

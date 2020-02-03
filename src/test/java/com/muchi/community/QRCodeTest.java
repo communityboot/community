@@ -1,4 +1,4 @@
-/*
+package com.muchi.community;/*
 package com.muchi.community.lambda;
 
 import com.muchi.community.common.utils.QRCodeUtil;

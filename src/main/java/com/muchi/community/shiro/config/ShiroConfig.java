@@ -60,9 +60,6 @@ public class ShiroConfig {
 		//filterChainDefinitionMap.put("/user/regist", "anon");
 		filterChainDefinitionMap.put("/index/**", "anon");
 		filterChainDefinitionMap.put("/regist", "anon");
-		//filterChainDefinitionMap.put("/ws/**", "anon");
-		//filterChainDefinitionMap.put("/group1/**", "anon");
-		// 配置退出过滤器,其中的具体的退出代码Shiro已经替我们实现了
 		filterChainDefinitionMap.put("/logout", "logout");
 		filterChainDefinitionMap.put("/**", "authc");
 		shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
@@ -157,9 +154,9 @@ public class ShiroConfig {
 		CustomSessionManager sessionManager = new CustomSessionManager();
 		sessionManager.setSessionDAO(redisSessionDAO());
 		//禁用cookie
-		sessionManager.setSessionIdCookieEnabled(false);
+		//sessionManager.setSessionIdCookieEnabled(false);
 		//禁用url重写   url;jsessionid=id
-		sessionManager.setSessionIdUrlRewritingEnabled(false);
+		//sessionManager.setSessionIdUrlRewritingEnabled(false);
 		return sessionManager;
 	}
 

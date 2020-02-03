@@ -31,7 +31,7 @@ public class MenuController {
 
     /**
      *
-     * @return 菜单首页
+     * @return 菜单首页i
      */
     @RequestMapping("/toMenuPage")
     public String toMenuPage() {

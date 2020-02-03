@@ -52,7 +52,9 @@ public class UserController {
      */
     @PostMapping("/login")
     @ResponseBody
-    public Map<String, Object> login(User user, BindingResult bindingResult, HttpSession session, Boolean rememberMe) {
+    public Map<String, Object> login(HttpServletRequest request,User user, BindingResult bindingResult, Boolean rememberMe) {
+      // request.getServletContext().;
+        System.out.println(request);
         Map<String, Object> map = new HashMap<String, Object>();
         //logger.info("用户:"+user.getUserName()+"登录，密码是"+user.getPassword());
         // 1、JSR303

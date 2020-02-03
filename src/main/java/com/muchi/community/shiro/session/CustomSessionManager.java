@@ -17,9 +17,9 @@ public class CustomSessionManager extends DefaultWebSessionManager {
 
     protected Serializable getSessionId(ServletRequest request, ServletResponse response) {
         Serializable sessionId = super.getSessionId(request, response);
-        request.setAttribute(ShiroHttpServletRequest.REFERENCED_SESSION_ID_SOURCE, "header");
+     /*   request.setAttribute(ShiroHttpServletRequest.REFERENCED_SESSION_ID_SOURCE, "header");
         request.setAttribute(ShiroHttpServletRequest.REFERENCED_SESSION_ID, sessionId);
-        request.setAttribute(ShiroHttpServletRequest.REFERENCED_SESSION_ID_IS_VALID, Boolean.TRUE);
+        request.setAttribute(ShiroHttpServletRequest.REFERENCED_SESSION_ID_IS_VALID, Boolean.TRUE);*/
         return sessionId;
     }
 }
