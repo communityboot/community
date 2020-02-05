@@ -25,7 +25,7 @@
         <FreeMaker>2.3.23</FreeMaker>
         <Jquery.version>3.4.1</Jquery.version>
         <layui.version>2.5.4</layui.version>
-        <shiro.version>1.4.0</shiro.version>
+        <shiro.version>1.5.0</shiro.version>
         <json.version>20160810</json.version>
     </properties>
 
