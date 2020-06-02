@@ -48,5 +48,19 @@ public class ValidationUtil {
         return result;
     }
 
-
+    public static void main(String[] args) {
+        Person p=new Person();
+        p.setAge(22);
+        p.setCity("1065@qq.com");
+        Student student=new Student();
+        student.setMoney(1);
+        student.setName("hhh");
+        p.setStudent(student);
+        System.out.println(p);
+        ValidationResult validationResult = ValidationUtil.validateEntity(p);
+        Map<String, String> errorMsg = validationResult.getErrorMsg();
+        boolean hasErrors = validationResult.isHasErrors();
+        System.out.println("isError: "+hasErrors);
+        System.out.println(errorMsg);
+    }
 }

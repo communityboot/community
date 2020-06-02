@@ -55,13 +55,14 @@ public class ShiroConfig {
 		// 配置不会被拦截的链接 顺序判断
 		//filterChainDefinitionMap.put("/**", "anon");
 		filterChainDefinitionMap.put("/webjars/**", "anon");
+		filterChainDefinitionMap.put("/ws/**", "anon");
 		filterChainDefinitionMap.put("/static/**", "anon");
 		filterChainDefinitionMap.put("/user/**", "anon");
 		//filterChainDefinitionMap.put("/user/regist", "anon");
 		filterChainDefinitionMap.put("/index/**", "anon");
 		filterChainDefinitionMap.put("/regist", "anon");
 		filterChainDefinitionMap.put("/logout", "logout");
-		filterChainDefinitionMap.put("/**", "authc");
+		filterChainDefinitionMap.put("/**", "anon");
 		shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
 		return shiroFilterFactoryBean;
 	}
@@ -134,6 +135,7 @@ public class ShiroConfig {
 		RedisManager redisManager = new RedisManager();
 		redisManager.setHost("39.106.121.52");
 		redisManager.setPort(6379);
+		redisManager.setPassword("mz666");
 		//redisManager.setTimeout(1800);
 		return redisManager;
 	}

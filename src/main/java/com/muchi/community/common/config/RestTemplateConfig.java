@@ -7,9 +7,9 @@ import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
 /**
- * @Author： yuzq
- * @Description: 调用第三方接口配置类
- * @Date: 2019/9/20   13:33
+ * Author： yuzq
+ * Description: 调用第三方接口配置类
+ * Date: 2019/9/20   13:33
  */
 @Configuration
 public class RestTemplateConfig {

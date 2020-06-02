@@ -5,11 +5,8 @@ import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
 import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.domain.AlipayTradeWapPayModel;
-import com.alipay.api.request.AlipayTradePagePayRequest;
 import com.alipay.api.request.AlipayTradeWapPayRequest;
-import com.alipay.api.response.AlipayTradePagePayResponse;
 import com.alipay.api.response.AlipayTradeWapPayResponse;
-import com.google.common.collect.Maps;
 import com.muchi.community.alipay.config.AlipayConfig;
 import org.springframework.stereotype.Service;
 

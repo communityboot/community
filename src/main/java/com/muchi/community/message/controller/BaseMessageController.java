@@ -129,4 +129,10 @@ public class BaseMessageController {
         }
         return MsgResult.fail();
     }
+    @PostMapping("/ddssa")
+    @ResponseBody
+    public  MsgResult ddssa() {
+        throw new NullPointerException("是是是");
+    }
+
 }
